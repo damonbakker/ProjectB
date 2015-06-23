@@ -1,7 +1,12 @@
 <resources>
+
+    <color name="cyan">#00FFFF</color>
+    <color name="pink">#FF00FF</color>
+
+
     <string name="app_name">Projectb</string>
 
-    <string name="button_1">onlongclicklistener</string>
-    <string name="hello">random strong</string>
+    <string name="button_1">on long click listener</string>
+    <string name="hello">random string</string>
     <string name="action_settings">Settings</string>
 </resources>
