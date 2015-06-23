@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Projectb</string>
+
+    <string name="button_1">onlongclicklistener</string>
+    <string name="hello">random strong</string>
+    <string name="action_settings">Settings</string>
+</resources>
