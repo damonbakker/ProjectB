@@ -3,41 +3,34 @@ package mobile_development.damon.projectb;
 import android.animation.Animator;
 import android.graphics.Color;
 import android.os.CountDownTimer;
-import android.util.Log;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.RelativeLayout;
 
+/**
+ * Created by Damon on 6/24/2015.
+ */
 
-public class MainActivity extends AppCompatActivity {
 
+public class LoginModel extends AppCompatActivity
+{
 
     private int animation_duration = 700;
     private int counter = 0;
     private boolean animation_state = false;
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {   //Load the parent activity and any saved instances if any are saved
-        super.onCreate(savedInstanceState);
-        //Load layout
-        setContentView(R.layout.activity_main);
 
 
 
 
-        //start
-    }
 
 
-    @Override
-    public boolean onTouchEvent(MotionEvent event)
+    //Animations
+
+    public void LoginBackgroundChange(MotionEvent event)
     {
         if (!animation_state)
         {
@@ -104,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onAnimationCancel(Animator animation)
                         {
-                           //animation is cancelled
+                            //animation is cancelled
                         }
 
                         @Override
@@ -123,39 +116,14 @@ public class MainActivity extends AppCompatActivity {
                     //start animation
                     anim.start();
 
-                    return true;  //
+                    break; //end switch ACTION_DOWN
 
                 case MotionEvent.ACTION_UP:
                     //released
-                    return true;
+                    break; //end switch ACTION_UP
             }
         }
-
-        return super.onTouchEvent(event);
-
     }
 
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
