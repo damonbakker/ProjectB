@@ -4,6 +4,8 @@
     tools:context=".MainActivity"
     android:background="@color/cyan"
     android:id="@+id/main_layout"
+
+
     >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,6 +13,7 @@
         android:background="@color/pink"
         android:id="@+id/register_layout"
         android:visibility="invisible"
+
         >
 
 

@@ -1,7 +1,10 @@
 package mobile_development.damon.projectb;
 
 import android.animation.Animator;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.text.Layout;
 import android.util.Log;
 import android.os.Bundle;
@@ -18,7 +21,25 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     public int counter = 0;
-    public boolean working = false;
+    public boolean workstate= false;
+
+    public void notification(){
+        new AlertDialog.Builder(this)
+                .setTitle("Delete entry")
+                .setMessage("Are you sure you want to delete this entry?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // continue with delete
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,12 +52,32 @@ public class MainActivity extends AppCompatActivity {
         /*start*/
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        if (working == false)
+        if (workstate == false)
         {
-            working = true;
+            workstate = true;
+
+
+
+        Log.i("touchevent", "Er is gedrukt");
+        Log.i("workingstatus ? false", Boolean.toString(workstate));
+
+        new CountDownTimer(5000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            public void onFinish() {
+                workstate = false;
+            }
+        }.start();
+
+
+        Log.i("workingchange", Boolean.toString(workstate));
 
 
         int x = (int)event.getX();
@@ -45,12 +86,12 @@ public class MainActivity extends AppCompatActivity {
         final RelativeLayout mainlayout = (RelativeLayout) findViewById(R.id.main_layout);
         final RelativeLayout registerlayout = (RelativeLayout) findViewById(R.id.register_layout);
 
-
+        mainlayout.setEnabled(false);
+        registerlayout.setEnabled(false);
         int finalradius = Math.max(mainlayout.getWidth(), mainlayout.getHeight());
 
 
-        switch (event.getAction())
-        {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //pressed
                 String stringx = String.valueOf(x);
@@ -61,8 +102,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
                 Animator anim= ViewAnimationUtils.createCircularReveal(registerlayout, x, y, 0, finalradius);
                 anim.setDuration(700);
+
 
 
 
@@ -76,11 +119,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onAnimationEnd(Animator animation) {
 
                         Log.i("malin", "klaar");
-                        working = false;
+                     /*   workstate = false;*/
+                       /* notification();*/
 
                         mainlayout.setBackgroundColor(Color.MAGENTA);
                         counter++;
                         Log.i("complete", "true");
+                        Log.i("workingreset", Boolean.toString(workstate));
 
                     }
 
