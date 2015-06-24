@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -17,11 +18,9 @@ import android.widget.RelativeLayout;
 public class LoginModel extends AppCompatActivity
 {
 
-    private int animation_duration = 700;
-    private int counter = 0;
-    private boolean animation_state = false;
-
-
+    public int animation_duration = 700;
+    public int counter = 0;
+    public boolean animation_state = false;
 
 
 
@@ -30,8 +29,11 @@ public class LoginModel extends AppCompatActivity
 
     //Animations
 
-    public void LoginBackgroundChange(MotionEvent event)
+    public void LoginBackgroundChange(MotionEvent event,RelativeLayout mainlayout1,RelativeLayout registerlayout1)
     {
+        final RelativeLayout mainlayout = mainlayout1;
+        final RelativeLayout registerlayout = registerlayout1;
+
         if (!animation_state)
         {
             animation_state = true;
@@ -50,12 +52,10 @@ public class LoginModel extends AppCompatActivity
                 }
             }.start();
 
-
+            //get pressed location(coordinates)
             int x = (int)event.getX();
             int y = (int)event.getY();
 
-            final RelativeLayout mainlayout = (RelativeLayout) findViewById(R.id.main_layout);
-            final RelativeLayout registerlayout = (RelativeLayout) findViewById(R.id.register_layout);
 
             //get the entire field radius of the view
             int finalradius = Math.max(mainlayout.getWidth(), mainlayout.getHeight());
@@ -65,10 +65,6 @@ public class LoginModel extends AppCompatActivity
             {
                 case MotionEvent.ACTION_DOWN:
                     //pressed
-
-                    //get pressed location(coordinates)
-                    String stringx = String.valueOf(x);
-                    String stringy = String.valueOf(y);
 
                     //create reveal animation with parameters
                     Animator anim= ViewAnimationUtils.createCircularReveal(registerlayout, x, y, 0, finalradius);
@@ -103,7 +99,7 @@ public class LoginModel extends AppCompatActivity
                         @Override
                         public void onAnimationRepeat(Animator animation)
                         {
-                            //
+                            //animation has repeated
                         }
                     });
 
