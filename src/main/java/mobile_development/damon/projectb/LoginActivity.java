@@ -10,13 +10,13 @@ import android.view.MotionEvent;
 import android.widget.RelativeLayout;
 
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
 
-    private int animation_duration = 700;
-    private int counter = 0;
-    private boolean animation_state = false;
     LoginModel lm = new LoginModel();
+
+    public RelativeLayout login_view;
+    public RelativeLayout login_view_2;
 
 
 
@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
         //Load layout
         setContentView(R.layout.activity_main);
 
+        login_view  = (RelativeLayout) findViewById(R.id.main_layout);
+        login_view_2 = (RelativeLayout) findViewById(R.id.register_layout);
 
 
 
@@ -37,11 +39,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        final RelativeLayout loginview = (RelativeLayout) findViewById(R.id.main_layout);
-        final RelativeLayout loginview_2 = (RelativeLayout) findViewById(R.id.register_layout);
 
-        lm.LoginBackgroundChange(event, loginview, loginview_2);
-
+        lm.LoginBackgroundChange(event, login_view, login_view_2);
 
         return super.onTouchEvent(event);
 

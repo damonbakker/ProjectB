@@ -21,6 +21,7 @@ public class LoginModel extends AppCompatActivity
     public int animation_duration = 700;
     public int counter = 0;
     public boolean animation_state = false;
+    public boolean countdown_state = false;
 
 
 
@@ -37,20 +38,28 @@ public class LoginModel extends AppCompatActivity
         if (!animation_state)
         {
             animation_state = true;
-
             //animation bug workaround, equals duration of animation
-            new CountDownTimer(animation_duration, 1000)
+            if (!countdown_state)
             {
-                public void onTick(long millisUntilFinished)
+                countdown_state = true;
+                new CountDownTimer(600, 1000)
                 {
+                    public void onTick(long millisUntilFinished)
+                    {
 
-                }
+                    }
 
-                public void onFinish()
-                {
-                    animation_state = false;
-                }
-            }.start();
+                    public void onFinish()
+                    {
+                        countdown_state = false;
+                        animation_state = false;
+                        Log.i("sate","COUNTDOWN KLAAR");
+
+
+                    }
+                }.start();
+            }
+
 
             //get pressed location(coordinates)
             int x = (int)event.getX();
