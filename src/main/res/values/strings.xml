@@ -2,7 +2,10 @@
 
     <string name="app_name">Projectb</string>
 
-    <string name="button_1">on long click listener</string>
     <string name="hello">random string</string>
+
     <string name="action_settings">Settings</string>
+
+    <string name="hint_password">Password</string>
+    <string name="hint_email">Email</string>
 </resources>

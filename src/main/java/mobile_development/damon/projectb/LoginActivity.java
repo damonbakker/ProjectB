@@ -39,8 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-
-        lm.LoginBackgroundChange(event, login_view, login_view_2);
+        lm.LoginBackgroundChange(event,login_view,login_view_2);
 
         return super.onTouchEvent(event);
 

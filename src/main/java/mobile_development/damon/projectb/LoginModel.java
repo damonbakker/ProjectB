@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.RelativeLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by Damon on 6/24/2015.
  */
@@ -22,7 +26,41 @@ public class LoginModel extends AppCompatActivity
     public int counter = 0;
     public boolean animation_state = false;
     public boolean countdown_state = false;
+    public List listPalette = new ArrayList<String>();
+    public boolean Generator_initialised = false;
 
+
+
+
+    public String Color_Generator(){
+
+        if (!Generator_initialised)
+        {
+
+            listPalette.add(0,"#25ae90");
+            listPalette.add(1,"#3267B1");
+            listPalette.add(2,"#84d9d2");
+            listPalette.add(3,"#f1924e");
+            listPalette.add(4,"#13383e");
+            listPalette.add(5,"#3f51b5");
+            listPalette.add(6,"#673ab7");
+            listPalette.add(7,"#AC193D");
+            listPalette.add(8,"#3267B1");
+            listPalette.add(9,"#094AB2");
+
+
+
+
+
+        }
+
+        Generator_initialised = true;
+
+        int random_index = new Random().nextInt(arrayPalette.length);
+
+
+        return arrayPalette[random_index];
+    }
 
 
 
@@ -34,6 +72,8 @@ public class LoginModel extends AppCompatActivity
     {
         final RelativeLayout mainlayout = mainlayout1;
         final RelativeLayout registerlayout = registerlayout1;
+
+
 
         if (!animation_state)
         {
@@ -65,9 +105,15 @@ public class LoginModel extends AppCompatActivity
             int x = (int)event.getX();
             int y = (int)event.getY();
 
+            //set backgroundcolor
+           String newcolor = Color_Generator();
+
+            registerlayout.setBackgroundColor(Color.parseColor("#AC193D"));
 
             //get the entire field radius of the view
             int finalradius = Math.max(mainlayout.getWidth(), mainlayout.getHeight());
+
+
 
 
             switch (event.getAction())
@@ -78,6 +124,8 @@ public class LoginModel extends AppCompatActivity
                     //create reveal animation with parameters
                     Animator anim= ViewAnimationUtils.createCircularReveal(registerlayout, x, y, 0, finalradius);
                     anim.setDuration(animation_duration);
+
+
 
                     //listen to the animation
                     anim.addListener(new Animator.AnimatorListener() {
@@ -114,6 +162,8 @@ public class LoginModel extends AppCompatActivity
 
                     if (counter == 1)
                     {
+                        String malin = Color_Generator();
+                        Log.i("NEKEN",malin);
                         registerlayout.setVisibility(View.INVISIBLE);
                         registerlayout.setBackgroundColor(Color.YELLOW);
                     }
@@ -129,6 +179,8 @@ public class LoginModel extends AppCompatActivity
             }
         }
     }
+
+
 
 
 }

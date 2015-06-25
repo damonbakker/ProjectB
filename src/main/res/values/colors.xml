@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="logincolor1">#25ae90</color>
-    <color name="logincolor2">#2d3238</color>
+    <color name="logincolor2">#3267B1</color>
+    <color name="logincolor3">#84d9d2</color>
+    <color name="logincolor4">#f1924e</color>
+    <color name="logincolor5">#13383e</color>
+    <color name="logincolor6">#3f51b5</color>
+    <color name="logincolor7">#673ab7</color>
+    <color name="logincolor8">#AC193D</color>
+    <color name="logincolor9">#3267B1</color>
+    <color name="logincolor10">#094AB2</color>
+
+
 
 
 </resources>
