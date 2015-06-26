@@ -25,13 +25,10 @@ public class LoginModel extends AppCompatActivity
 
     public int animation_duration = 700;
     public int counter = 0;
-    public boolean animation_state = false;
-    public boolean countdown_state = false;
     public List listPalette = new ArrayList<String>();
-    public boolean Generator_initialised = false;
     public String current_background_color;
-    public boolean animbgstate = false;
-    public boolean animbgstate2 = false;
+    public boolean Generator_initialised = false;
+
 
 
 
@@ -50,10 +47,6 @@ public class LoginModel extends AppCompatActivity
             listPalette.add(7,"#AC193D");
             listPalette.add(8,"#3267B1");
             listPalette.add(9,"#094AB2");
-
-
-
-
 
         }
 
@@ -78,11 +71,9 @@ public class LoginModel extends AppCompatActivity
 
 
 
-        if (!animation_state)
-        {
-            animation_state = true;
+
             //animation bug workaround, equals duration of animation
-            if (!countdown_state)
+            /*if (!countdown_state)
             {
                 countdown_state = true;
 
@@ -104,41 +95,9 @@ public class LoginModel extends AppCompatActivity
 
                     }
                 }.start();
-            }
-
-            Log.i("test","ANIMATIE BOUWEN NU");
-
-            //get pressed location(coordinates)
-            int x = (int)event.getX();
-            int y = (int)event.getY();
-
-            //set backgroundcolor
-            String new_color = Color_Generator();
-
-            //if (new_color == ((PaintDrawable)))
-
-            //Prevebt sane background
-            /*while (new_color == current_background_color);
-            {
-                new_color = Color_Generator();
             }*/
 
 
-            current_background_color = new_color;
-            Log.i("test",new_color);
-            if (!animbgstate && !animbgstate2)
-            {
-                registerlayout.setBackgroundColor(Color.parseColor(new_color));
-            }
-            Log.i("test","COLORCHAGNE");
-
-
-            //get the entire field radius of the view
-            int finalradius = Math.max(mainlayout.getWidth(), mainlayout.getHeight());
-
-
-            if (!animbgstate && !animbgstate2)
-            {
 
 
 
@@ -147,9 +106,38 @@ public class LoginModel extends AppCompatActivity
                 case MotionEvent.ACTION_DOWN:
                     //pressed
 
-                    //create reveal animation with parameters
 
-                        Animator anim = ViewAnimationUtils.createCircularReveal(registerlayout, x, y, 0, finalradius);
+                    Log.i("test","ANIMATIE BOUWEN NU");
+
+                    //get pressed location(coordinates)
+                    int x = (int)event.getX();
+                    int y = (int)event.getY();
+
+                    //set backgroundcolor
+                    String new_color = Color_Generator();
+
+                    //if (new_color == ((PaintDrawable)))
+
+                    //Prevebt sane background
+            /*while (new_color == current_background_color);
+            {
+                new_color = Color_Generator();
+            }*/
+
+
+                    current_background_color = new_color;
+                    Log.i("test",new_color);
+
+                    registerlayout.setBackgroundColor(Color.parseColor(new_color));
+
+                    Log.i("test","COLORchanged");
+
+
+                    //get the entire field radius of the view
+                    int finalradius = Math.max(mainlayout.getWidth(), mainlayout.getHeight());
+
+                    //create reveal animation with parameters
+                    Animator anim = ViewAnimationUtils.createCircularReveal(registerlayout, x, y, 0, finalradius);
 
                     anim.setDuration(animation_duration);
 
@@ -169,7 +157,6 @@ public class LoginModel extends AppCompatActivity
                         {
 
                             //animation has ended
-                            animbgstate2 = false;
                             counter++;
                             Log.i("test","ANIMATIE EINDE");
                             mainlayout.setBackgroundColor(Color.parseColor(current_background_color));
@@ -191,17 +178,10 @@ public class LoginModel extends AppCompatActivity
                         }
                     });
 
-                   /* if (counter == 1)
-                    {
-                        String malin = Color_Generator();
-                        Log.i("NEKEN",malin);
-                        registerlayout.setVisibility(View.INVISIBLE);
-                        registerlayout.setBackgroundColor(Color.YELLOW);
-                    }*/
 
                     //start animation
                     anim.start();
-                    animbgstate2=true;
+
 
                     break; //end switch ACTION_DOWN
 
@@ -209,8 +189,8 @@ public class LoginModel extends AppCompatActivity
                     //released
                     break; //end switch ACTION_UP
             }
-            }
-        }
+
+
     }
 
 
