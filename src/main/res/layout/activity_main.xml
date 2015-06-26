@@ -26,7 +26,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/userInput_email"
-        android:background="#ffffffff"
+        android:background="@drawable/rounded_corner"
         android:hint="@string/hint_email"
         android:width="280dp"
         android:selectAllOnFocus="false"
@@ -34,6 +34,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="225dp"
         android:padding="10dp"
+
         />
 
     <EditText
@@ -43,7 +44,7 @@
         android:ems="10"
         android:id="@+id/userInput_password"
         android:autoText="false"
-        android:background="#ffffffff"
+        android:background="@drawable/rounded_corner"
         android:hint="@string/hint_password"
         android:width="280dp"
         android:textAlignment="textEnd"
@@ -52,17 +53,6 @@
         android:layout_marginTop="63dp"
         android:padding="10dp"
         />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
-        android:layout_alignBottom="@+id/userInput_password"
-        android:layout_alignEnd="@+id/userInput_password"
-        android:layout_marginBottom="-65dp"
-
-        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -75,6 +65,28 @@
         android:adjustViewBounds="true"
 
         />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:id="@+id/button"
+        android:layout_alignBottom="@+id/userInput_password"
+        android:layout_alignEnd="@+id/userInput_password"
+        android:layout_marginBottom="-58dp"
+
+        android:layout_alignStart="@+id/userInput_password" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/hint_login_to_register"
+        android:id="@+id/textView"
+        android:layout_marginTop="52dp"
+        android:layout_alignTop="@id/button"
+        android:layout_centerHorizontal="true"
+         />
 
 
 </RelativeLayout>
