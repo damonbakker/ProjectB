@@ -2,6 +2,7 @@ package mobile_development.damon.projectb;
 
 import android.animation.Animator;
 import android.graphics.Color;
+import android.graphics.drawable.PaintDrawable;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class LoginModel extends AppCompatActivity
     public boolean countdown_state = false;
     public List listPalette = new ArrayList<String>();
     public boolean Generator_initialised = false;
+    public String current_background_color;
 
 
 
@@ -56,10 +58,9 @@ public class LoginModel extends AppCompatActivity
 
         Generator_initialised = true;
 
-        int random_index = new Random().nextInt(arrayPalette.length);
+        int random_index = new Random().nextInt(listPalette.size());
 
-
-        return arrayPalette[random_index];
+        return listPalette.get(random_index).toString();
     }
 
 
@@ -93,7 +94,6 @@ public class LoginModel extends AppCompatActivity
                     {
                         countdown_state = false;
                         animation_state = false;
-                        Log.i("sate","COUNTDOWN KLAAR");
 
 
                     }
@@ -106,9 +106,21 @@ public class LoginModel extends AppCompatActivity
             int y = (int)event.getY();
 
             //set backgroundcolor
-           String newcolor = Color_Generator();
+            String new_color = Color_Generator();
 
-            registerlayout.setBackgroundColor(Color.parseColor("#AC193D"));
+            //if (new_color == ((PaintDrawable)))
+
+            while (new_color == current_background_color);
+            {
+                new_color = Color_Generator();
+            }
+
+
+            current_background_color = new_color;
+
+            registerlayout.setBackgroundColor(Color.parseColor(new_color));
+
+
 
             //get the entire field radius of the view
             int finalradius = Math.max(mainlayout.getWidth(), mainlayout.getHeight());
