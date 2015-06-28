@@ -72,34 +72,6 @@ public class LoginModel extends AppCompatActivity
 
 
 
-            //animation bug workaround, equals duration of animation
-            /*if (!countdown_state)
-            {
-                countdown_state = true;
-
-                new CountDownTimer(500, 1000)
-                {
-
-                    public void onTick(long millisUntilFinished)
-                    {
-
-                    }
-
-                    public void onFinish()
-                    {
-                        animbgstate = false;
-
-                        countdown_state = false;
-                        animation_state = false;
-                        Log.i("test","COUNTDOWN KLAAR");
-
-                    }
-                }.start();
-            }*/
-
-
-
-
 
             switch (event.getAction())
             {
