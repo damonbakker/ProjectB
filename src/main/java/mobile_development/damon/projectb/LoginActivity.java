@@ -1,6 +1,9 @@
 package mobile_development.damon.projectb;
 
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.os.Bundle;
@@ -8,10 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
-public class LoginActivity extends AppCompatActivity
+
+public class LoginActivity extends Activity
 {
 
     public boolean touch_state = false;
@@ -31,11 +38,11 @@ public class LoginActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         login_view  = (RelativeLayout) findViewById(R.id.main_layout);
-        login_view_2 = (RelativeLayout) findViewById(R.id.register_layout);
+        login_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
+        Button button_login = (Button) findViewById(R.id.button);
 
+        button_login.setOnLongClickListener(onLongClickListener);
 
-
-        //start
     }
 
 
@@ -76,5 +83,24 @@ public class LoginActivity extends AppCompatActivity
         return super.onTouchEvent(event);
 
     }
+
+    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener()
+    {
+        @Override
+        public boolean onLongClick(View v)
+        {
+            Context context = getApplicationContext();
+            CharSequence text = "Hello toast!";
+            int duration = Toast.LENGTH_LONG;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+            return false;
+        }
+    };
+
 
 }

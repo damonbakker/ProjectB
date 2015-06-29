@@ -1,6 +1,7 @@
 package mobile_development.damon.projectb;
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.PaintDrawable;
 import android.os.CountDownTimer;
@@ -20,7 +21,7 @@ import java.util.Random;
  */
 
 
-public class LoginModel extends AppCompatActivity
+public class LoginModel extends Activity
 {
 
     public int animation_duration = 700;
