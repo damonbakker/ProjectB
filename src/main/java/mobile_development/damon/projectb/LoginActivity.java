@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.os.Bundle;
@@ -22,11 +23,14 @@ public class LoginActivity extends Activity
 
     public boolean touch_state = false;
     public boolean bugfix_state = false;
+   // public String background_color  = getResources().getColor(R.id.logincolor1);
+    public String background_color  = "#25ae90";
 
     LoginModel lm = new LoginModel();
 
     public RelativeLayout login_view;
     public RelativeLayout login_view_2;
+    public RelativeLayout register_view;
 
 
     @Override
@@ -36,12 +40,24 @@ public class LoginActivity extends Activity
         //Load layout
         setContentView(R.layout.activity_main);
 
+
+
+
+
         login_view  = (RelativeLayout) findViewById(R.id.main_layout);
         login_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
+        register_view = (RelativeLayout) findViewById(R.id.register_layout);
+
+        if (getIntent().getExtras()!= null)
+        {
+            String new_background_color =getIntent().getStringExtra("background_color");
+            background_color = new_background_color;
+            Log.i("RETURN TO ACTVITY",background_color);
+            login_view.setBackgroundColor(Color.parseColor(background_color));
+        }
+
         Button button_login = (Button) findViewById(R.id.button_login);
-
         button_login.setOnLongClickListener(onLongClickListener);
-
 
 
     }
@@ -50,7 +66,7 @@ public class LoginActivity extends Activity
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-        //workaround animation end bug
+        //workaround animation_send bug
         if (!bugfix_state)
         {
                 bugfix_state = true;
@@ -75,8 +91,10 @@ public class LoginActivity extends Activity
         if (!touch_state)
         {
             touch_state = true;
-            lm.LoginBackgroundChange(event,login_view,login_view_2);
+            lm.LoginBackgroundChange(event, login_view, login_view_2);
+            background_color = lm.current_background_color;
             Log.i("Touch event","HAS started");
+
         }
 
 
@@ -99,7 +117,7 @@ public class LoginActivity extends Activity
             //toast.show();
 
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-
+            intent.putExtra("background_color",background_color);
             startActivity(intent);
             overridePendingTransition(R.anim.pull_from_right, R.anim.push_to_left);
 

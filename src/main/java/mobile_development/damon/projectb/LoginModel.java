@@ -31,7 +31,7 @@ public class LoginModel extends Activity
     public int animation_duration = 700;
     public int counter = 0;
     public List listPalette = new ArrayList<String>();
-    public String current_background_color;
+    public String current_background_color = "#25ae90" ;
     public boolean Generator_initialised = false;
 
 
@@ -67,11 +67,9 @@ public class LoginModel extends Activity
 
     //Animations
 
-    public void LoginBackgroundChange(MotionEvent event,RelativeLayout mainlayout1,RelativeLayout overlay_layout1)
+    public void LoginBackgroundChange(MotionEvent event,final RelativeLayout layout_current,final RelativeLayout layout_overlay)
     {
 
-        final RelativeLayout mainlayout = mainlayout1;
-        final RelativeLayout overlay_layout = overlay_layout1;
 
 
 
@@ -92,29 +90,13 @@ public class LoginModel extends Activity
                     //set backgroundcolor
                     final String new_color = Color_Generator();
 
-                    //if (new_color == ((PaintDrawable)))
-
-                    //Prevebt sane background
-            /*while (new_color == current_background_color);
-            {
-                new_color = Color_Generator();
-            }*/
-
-
-
                     current_background_color = new_color;
 
-
-                    overlay_layout.setBackgroundColor(Color.parseColor(new_color));
-
-
-
-
+                    layout_overlay.setBackgroundColor(Color.parseColor(new_color));
                     //get the entire field radius of the view
-                    int finalradius = Math.max(mainlayout.getWidth(), mainlayout.getHeight());
-
+                    int finalradius = Math.max(layout_current.getWidth(), layout_current.getHeight());
                     //create reveal animation with parameters
-                    Animator anim = ViewAnimationUtils.createCircularReveal(overlay_layout, x, y, 0, finalradius);
+                    Animator anim = ViewAnimationUtils.createCircularReveal(layout_overlay, x, y, 0, finalradius);
 
                     anim.setDuration(animation_duration);
 
@@ -126,7 +108,7 @@ public class LoginModel extends Activity
                         public void onAnimationStart(Animator animation)
                         {
                             //animation is started
-                            overlay_layout.setVisibility(View.VISIBLE);
+                            layout_overlay.setVisibility(View.VISIBLE);
                         }
 
                         @Override
@@ -137,10 +119,8 @@ public class LoginModel extends Activity
                             counter++;
 
 
-
-                            mainlayout.setBackgroundColor(Color.parseColor(current_background_color));
-
-
+                            layout_current.setBackgroundColor(Color.parseColor(current_background_color));
+                            //layout_secondary.setBackgroundColor(Color.parseColor(current_background_color));
 
                         }
 
