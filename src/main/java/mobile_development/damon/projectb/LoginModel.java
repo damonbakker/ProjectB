@@ -2,9 +2,12 @@ package mobile_development.damon.projectb;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.PaintDrawable;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -24,12 +27,12 @@ import java.util.Random;
 public class LoginModel extends Activity
 {
 
+
     public int animation_duration = 700;
     public int counter = 0;
     public List listPalette = new ArrayList<String>();
     public String current_background_color;
     public boolean Generator_initialised = false;
-
 
 
 
@@ -64,11 +67,11 @@ public class LoginModel extends Activity
 
     //Animations
 
-    public void LoginBackgroundChange(MotionEvent event,RelativeLayout mainlayout1,RelativeLayout registerlayout1)
+    public void LoginBackgroundChange(MotionEvent event,RelativeLayout mainlayout1,RelativeLayout overlay_layout1)
     {
 
         final RelativeLayout mainlayout = mainlayout1;
-        final RelativeLayout registerlayout = registerlayout1;
+        final RelativeLayout overlay_layout = overlay_layout1;
 
 
 
@@ -87,7 +90,7 @@ public class LoginModel extends Activity
                     int y = (int)event.getY();
 
                     //set backgroundcolor
-                    String new_color = Color_Generator();
+                    final String new_color = Color_Generator();
 
                     //if (new_color == ((PaintDrawable)))
 
@@ -98,19 +101,20 @@ public class LoginModel extends Activity
             }*/
 
 
+
                     current_background_color = new_color;
-                    Log.i("test",new_color);
 
-                    registerlayout.setBackgroundColor(Color.parseColor(new_color));
 
-                    Log.i("test","COLORchanged");
+                    overlay_layout.setBackgroundColor(Color.parseColor(new_color));
+
+
 
 
                     //get the entire field radius of the view
                     int finalradius = Math.max(mainlayout.getWidth(), mainlayout.getHeight());
 
                     //create reveal animation with parameters
-                    Animator anim = ViewAnimationUtils.createCircularReveal(registerlayout, x, y, 0, finalradius);
+                    Animator anim = ViewAnimationUtils.createCircularReveal(overlay_layout, x, y, 0, finalradius);
 
                     anim.setDuration(animation_duration);
 
@@ -122,7 +126,7 @@ public class LoginModel extends Activity
                         public void onAnimationStart(Animator animation)
                         {
                             //animation is started
-                            registerlayout.setVisibility(View.VISIBLE);
+                            overlay_layout.setVisibility(View.VISIBLE);
                         }
 
                         @Override
@@ -131,7 +135,9 @@ public class LoginModel extends Activity
 
                             //animation has ended
                             counter++;
-                            Log.i("test","ANIMATIE EINDE");
+
+
+
                             mainlayout.setBackgroundColor(Color.parseColor(current_background_color));
 
 

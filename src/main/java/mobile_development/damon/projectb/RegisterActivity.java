@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 
@@ -29,7 +31,27 @@ public class RegisterActivity extends Activity {
         register_view  = (RelativeLayout) findViewById(R.id.register_layout);
         register_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
 
+        Button button_login = (Button) findViewById(R.id.button_register);
+
+        button_login.setOnLongClickListener(onLongClickListener);
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.pull_from_left, R.anim.push_to_right);
+    }
+
+    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v)
+        {
+            finish();
+            overridePendingTransition(R.anim.pull_from_left, R.anim.push_to_right);
+            return false;
+        }
+    };
 
     @Override
     public boolean onTouchEvent(MotionEvent event)

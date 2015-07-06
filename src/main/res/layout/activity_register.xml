@@ -76,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
-        android:id="@+id/button"
+        android:id="@+id/button_register"
         android:layout_alignBottom="@+id/userInput_password"
         android:layout_alignEnd="@+id/userInput_password"
         android:layout_marginBottom="-58dp"
@@ -89,17 +89,18 @@
         android:text="@string/hint_register_to_login"
         android:id="@+id/textView"
         android:layout_marginTop="52dp"
-        android:layout_alignTop="@id/button"
+        android:layout_alignTop="@id/button_register"
         android:layout_centerHorizontal="true"
         />
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="200dp"
-        android:id="@+id/imageView"
+        android:id="@+id/login_logo"
         android:layout_marginTop="25dp"
         android:src="@drawable/projectb_logo"
         android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         />

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer
+        name="Anim_transition_login_register_duration"
+        >300</integer>
+
+
+</resources>
