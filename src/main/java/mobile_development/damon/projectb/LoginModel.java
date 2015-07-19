@@ -2,13 +2,7 @@ package mobile_development.damon.projectb;
 
 import android.animation.Animator;
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.graphics.drawable.PaintDrawable;
-import android.os.CountDownTimer;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,11 +63,6 @@ public class LoginModel extends Activity
 
     public void LoginBackgroundChange(MotionEvent event,final RelativeLayout layout_current,final RelativeLayout layout_overlay)
     {
-
-
-
-
-
 
             switch (event.getAction())
             {

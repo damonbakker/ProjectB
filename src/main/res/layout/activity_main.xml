@@ -13,11 +13,7 @@
         android:background="@color/logincolor2"
         android:id="@+id/underflow_layout"
         android:visibility="invisible"
-
-
         android:layout_alignParentEnd="false">
-
-
     </RelativeLayout>
 
     <EditText

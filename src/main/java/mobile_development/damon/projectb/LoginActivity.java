@@ -4,7 +4,6 @@ package mobile_development.damon.projectb;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -23,7 +22,6 @@ public class LoginActivity extends Activity
 
     public boolean touch_state = false;
     public boolean bugfix_state = false;
-   // public String background_color  = getResources().getColor(R.id.logincolor1);
     public String background_color  = "#25ae90";
 
     LoginModel lm = new LoginModel();
@@ -39,10 +37,6 @@ public class LoginActivity extends Activity
         super.onCreate(savedInstanceState);
         //Load layout
         setContentView(R.layout.activity_main);
-
-
-
-
 
         login_view  = (RelativeLayout) findViewById(R.id.main_layout);
         login_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
