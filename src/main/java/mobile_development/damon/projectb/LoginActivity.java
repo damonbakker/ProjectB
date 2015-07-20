@@ -44,8 +44,8 @@ public class LoginActivity extends Activity
 
         if (getIntent().getExtras()!= null)
         {
-            String new_background_color =getIntent().getStringExtra("background_color");
-            background_color = new_background_color;
+
+            background_color = getIntent().getStringExtra("background_color");
             Log.i("RETURN TO ACTVITY",background_color);
             login_view.setBackgroundColor(Color.parseColor(background_color));
         }
