@@ -21,7 +21,6 @@ public class RegisterActivity extends Activity {
     public boolean bugfix_state = false;
     public String background_color;
 
-
     LoginModel lm = new LoginModel();
 
     public RelativeLayout register_view;

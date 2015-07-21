@@ -15,6 +15,15 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginActivity extends Activity
@@ -52,6 +61,7 @@ public class LoginActivity extends Activity
 
         Button button_login = (Button) findViewById(R.id.button_login);
         button_login.setOnLongClickListener(onLongClickListener);
+        button_login.setOnClickListener(onClickListener);
 
 
     }
@@ -95,6 +105,50 @@ public class LoginActivity extends Activity
         return super.onTouchEvent(event);
 
     }
+
+
+    View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Log.i("RESPONSE","BUTTON_IS_CLICKED");
+            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
+            String url ="http://api.projectb.me/";
+
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Log.i("RESPONSE", "RESPONSE RECIEVED");
+                            Log.i("RESPONSE",response.toString());
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                    Log.i("RESPONSE","RESPONSE FAILED");
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    // Posting parameters to login url
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("tag", "login");
+
+                    //params.put("email", email);
+                    //params.put("password", password);
+
+                    return params;
+                }
+
+            };
+
+            queue.add(stringRequest);
+
+        }
+    };
 
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener()
     {

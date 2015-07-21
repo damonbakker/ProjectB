@@ -57,10 +57,6 @@ public class LoginModel extends Activity
 
 
 
-
-
-    //Animations
-
     public void LoginBackgroundChange(MotionEvent event,final RelativeLayout layout_current,final RelativeLayout layout_overlay)
     {
 
