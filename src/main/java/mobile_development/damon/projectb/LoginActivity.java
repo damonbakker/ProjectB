@@ -55,7 +55,6 @@ public class LoginActivity extends Activity
         {
 
             background_color = getIntent().getStringExtra("background_color");
-            Log.i("RETURN TO ACTVITY",background_color);
             login_view.setBackgroundColor(Color.parseColor(background_color));
         }
 
@@ -107,38 +106,45 @@ public class LoginActivity extends Activity
     }
 
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
 
-            Log.i("RESPONSE","BUTTON_IS_CLICKED");
-            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
             String url ="http://api.projectb.me/";
 
+            Log.i("RESPONSE","BUTTON_IS_CLICKED");
+            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
 
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            Log.i("RESPONSE", "RESPONSE RECIEVED");
-                            Log.i("RESPONSE",response.toString());
-                        }
-                    }, new Response.ErrorListener() {
+
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>()
+            {
+                @Override
+                public void onResponse(String response)
+                {
+                    Log.i("RESPONSE", "RESPONSE RECIEVED");
+                    Log.i("RESPONSE",response);
+                }
+
+            }, new Response.ErrorListener()
+            {
                 @Override
                 public void onErrorResponse(VolleyError error) {
 
                     Log.i("RESPONSE","RESPONSE FAILED");
 
                 }
-            }) {
-                @Override
-                protected Map<String, String> getParams() {
-                    // Posting parameters to login url
-                    Map<String, String> params = new HashMap<String, String>();
-                    params.put("tag", "login");
+            })
 
-                    //params.put("email", email);
-                    //params.put("password", password);
+            {
+                @Override
+                protected Map<String, String> getParams()
+                {
+                    // Posting parameters to login url
+                    Map<String, String> params = new HashMap<>();
+                    params.put("tag", "loginTEST");
+                    params.put("email", "emailTEST");
+                    params.put("password", "passwordTEST");
 
                     return params;
                 }
