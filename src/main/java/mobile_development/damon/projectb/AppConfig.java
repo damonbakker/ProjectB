@@ -5,7 +5,5 @@ package mobile_development.damon.projectb;
  */
 public class AppConfig
 {
-    public static String URL_login = "http://api.projectb.me/login";
-    public static String  URL_Register = "";
-    public static String URL_Game = "";
+    public static String URL_APi = "http://api.projectb.me/";
 }

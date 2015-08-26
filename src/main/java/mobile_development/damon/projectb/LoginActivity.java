@@ -59,6 +59,7 @@ public class LoginActivity extends Activity
         }
 
         Button button_login = (Button) findViewById(R.id.button_login);
+
         button_login.setOnLongClickListener(onLongClickListener);
         button_login.setOnClickListener(onClickListener);
 
@@ -116,8 +117,7 @@ public class LoginActivity extends Activity
             RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
 
 
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>()
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.URL_APi, new Response.Listener<String>()
             {
                 @Override
                 public void onResponse(String response)
