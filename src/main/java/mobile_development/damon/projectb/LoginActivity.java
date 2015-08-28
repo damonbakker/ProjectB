@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -21,6 +22,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,9 +39,13 @@ public class LoginActivity extends Activity
 
     LoginModel lm = new LoginModel();
 
+    public EditText input_email;
+    public EditText input_password;
+
     public RelativeLayout login_view;
     public RelativeLayout login_view_2;
     public RelativeLayout register_view;
+   // public RequestQueue queue;
 
 
     @Override
@@ -58,10 +66,15 @@ public class LoginActivity extends Activity
             login_view.setBackgroundColor(Color.parseColor(background_color));
         }
 
+        input_email = (EditText) findViewById(R.id.userInput_email);
+        input_password = (EditText) findViewById(R.id.userInput_password);
+
         Button button_login = (Button) findViewById(R.id.button_login);
 
         button_login.setOnLongClickListener(onLongClickListener);
         button_login.setOnClickListener(onClickListener);
+
+       // queue = NetworkHandler.getInstance(this.getApplicationContext()).getRequestQueue();
 
 
     }
@@ -109,49 +122,25 @@ public class LoginActivity extends Activity
 
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View v)
+        {
+            Log.i("RESPONSE", "BUTTON_IS_CLICKED");
 
-            String url ="http://api.projectb.me/";
+            String email = input_email.getText().toString();
+            String password = input_password.getText().toString();
 
-            Log.i("RESPONSE","BUTTON_IS_CLICKED");
-            RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
-
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, AppConfig.URL_APi, new Response.Listener<String>()
+            if (email.trim().length() > 0 && password.trim().length() > 0 )
             {
-                @Override
-                public void onResponse(String response)
-                {
-                    Log.i("RESPONSE", "RESPONSE RECIEVED");
-                    Log.i("RESPONSE",response);
-                }
-
-            }, new Response.ErrorListener()
+                CheckLogin(email,password);
+            }
+            else
             {
-                @Override
-                public void onErrorResponse(VolleyError error) {
+                Toast toast =  Toast.makeText(getApplicationContext(), "Fields are missing credentials", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
 
-                    Log.i("RESPONSE","RESPONSE FAILED");
 
-                }
-            })
-
-            {
-                @Override
-                protected Map<String, String> getParams()
-                {
-                    // Posting parameters to login url
-                    Map<String, String> params = new HashMap<>();
-                    params.put("tag", "loginTEST");
-                    params.put("email", "emailTEST");
-                    params.put("password", "passwordTEST");
-
-                    return params;
-                }
-
-            };
-
-            queue.add(stringRequest);
 
         }
     };
@@ -178,6 +167,80 @@ public class LoginActivity extends Activity
             return false;
         }
     };
+
+
+    private void CheckLogin(final String email, final String password)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_APi, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                Log.i("RESPONSE", "RESPONSE RECIEVED");
+                Log.i("RESPONSE",response);
+
+                try
+                {
+                    JSONObject response_obj = new JSONObject(response);
+                    boolean error = response_obj.getBoolean("error");
+
+                    if (!error)
+                    {
+                        Toast toast =  Toast.makeText(getApplicationContext(), "login successful", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
+                    }
+                    else
+                    {
+                        String error_msg = response_obj.getString("error_msg");
+                        Toast toast =  Toast.makeText(getApplicationContext(), error_msg, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
+
+                    }
+
+                }
+                catch (JSONException e)
+                {
+
+                }
+
+
+            }
+
+        }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i("RESPONSE","RESPONSE FAILED");
+                Log.i("RESPONSE",error.getMessage());
+
+
+
+
+            }
+        })
+
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("tag", "login");
+                params.put("email", email);
+                params.put("password", password);
+
+                return params;
+            }
+
+        };
+
+
+        NetworkHandler.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
+
+    }
 
 
 }
