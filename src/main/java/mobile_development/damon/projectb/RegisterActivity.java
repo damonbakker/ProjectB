@@ -7,12 +7,25 @@ import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class RegisterActivity extends Activity {
@@ -21,12 +34,17 @@ public class RegisterActivity extends Activity {
     public boolean bugfix_state = false;
     public String background_color;
 
+    public EditText input_email;
+    public EditText input_uname;
+    public EditText input_password;
+
     LoginModel lm = new LoginModel();
 
     public RelativeLayout register_view;
     public RelativeLayout register_view_2;
     public RelativeLayout login_view;
 
+   // public EditText
     public void returnTo_sender()
     {
         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
@@ -43,13 +61,19 @@ public class RegisterActivity extends Activity {
         register_view  = (RelativeLayout) findViewById(R.id.register_layout);
         register_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
         login_view = (RelativeLayout) findViewById(R.id.main_layout);
-
         String new_background_color =getIntent().getStringExtra("background_color");
         register_view.setBackgroundColor(Color.parseColor(new_background_color));
         background_color = new_background_color;
 
+        input_email = (EditText) findViewById(R.id.userInput_email);
+        input_uname = (EditText) findViewById(R.id.userInput_username);
+        input_password = (EditText) findViewById(R.id.userInput_password);
+
         Button button_login = (Button) findViewById(R.id.button_register);
+
         button_login.setOnLongClickListener(onLongClickListener);
+        button_login.setOnClickListener(onClickListener);
+
 
 
         Log.i("1232131",background_color);
@@ -62,6 +86,30 @@ public class RegisterActivity extends Activity {
         returnTo_sender();
 
     }
+
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v)
+        {
+            String email = input_email.getText().toString();
+            String uname = input_uname.getText().toString();
+            String password = input_password.getText().toString();
+
+            if (email.trim().length() > 0 && password.trim().length() > 0 )
+            {
+                Toast toast =  Toast.makeText(getApplicationContext(), "yes", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
+            else
+            {
+                Toast toast =  Toast.makeText(getApplicationContext(), "Fields are missing credentials", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
+
+        }
+    };
 
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override

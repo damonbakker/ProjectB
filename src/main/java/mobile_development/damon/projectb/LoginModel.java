@@ -9,8 +9,17 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.RelativeLayout;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -27,7 +36,12 @@ public class LoginModel extends Activity
     public List listPalette = new ArrayList<String>();
     public String current_background_color = "#25ae90" ;
     public boolean Generator_initialised = false;
+    public RequestQueue queue;
 
+    public LoginModel()
+    {
+        queue = Volley.newRequestQueue(LoginModel.this);
+    }
 
 
     public String Color_Generator(){
@@ -55,7 +69,55 @@ public class LoginModel extends Activity
         return listPalette.get(random_index).toString();
     }
 
+    public boolean LoginRequest()
+    {
 
+        StringRequest registerRequest = new StringRequest(Request.Method.POST, AppConfig.URL_APi, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                Log.i("RESPONSE", "RESPONSE RECIEVED");
+                Log.i("RESPONSE",response);
+            }
+
+        }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i("RESPONSE","RESPONSE FAILED");
+
+            }
+        })
+
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("tag", "register");
+                params.put("email", "damon@projectb.me");
+                params.put("uname","damon");
+                params.put("password", "123");
+
+                return params;
+            }
+
+        };
+
+        queue.add(registerRequest);
+
+        return true;
+    }
+
+    public boolean RegisterRequest()
+    {
+
+
+        return true;
+    }
 
     public void LoginBackgroundChange(MotionEvent event,final RelativeLayout layout_current,final RelativeLayout layout_overlay)
     {
