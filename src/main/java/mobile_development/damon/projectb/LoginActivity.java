@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class LoginActivity extends Activity
 
     public EditText input_email;
     public EditText input_password;
+    public ProgressBar waiting_response;
 
     public RelativeLayout login_view;
     public RelativeLayout login_view_2;
@@ -68,6 +70,7 @@ public class LoginActivity extends Activity
 
         input_email = (EditText) findViewById(R.id.userInput_email);
         input_password = (EditText) findViewById(R.id.userInput_password);
+        waiting_response = (ProgressBar) findViewById(R.id.progressBar_login);
 
         Button button_login = (Button) findViewById(R.id.button_login);
 
@@ -176,6 +179,7 @@ public class LoginActivity extends Activity
             @Override
             public void onResponse(String response)
             {
+                waiting_response.setVisibility(View.INVISIBLE);
                 Log.i("RESPONSE", "RESPONSE RECIEVED");
                 Log.i("RESPONSE",response);
 
@@ -237,7 +241,7 @@ public class LoginActivity extends Activity
 
         };
 
-
+        waiting_response.setVisibility(View.VISIBLE);
         NetworkHandler.getInstance(LoginActivity.this).addToRequestQueue(stringRequest);
 
     }

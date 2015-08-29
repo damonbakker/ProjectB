@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -23,6 +24,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +41,7 @@ public class RegisterActivity extends Activity {
     public EditText input_email;
     public EditText input_uname;
     public EditText input_password;
+    public ProgressBar waiting_response;
 
     LoginModel lm = new LoginModel();
 
@@ -68,6 +73,8 @@ public class RegisterActivity extends Activity {
         input_email = (EditText) findViewById(R.id.userInput_email);
         input_uname = (EditText) findViewById(R.id.userInput_username);
         input_password = (EditText) findViewById(R.id.userInput_password);
+        waiting_response = (ProgressBar) findViewById(R.id.progressBar_register);
+
 
         Button button_login = (Button) findViewById(R.id.button_register);
 
@@ -95,11 +102,11 @@ public class RegisterActivity extends Activity {
             String uname = input_uname.getText().toString();
             String password = input_password.getText().toString();
 
-            if (email.trim().length() > 0 && password.trim().length() > 0 )
+            if (email.trim().length() > 0 && password.trim().length() > 0 && uname.trim().length() > 0)
             {
-                Toast toast =  Toast.makeText(getApplicationContext(), "yes", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER,0,0);
-                toast.show();
+
+                Register(email,uname,password);
+
             }
             else
             {
@@ -110,6 +117,9 @@ public class RegisterActivity extends Activity {
 
         }
     };
+
+
+
 
     private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
         @Override
@@ -160,4 +170,80 @@ public class RegisterActivity extends Activity {
         return super.onTouchEvent(event);
 
     }
+
+    private void Register(final String email, final String uname, final String password)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_APi, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                waiting_response.setVisibility(View.INVISIBLE);
+                Log.i("RESPONSE", "RESPONSE RECIEVED");
+                Log.i("RESPONSE",response);
+
+                try
+                {
+                    JSONObject response_obj = new JSONObject(response);
+                    boolean error = response_obj.getBoolean("error");
+
+                    if (!error)
+                    {
+                        Toast toast =  Toast.makeText(getApplicationContext(), "Register successful", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
+                    }
+                    else
+                    {
+                        String error_msg = response_obj.getString("error_msg");
+                        Toast toast =  Toast.makeText(getApplicationContext(), error_msg, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
+
+                    }
+
+                }
+                catch (JSONException e)
+                {
+
+                }
+
+
+            }
+
+        }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Log.i("RESPONSE","RESPONSE FAILED");
+                Log.i("RESPONSE",error.getMessage());
+
+
+
+
+            }
+        })
+
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("tag", "register");
+                params.put("email", email);
+                params.put("uname",uname);
+                params.put("password", password);
+
+                return params;
+            }
+
+        };
+
+        waiting_response.setVisibility(View.VISIBLE);
+        NetworkHandler.getInstance(RegisterActivity.this).addToRequestQueue(stringRequest);
+    }
+
+
 }

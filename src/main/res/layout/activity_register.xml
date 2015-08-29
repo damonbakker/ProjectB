@@ -16,13 +16,6 @@
         android:layout_alignParentEnd="false">
 
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBar"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
     <EditText
@@ -109,6 +102,14 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar_register"
+        android:visibility="invisible"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
