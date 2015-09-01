@@ -14,8 +14,6 @@
         android:id="@+id/underflow_layout"
         android:visibility="invisible"
         android:layout_alignParentEnd="false">
-
-
     </RelativeLayout>
 
     <EditText

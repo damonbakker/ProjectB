@@ -1,15 +1,14 @@
 package mobile_development.damon.projectb;
 
+
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
+import android.os.Bundle;
 import android.view.Gravity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -19,11 +18,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,137 +29,89 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class RegisterActivity extends Activity {
+public class Activity_Login extends Activity
+{
 
     public boolean touch_state = false;
     public boolean bugfix_state = false;
-    public String background_color;
+    public String background_color  = "#25ae90";
+
+    Model_Login lm = new Model_Login();
 
     public EditText input_email;
-    public EditText input_uname;
     public EditText input_password;
     public ProgressBar waiting_response;
 
-    LoginModel lm = new LoginModel();
-
-    public RelativeLayout register_view;
-    public RelativeLayout register_view_2;
     public RelativeLayout login_view;
+    public RelativeLayout login_view_2;
+    public RelativeLayout register_view;
+   // public RequestQueue queue;
 
-   // public EditText
-    public void returnTo_sender()
-    {
-        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-        intent.putExtra("background_color", background_color);
-        startActivity(intent);
-        overridePendingTransition(R.anim.pull_from_left, R.anim.push_to_right);
-    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {   //Load the parent activity and any saved instances if any are saved
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        //Load layout
+        setContentView(R.layout.activity_main);
 
-        register_view  = (RelativeLayout) findViewById(R.id.register_layout);
-        register_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
-        login_view = (RelativeLayout) findViewById(R.id.main_layout);
-        String new_background_color =getIntent().getStringExtra("background_color");
-        register_view.setBackgroundColor(Color.parseColor(new_background_color));
-        background_color = new_background_color;
+        login_view  = (RelativeLayout) findViewById(R.id.main_layout);
+        login_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
+        register_view = (RelativeLayout) findViewById(R.id.register_layout);
+
+        if (getIntent().getExtras()!= null)
+        {
+
+            background_color = getIntent().getStringExtra("background_color");
+            login_view.setBackgroundColor(Color.parseColor(background_color));
+        }
 
         input_email = (EditText) findViewById(R.id.userInput_email);
-        input_uname = (EditText) findViewById(R.id.userInput_username);
         input_password = (EditText) findViewById(R.id.userInput_password);
-        waiting_response = (ProgressBar) findViewById(R.id.progressBar_register);
+        waiting_response = (ProgressBar) findViewById(R.id.progressBar_login);
 
-
-        Button button_login = (Button) findViewById(R.id.button_register);
+        Button button_login = (Button) findViewById(R.id.button_login);
 
         button_login.setOnLongClickListener(onLongClickListener);
         button_login.setOnClickListener(onClickListener);
 
+       // queue = NetworkHandler.getInstance(this.getApplicationContext()).getRequestQueue();
 
-
-        Log.i("1232131",background_color);
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        returnTo_sender();
 
     }
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v)
-        {
-            String email = input_email.getText().toString();
-            String uname = input_uname.getText().toString();
-            String password = input_password.getText().toString();
-
-            if (email.trim().length() > 0 && password.trim().length() > 0 && uname.trim().length() > 0)
-            {
-
-                Register(email,uname,password);
-
-            }
-            else
-            {
-                Toast toast =  Toast.makeText(getApplicationContext(), "Fields are missing credentials", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER,0,0);
-                toast.show();
-            }
-
-        }
-    };
-
-
-
-
-    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v)
-        {
-
-            returnTo_sender();
-            return false;
-        }
-    };
 
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
-
-        //workaround animation end bug
+        //workaround animation_send bug
         if (!bugfix_state)
         {
-            bugfix_state = true;
+                bugfix_state = true;
 
-            new CountDownTimer(700, 1000)
-            {
-
-                public void onTick(long millisUntilFinished)
+                new CountDownTimer(700, 1000)
                 {
 
-                }
+                    public void onTick(long millisUntilFinished)
+                    {
 
-                public void onFinish()
-                {
-                    bugfix_state = false;
-                    Log.i("test", "COUNTDOWN KLAAR");
-                    touch_state = false;
-                }
-            }.start();
+                    }
+
+                    public void onFinish()
+                    {
+                        bugfix_state = false;
+                        Log.i("test","COUNTDOWN KLAAR");
+                        touch_state = false;
+                    }
+                }.start();
         }
 
         if (!touch_state)
         {
             touch_state = true;
-            lm.LoginBackgroundChange(event,register_view,register_view_2);
+            lm.LoginBackgroundChange(event, login_view, login_view_2);
             background_color = lm.current_background_color;
-
+            Log.i("Touch event","HAS started");
 
         }
 
@@ -171,7 +120,57 @@ public class RegisterActivity extends Activity {
 
     }
 
-    private void Register(final String email, final String uname, final String password)
+
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v)
+        {
+            Log.i("RESPONSE", "BUTTON_IS_CLICKED");
+
+            String email = input_email.getText().toString();
+            String password = input_password.getText().toString();
+
+            if (email.trim().length() > 0 && password.trim().length() > 0 )
+            {
+                CheckLogin(email,password);
+            }
+            else
+            {
+                Toast toast =  Toast.makeText(getApplicationContext(), "Fields are missing credentials", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
+
+
+
+        }
+    };
+
+    private View.OnLongClickListener onLongClickListener = new View.OnLongClickListener()
+    {
+        @Override
+        public boolean onLongClick(View v)
+        {
+
+            Context context = getApplicationContext();
+            CharSequence text = "Long click successful";
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.setGravity(Gravity.CENTER,0,0);
+
+            //toast.show();
+
+            Intent intent = new Intent(Activity_Login.this, Activity_Register.class);
+            intent.putExtra("background_color",background_color);
+            startActivity(intent);
+            overridePendingTransition(R.anim.pull_from_right, R.anim.push_to_left);
+
+            return false;
+        }
+    };
+
+
+    private void CheckLogin(final String email, final String password)
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_APi, new Response.Listener<String>()
         {
@@ -189,9 +188,11 @@ public class RegisterActivity extends Activity {
 
                     if (!error)
                     {
-                        Toast toast =  Toast.makeText(getApplicationContext(), "Register successful", Toast.LENGTH_SHORT);
+                        Toast toast =  Toast.makeText(getApplicationContext(), "login successful", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER,0,0);
                         toast.show();
+                        Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+                        startActivity(intent);
                     }
                     else
                     {
@@ -231,9 +232,8 @@ public class RegisterActivity extends Activity {
             {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
-                params.put("tag", "register");
+                params.put("tag", "login");
                 params.put("email", email);
-                params.put("uname",uname);
                 params.put("password", password);
 
                 return params;
@@ -242,7 +242,8 @@ public class RegisterActivity extends Activity {
         };
 
         waiting_response.setVisibility(View.VISIBLE);
-        NetworkHandler.getInstance(RegisterActivity.this).addToRequestQueue(stringRequest);
+        NetworkHandler.getInstance(Activity_Login.this).addToRequestQueue(stringRequest);
+
     }
 
 

@@ -27,7 +27,7 @@ import java.util.Random;
  */
 
 
-public class LoginModel extends Activity
+public class Model_Login extends Activity
 {
 
 
