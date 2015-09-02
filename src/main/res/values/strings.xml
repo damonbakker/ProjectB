@@ -6,8 +6,8 @@
     <string name="hint_password">Password</string>
     <string name="hint_email">Email</string>
     <string name="hint_username">Username</string>
-    <string name="hint_login_to_register">Hold the button to register</string>
-    <string name="hint_register_to_login">Hold the button to login</string>
+    <string name="hint_login_to_register">No account yet? Hold the "Login" button</string>
+    <string name="hint_register_to_login">Hold the "Register" button to go back</string>
 
 
     <string name="title_activity_register">RegisterActivity</string>
