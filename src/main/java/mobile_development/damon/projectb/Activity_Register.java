@@ -126,6 +126,8 @@ public class Activity_Register extends Activity {
         }
     };
 
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {

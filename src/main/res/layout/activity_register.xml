@@ -6,6 +6,7 @@
     android:id="@+id/register_layout"
 
 
+
     >
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,6 +17,17 @@
         android:layout_alignParentEnd="false">
     </RelativeLayout>
 
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/login_logo"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/projectb_logo"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        />
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="50dp"
@@ -49,6 +61,7 @@
         android:padding="10dp"
 
         />
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -87,18 +100,6 @@
         android:layout_marginTop="52dp"
         android:layout_alignTop="@id/button_register"
         android:layout_centerHorizontal="true"
-        />
-
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:id="@+id/login_logo"
-        android:layout_marginTop="25dp"
-        android:src="@drawable/projectb_logo"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
         />
 
     <ProgressBar
