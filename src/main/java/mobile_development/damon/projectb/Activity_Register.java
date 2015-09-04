@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -27,7 +28,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Activity_Register extends Activity {
+public class Activity_Register extends AppCompatActivity
+{
 
     public boolean touch_state = false;
     public boolean bugfix_state = false;
@@ -44,14 +46,6 @@ public class Activity_Register extends Activity {
     public RelativeLayout register_view_2;
     public RelativeLayout login_view;
 
-
-    public void returnTo_sender()
-    {
-        Intent intent = new Intent(Activity_Register.this, Activity_Login.class);
-        intent.putExtra("background_color", background_color);
-        startActivity(intent);
-        overridePendingTransition(R.anim.pull_from_left, R.anim.push_to_right);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +73,14 @@ public class Activity_Register extends Activity {
 
 
         Log.i("1232131",background_color);
+    }
+
+    public void returnTo_sender()
+    {
+        Intent intent = new Intent(Activity_Register.this, Activity_Login.class);
+        intent.putExtra("background_color", background_color);
+        startActivity(intent);
+        overridePendingTransition(R.anim.pull_from_left, R.anim.push_to_right);
     }
 
     @Override

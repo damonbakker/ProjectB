@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -29,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Activity_Login extends Activity
+public class Activity_Login extends AppCompatActivity
 {
 
     public boolean touch_state = false;
@@ -127,7 +128,7 @@ public class Activity_Login extends Activity
         {
             Log.i("RESPONSE", "BUTTON_IS_CLICKED");
 
-          //  Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+            //Intent intent = new Intent(Activity_Login.this, Main.class);
             //startActivity(intent);
 
             String email = input_email.getText().toString();

@@ -27,13 +27,6 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         />
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar_login"
-        android:visibility="invisible"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -90,6 +83,15 @@
         android:layout_alignTop="@id/button_login"
         android:layout_centerHorizontal="true"
          />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar_login"
+        android:visibility="invisible"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 
 
 
