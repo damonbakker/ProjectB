@@ -16,8 +16,7 @@
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"
-            android:windowSoftInputMode="adjustResize">
-
+            android:windowSoftInputMode="adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,12 +29,9 @@
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize" >
         </activity>
-        <activity
-            android:name=".Activity_Dashboard"
-            android:label="@string/title_activity_dashboard">
-        </activity>
+
     </application>
 
 </manifest>
