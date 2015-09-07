@@ -128,7 +128,7 @@ public class Activity_Login extends AppCompatActivity
         {
             Log.i("RESPONSE", "BUTTON_IS_CLICKED");
 
-            Intent intent = new Intent(Activity_Login.this, Main2Activity.class);
+            Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
             startActivity(intent);
 
             String email = input_email.getText().toString();

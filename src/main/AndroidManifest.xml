@@ -31,7 +31,10 @@
             android:theme="@style/LoginTheme"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-
+        <activity
+            android:name=".Activity_Dashboard"
+            android:label="@string/title_activity_activity__dashboard" >
+        </activity>
     </application>
 
 </manifest>

@@ -11,6 +11,8 @@
 
 
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_activity_activity__dashboard">Activity_Dashboard</string>
+    <string name="hello_world">Hello world!</string>
 
 
 

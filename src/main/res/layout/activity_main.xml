@@ -4,6 +4,8 @@
     tools:context=".MainActivity"
     android:background="@color/logincolor1"
     android:id="@+id/main_layout"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
 
 
     >
