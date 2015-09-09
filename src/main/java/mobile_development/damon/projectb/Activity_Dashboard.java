@@ -10,16 +10,27 @@ import android.widget.Toolbar;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 
-public class Activity_Dashboard extends AppCompatActivity {
+public class Activity_Dashboard extends AppCompatActivity
+{
+    private android.support.v7.widget.Toolbar mToolbar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        new DrawerBuilder()
+       android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        mToolbar.setTitle("Dashboard");
+        mToolbar.setSubtitle("subtitle");
+        mToolbar.setLogo(R.drawable.projectb_logo);
+        setSupportActionBar(toolbar);
+
+
+        Drawer result = new DrawerBuilder()
                 .withActivity(this)
-                .withToolbar(android.support.v7.widget.Toolbar)
+                .withDisplayBelowToolbar(true)
                 .build();
 
 
