@@ -9,10 +9,14 @@ import android.widget.Toolbar;
 
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 
 public class Activity_Dashboard extends AppCompatActivity
 {
     private android.support.v7.widget.Toolbar mToolbar;
+    private Drawer result;
 
 
 
@@ -22,16 +26,20 @@ public class Activity_Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
 
        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setTitle("Dashboard");
-        mToolbar.setSubtitle("subtitle");
-        mToolbar.setLogo(R.drawable.projectb_logo);
         setSupportActionBar(toolbar);
 
+        result = new DrawerBuilder(this)
+                //this layout have to contain child layouts
+                .withRootView(R.id.drawer_container)
+                .withToolbar(toolbar)
+                .withActionBarDrawerToggleAnimated(true)
+                .addDrawerItems(
 
-        Drawer result = new DrawerBuilder()
-                .withActivity(this)
-                .withDisplayBelowToolbar(true)
+                )
+                .withSavedInstance(savedInstanceState)
                 .build();
+
+
 
 
     }
