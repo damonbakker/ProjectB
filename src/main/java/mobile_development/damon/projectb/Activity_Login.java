@@ -133,8 +133,8 @@ public class Activity_Login extends AppCompatActivity
         {
             Log.i("RESPONSE", "BUTTON_IS_CLICKED");
 
-            Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
-            startActivity(intent);
+           /* Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+            startActivity(intent);*/
 
             String email = input_email.getText().toString();
             String password = input_password.getText().toString();
@@ -198,10 +198,11 @@ public class Activity_Login extends AppCompatActivity
                     if (!error)
                     {
                         Toast toast =  Toast.makeText(getApplicationContext(), "login successful", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
-                       /* Intent intent = new Intent(Activity_Login.this, Main2Activity.class);
-                        startActivity(intent);*/
+                        Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+                        startActivity(intent);
+
                     }
                     else
                     {

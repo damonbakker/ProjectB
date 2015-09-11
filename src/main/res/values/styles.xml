@@ -11,6 +11,8 @@
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/accent</item>
 
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+
 
             <!-- MaterialDrawer specific values -->
             <item name="material_drawer_background">@color/material_drawer_background</item>
