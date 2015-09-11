@@ -5,13 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toolbar;
 
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 public class Activity_Dashboard extends AppCompatActivity
 {
@@ -28,17 +31,36 @@ public class Activity_Dashboard extends AppCompatActivity
        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIdentifier(1);
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIdentifier(2);
+
+
         result = new DrawerBuilder(this)
                 //this layout have to contain child layouts
                 .withRootView(R.id.drawer_container)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
-
+                        item1,
+                        new DividerDrawerItem(),
+                        item2
                 )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem)
+                    {
+                        // do something with the clicked item :D
+                        return true;
+                    }
+                })
                 .withSavedInstance(savedInstanceState)
                 .build();
 
+
+
+
+                //icon ideas,  material desgn / xml, (account/account multiple,clippboard account), poll, school, (file-document,folder-multiple)
+                // Colors or NO colors for the sidebar
 
 
 

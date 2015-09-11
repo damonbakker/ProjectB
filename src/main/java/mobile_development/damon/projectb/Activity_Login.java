@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -85,6 +86,10 @@ public class Activity_Login extends AppCompatActivity
     @Override
     public boolean onTouchEvent(MotionEvent event)
     {
+        if(Build.VERSION.SDK_INT > 20 )
+        {
+
+
         //workaround animation_send bug
         if (!bugfix_state)
         {
@@ -116,7 +121,7 @@ public class Activity_Login extends AppCompatActivity
 
         }
 
-
+        }
         return super.onTouchEvent(event);
 
     }
