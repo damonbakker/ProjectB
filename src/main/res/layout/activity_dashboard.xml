@@ -27,25 +27,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txtLabel"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Test"
-                android:textSize="16sp" />
         </FrameLayout>
     </FrameLayout>
 
 
-<!--
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:id="@+id/fragment"
         android:name="mobile_development.damon.projectb.Activity_DashboardFragment"
         tools:layout="@layout/fragment_dashboard" android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar"/>
--->
 
 
 </RelativeLayout>
