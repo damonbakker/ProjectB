@@ -1,11 +1,16 @@
 package mobile_development.damon.projectb;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.mikepenz.materialdrawer.Drawer;
@@ -31,8 +36,8 @@ public class Activity_Dashboard extends AppCompatActivity
        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIdentifier(1);
-        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIdentifier(2);
+       final PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIdentifier(1);
+       final SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIdentifier(2);
 
 
         result = new DrawerBuilder(this)
@@ -47,8 +52,25 @@ public class Activity_Dashboard extends AppCompatActivity
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
-                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem)
-                    {
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        result.closeDrawer();
+                        if (drawerItem == item1) {
+                            Toast toast = Toast.makeText(getApplicationContext(), "TEST", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
+
+                            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                            Fragment newFragment = new Activity_DashboardFragment();
+                            android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+                            transaction.replace(R.id.frame_container,newFragment);
+                            transaction.addToBackStack(null);
+
+                            transaction.commit();
+
+                        }
                         // do something with the clicked item :D
                         return true;
                     }

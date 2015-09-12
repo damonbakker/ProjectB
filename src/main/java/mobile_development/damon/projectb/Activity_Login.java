@@ -132,7 +132,8 @@ public class Activity_Login extends AppCompatActivity
         public void onClick(View v)
         {
             Log.i("RESPONSE", "BUTTON_IS_CLICKED");
-
+            Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+            startActivity(intent);
            /* Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
             startActivity(intent);*/
 
