@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -36,8 +37,14 @@ public class Activity_Dashboard extends AppCompatActivity
        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       final PrimaryDrawerItem item1 = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIdentifier(1);
-       final SecondaryDrawerItem item2 = new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIdentifier(2);
+       final PrimaryDrawerItem item_dashboard = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(GoogleMaterial.Icon.gmd_home).withIdentifier(1);
+       final SecondaryDrawerItem item_projects = new SecondaryDrawerItem().withName(R.string.drawer_item_projects).withIcon(GoogleMaterial.Icon.gmd_folder).withIdentifier(2);
+       final SecondaryDrawerItem item_students = new SecondaryDrawerItem().withName(R.string.drawer_item_students).withIcon(GoogleMaterial.Icon.gmd_account_box).withIdentifier(3);
+       final SecondaryDrawerItem item_inventory = new SecondaryDrawerItem().withName(R.string.drawer_item_inventory).withIcon(GoogleMaterial.Icon.gmd_laptop_windows).withIdentifier(4);
+       final SecondaryDrawerItem item_feedback = new SecondaryDrawerItem().withName(R.string.drawer_item_feedback).withIcon(GoogleMaterial.Icon.gmd_info).withIdentifier(5);
+       final SecondaryDrawerItem item_settings = new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(GoogleMaterial.Icon.gmd_settings).withIdentifier(6);
+
+       final android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
 
         result = new DrawerBuilder(this)
@@ -46,31 +53,36 @@ public class Activity_Dashboard extends AppCompatActivity
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggleAnimated(true)
                 .addDrawerItems(
-                        item1,
+                        item_dashboard,
+                        item_projects,
+                        item_students,
+                        item_inventory,
                         new DividerDrawerItem(),
-                        item2
+                        item_feedback,
+                        item_settings
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
                         result.closeDrawer();
-                        if (drawerItem == item1) {
-                            Toast toast = Toast.makeText(getApplicationContext(), "TEST", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.CENTER, 0, 0);
-                            toast.show();
 
-                            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        switch (drawerItem.getIdentifier()) {
+                            case 1:
+                                Fragment newFragment = new Activity_DashboardFragment();
 
-                            Fragment newFragment = new Activity_DashboardFragment();
-                            android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                transaction.replace(R.id.frame_container, newFragment);
+                                transaction.addToBackStack(null);
 
-                            transaction.replace(R.id.frame_container,newFragment);
-                            transaction.addToBackStack(null);
-
-                            transaction.commit();
+                                transaction.commit();
+                                break;
+                            case 2:
+                                Toast.makeText(Activity_Dashboard.this, "Navigation", Toast.LENGTH_SHORT).show();
+                                break;
 
                         }
+
+
                         // do something with the clicked item :D
                         return true;
                     }
