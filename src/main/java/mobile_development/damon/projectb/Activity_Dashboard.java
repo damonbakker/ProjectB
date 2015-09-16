@@ -40,7 +40,7 @@ public class Activity_Dashboard extends AppCompatActivity
        final PrimaryDrawerItem item_dashboard = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(GoogleMaterial.Icon.gmd_home).withIdentifier(1);
        final SecondaryDrawerItem item_projects = new SecondaryDrawerItem().withName(R.string.drawer_item_projects).withIcon(GoogleMaterial.Icon.gmd_folder).withIdentifier(2);
        final SecondaryDrawerItem item_students = new SecondaryDrawerItem().withName(R.string.drawer_item_students).withIcon(GoogleMaterial.Icon.gmd_account_box).withIdentifier(3);
-       final SecondaryDrawerItem item_inventory = new SecondaryDrawerItem().withName(R.string.drawer_item_inventory).withIcon(GoogleMaterial.Icon.gmd_laptop_windows).withIdentifier(4);
+       final SecondaryDrawerItem item_inventory = new SecondaryDrawerItem().withName(R.string.drawer_item_inventory).withIcon(GoogleMaterial.Icon.gmd_archive).withIdentifier(4);
        final SecondaryDrawerItem item_feedback = new SecondaryDrawerItem().withName(R.string.drawer_item_feedback).withIcon(GoogleMaterial.Icon.gmd_info).withIdentifier(5);
        final SecondaryDrawerItem item_settings = new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(GoogleMaterial.Icon.gmd_settings).withIdentifier(6);
 

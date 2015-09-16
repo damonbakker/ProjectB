@@ -52,10 +52,10 @@ public class Activity_Register extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        register_view  = (RelativeLayout) findViewById(R.id.register_layout);
+        register_view = (RelativeLayout) findViewById(R.id.register_layout);
         register_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
         login_view = (RelativeLayout) findViewById(R.id.main_layout);
-        String new_background_color =getIntent().getStringExtra("background_color");
+        String new_background_color = getIntent().getStringExtra("background_color");
         register_view.setBackgroundColor(Color.parseColor(new_background_color));
         background_color = new_background_color;
 
@@ -71,8 +71,19 @@ public class Activity_Register extends AppCompatActivity
         button_login.setOnClickListener(onClickListener);
 
 
-
-        Log.i("1232131",background_color);
+        Log.i("1232131", background_color);
+        findViewById(R.id.login_logo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Activity_Register.this, Activity_Dashboard.class));
+            }
+        });
+        findViewById(R.id.underflow_layout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Activity_Register.this, Activity_Login.class));
+            }
+        });
     }
 
     public void returnTo_sender()
