@@ -1,17 +1,12 @@
 package mobile_development.damon.projectb;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.materialdrawer.Drawer;
@@ -19,7 +14,6 @@ import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
-import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 public class Activity_Dashboard extends AppCompatActivity
@@ -45,7 +39,7 @@ public class Activity_Dashboard extends AppCompatActivity
        final SecondaryDrawerItem item_settings = new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(GoogleMaterial.Icon.gmd_settings).withIdentifier(6);
 
        final android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-
+       final android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         result = new DrawerBuilder(this)
                 //this layout have to contain child layouts
@@ -68,16 +62,46 @@ public class Activity_Dashboard extends AppCompatActivity
 
                         switch (drawerItem.getIdentifier()) {
                             case 1:
-                                Fragment newFragment = new Activity_DashboardFragment();
-
-                                android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-                                transaction.replace(R.id.frame_container, newFragment);
+                                Fragment dashboardFragment = new Fragment_Dashboard();
+                                transaction.replace(R.id.frame_container, dashboardFragment);
                                 transaction.addToBackStack(null);
-
                                 transaction.commit();
+
                                 break;
                             case 2:
-                                Toast.makeText(Activity_Dashboard.this, "Navigation", Toast.LENGTH_SHORT).show();
+                                Fragment projectsFragment = new Fragment_Projects();
+                                transaction.replace(R.id.frame_container, projectsFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+
+                                break;
+                            case 3:
+                                Fragment studentsFragment = new Fragment_Dashboard();
+                                transaction.replace(R.id.frame_container, studentsFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+
+                                break;
+                            case 4:
+                                Fragment inventoryFragment = new Fragment_Dashboard();
+                                transaction.replace(R.id.frame_container, inventoryFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+
+                                break;
+                            case 5:
+                                Fragment feedbackFragment = new Fragment_Dashboard();
+                                transaction.replace(R.id.frame_container, feedbackFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+
+                                break;
+                            case 6:
+                                Fragment settingsFragment = new Fragment_Dashboard();
+                                transaction.replace(R.id.frame_container, settingsFragment);
+                                transaction.addToBackStack(null);
+                                transaction.commit();
+
                                 break;
 
                         }

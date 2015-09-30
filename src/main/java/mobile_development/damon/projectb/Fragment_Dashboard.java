@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class Activity_DashboardFragment extends Fragment {
+public class Fragment_Dashboard extends Fragment {
 
-    public Activity_DashboardFragment() {
+    public Fragment_Dashboard() {
     }
 
     @Override
