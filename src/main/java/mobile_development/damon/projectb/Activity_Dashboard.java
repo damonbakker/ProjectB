@@ -1,5 +1,6 @@
 package mobile_development.damon.projectb;
 
+import android.app.FragmentManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -70,34 +71,34 @@ public class Activity_Dashboard extends AppCompatActivity
                                 break;
                             case 2:
                                 Fragment projectsFragment = new Fragment_Projects();
-                                transaction.replace(R.id.frame_container, projectsFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container,projectsFragment);
+                                        .addToBackStack(null);
 
                                 break;
                             case 3:
-                                Fragment studentsFragment = new Fragment_Dashboard();
+                                Fragment studentsFragment = new Fragment_Students();
                                 transaction.replace(R.id.frame_container, studentsFragment);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
 
                                 break;
                             case 4:
-                                Fragment inventoryFragment = new Fragment_Dashboard();
+                                Fragment inventoryFragment = new Fragment_Inventory();
                                 transaction.replace(R.id.frame_container, inventoryFragment);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
 
                                 break;
                             case 5:
-                                Fragment feedbackFragment = new Fragment_Dashboard();
+                                Fragment feedbackFragment = new Fragment_Feedback();
                                 transaction.replace(R.id.frame_container, feedbackFragment);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
 
                                 break;
                             case 6:
-                                Fragment settingsFragment = new Fragment_Dashboard();
+                                Fragment settingsFragment = new Fragment_Settings();
                                 transaction.replace(R.id.frame_container, settingsFragment);
                                 transaction.addToBackStack(null);
                                 transaction.commit();
