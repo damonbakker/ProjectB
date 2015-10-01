@@ -103,6 +103,7 @@
     <orderEntry type="library" exported="" name="iconics-core-1.7.5" level="project" />
     <orderEntry type="library" exported="" name="support-v4-23.0.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.0" level="project" />
+    <orderEntry type="module" module-name="library" exported="" />
     <orderEntry type="module" module-name="volley" exported="" />
   </component>
 </module>

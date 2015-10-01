@@ -40,7 +40,6 @@ public class Activity_Dashboard extends AppCompatActivity
        final SecondaryDrawerItem item_settings = new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(GoogleMaterial.Icon.gmd_settings).withIdentifier(6);
 
        final android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-       final android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 
         result = new DrawerBuilder(this)
                 //this layout have to contain child layouts
@@ -64,44 +63,49 @@ public class Activity_Dashboard extends AppCompatActivity
                         switch (drawerItem.getIdentifier()) {
                             case 1:
                                 Fragment dashboardFragment = new Fragment_Dashboard();
-                                transaction.replace(R.id.frame_container, dashboardFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container,dashboardFragment)
+                                        .addToBackStack(null)
+                                        .commit();
 
                                 break;
                             case 2:
                                 Fragment projectsFragment = new Fragment_Projects();
                                 fragmentManager.beginTransaction()
-                                        .replace(R.id.frame_container,projectsFragment);
-                                        .addToBackStack(null);
+                                        .replace(R.id.frame_container,projectsFragment)
+                                        .addToBackStack(null)
+                                        .commit();
 
                                 break;
                             case 3:
                                 Fragment studentsFragment = new Fragment_Students();
-                                transaction.replace(R.id.frame_container, studentsFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container,studentsFragment)
+                                        .addToBackStack(null)
+                                        .commit();
 
                                 break;
                             case 4:
                                 Fragment inventoryFragment = new Fragment_Inventory();
-                                transaction.replace(R.id.frame_container, inventoryFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
-
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container,inventoryFragment)
+                                        .addToBackStack(null)
+                                        .commit();
                                 break;
                             case 5:
                                 Fragment feedbackFragment = new Fragment_Feedback();
-                                transaction.replace(R.id.frame_container, feedbackFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container,feedbackFragment)
+                                        .addToBackStack(null)
+                                        .commit();
 
                                 break;
                             case 6:
                                 Fragment settingsFragment = new Fragment_Settings();
-                                transaction.replace(R.id.frame_container, settingsFragment);
-                                transaction.addToBackStack(null);
-                                transaction.commit();
+                                fragmentManager.beginTransaction()
+                                        .replace(R.id.frame_container,settingsFragment)
+                                        .addToBackStack(null)
+                                        .commit();
 
                                 break;
 
@@ -115,11 +119,6 @@ public class Activity_Dashboard extends AppCompatActivity
                 .withSavedInstance(savedInstanceState)
                 .build();
 
-
-
-
-                //icon ideas,  material desgn / xml, (account/account multiple,clippboard account), poll, school, (file-document,folder-multiple)
-                // Colors or NO colors for the sidebar
 
 
 

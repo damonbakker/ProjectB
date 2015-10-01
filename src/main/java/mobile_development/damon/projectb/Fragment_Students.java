@@ -7,6 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
+
+import com.tjerkw.slideexpandable.library.ActionSlideExpandableListView;
 
 
 /**
@@ -28,6 +32,8 @@ public class Fragment_Students extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    public FrameLayout frameLayout;
 
     /**
      * Use this factory method to create a new instance of
@@ -58,6 +64,9 @@ public class Fragment_Students extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
@@ -65,6 +74,8 @@ public class Fragment_Students extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_students, container, false);
+
+        //login_view  = (RelativeLayout) findViewById(R.id.main_layout);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
