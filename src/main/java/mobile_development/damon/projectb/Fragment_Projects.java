@@ -7,6 +7,14 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -22,6 +30,15 @@ public class Fragment_Projects extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    public ExpandableListAdapter listAdapter;
+    public ExpandableListView expListView;
+    public List<String> listDataHeader;
+    public HashMap<String, List<String>> listDataChild;
+
+    public FrameLayout layout_fragment;
+    public ListView mainlistview;
+
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -64,7 +81,23 @@ public class Fragment_Projects extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_projects, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_projects, container, false);
+        layout_fragment = (FrameLayout) rootView.findViewById(R.id.layout_projects);
+        //mainlistview = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
+
+        // get the listview
+        expListView = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
+
+        // preparing list data
+        prepareListData();
+
+        listAdapter = new mobile_development.damon.projectb.ExpandableListAdapter(getActivity(),listDataHeader, listDataChild);
+
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
+
+        return rootView;
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -94,6 +127,45 @@ public class Fragment_Projects extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+    private void prepareListData() {
+        listDataHeader = new ArrayList<String>();
+        listDataChild = new HashMap<String, List<String>>();
+
+        // Adding child data
+        listDataHeader.add("Top 250");
+        listDataHeader.add("Now Showing");
+        listDataHeader.add("Coming Soon..");
+
+        // Adding child data
+        List<String> top250 = new ArrayList<String>();
+        top250.add("The Shawshank Redemption");
+        top250.add("The Godfather");
+        top250.add("The Godfather: Part II");
+        top250.add("Pulp Fiction");
+        top250.add("The Good, the Bad and the Ugly");
+        top250.add("The Dark Knight");
+        top250.add("12 Angry Men");
+
+        List<String> nowShowing = new ArrayList<String>();
+        nowShowing.add("The Conjuring");
+        nowShowing.add("Despicable Me 2");
+        nowShowing.add("Turbo");
+        nowShowing.add("Grown Ups 2");
+        nowShowing.add("Red 2");
+        nowShowing.add("The Wolverine");
+
+        List<String> comingSoon = new ArrayList<String>();
+        comingSoon.add("2 Guns");
+        comingSoon.add("The Smurfs 2");
+        comingSoon.add("The Spectacular Now");
+        comingSoon.add("The Canyons");
+        comingSoon.add("Europa Report");
+
+        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), nowShowing);
+        listDataChild.put(listDataHeader.get(2), comingSoon);
     }
 
 }

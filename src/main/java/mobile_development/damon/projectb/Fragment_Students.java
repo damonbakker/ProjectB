@@ -7,10 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.tjerkw.slideexpandable.library.ActionSlideExpandableListView;
+
+import java.util.HashMap;
+import java.util.List;
 
 
 /**
@@ -31,9 +37,13 @@ public class Fragment_Students extends Fragment {
     private String mParam1;
     private String mParam2;
 
+
+    public FrameLayout layout_fragment;
+    public ListView mainlistview;
+
+
     private OnFragmentInteractionListener mListener;
 
-    public FrameLayout frameLayout;
 
     /**
      * Use this factory method to create a new instance of
@@ -73,9 +83,15 @@ public class Fragment_Students extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_students, container, false);
+        //return inflater.inflate(R.layout.fragment_students, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_students, container, false);
+        layout_fragment = (FrameLayout) rootView.findViewById(R.id.layout_students);
+        mainlistview = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
 
-        //login_view  = (RelativeLayout) findViewById(R.id.main_layout);
+
+
+
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
