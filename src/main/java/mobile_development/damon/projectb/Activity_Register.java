@@ -72,18 +72,7 @@ public class Activity_Register extends AppCompatActivity
 
 
         Log.i("1232131", background_color);
-        findViewById(R.id.login_logo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Activity_Register.this, Activity_Dashboard.class));
-            }
-        });
-        findViewById(R.id.underflow_layout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Activity_Register.this, Activity_Login.class));
-            }
-        });
+
     }
 
     public void returnTo_sender()

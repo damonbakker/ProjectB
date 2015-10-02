@@ -11,6 +11,8 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,12 +34,11 @@ public class Fragment_Projects extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     public ExpandableListAdapter listAdapter;
-    public ExpandableListView expListView;
+    public ExpandableListView mainlistview_projects;
     public List<String> listDataHeader;
     public HashMap<String, List<String>> listDataChild;
 
-    public FrameLayout layout_fragment;
-    public ListView mainlistview;
+    public RelativeLayout layout_fragment;
 
 
     // TODO: Rename and change types of parameters
@@ -82,19 +83,43 @@ public class Fragment_Projects extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_projects, container, false);
-        layout_fragment = (FrameLayout) rootView.findViewById(R.id.layout_projects);
-        //mainlistview = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
+        layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
+        mainlistview_projects = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
 
-        // get the listview
-        expListView = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
-
-        // preparing list data
         prepareListData();
 
         listAdapter = new mobile_development.damon.projectb.ExpandableListAdapter(getActivity(),listDataHeader, listDataChild);
 
         // setting list adapter
-        expListView.setAdapter(listAdapter);
+        mainlistview_projects.setAdapter(listAdapter);
+
+
+        mainlistview_projects.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
+        {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
+            {
+                Toast.makeText(
+                    getActivity(),
+                    listDataHeader.get(groupPosition)
+                            + " : "
+                            + listDataChild.get(
+                            listDataHeader.get(groupPosition)).get(
+                            childPosition), Toast.LENGTH_SHORT)
+                    .show();
+                return false;
+            }
+        });
+
+        mainlistview_projects.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                Toast.makeText(getActivity(),
+                        listDataHeader.get(groupPosition) + " Expanded",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return rootView;
 
@@ -134,38 +159,38 @@ public class Fragment_Projects extends Fragment {
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
-        listDataHeader.add("Top 250");
-        listDataHeader.add("Now Showing");
-        listDataHeader.add("Coming Soon..");
+        listDataHeader.add("Easy");
+        listDataHeader.add("Medium");
+        listDataHeader.add("Hard");
 
         // Adding child data
-        List<String> top250 = new ArrayList<String>();
-        top250.add("The Shawshank Redemption");
-        top250.add("The Godfather");
-        top250.add("The Godfather: Part II");
-        top250.add("Pulp Fiction");
-        top250.add("The Good, the Bad and the Ugly");
-        top250.add("The Dark Knight");
-        top250.add("12 Angry Men");
+        List<String> easy = new ArrayList<String>();
+        easy.add("test");
+        easy.add("test");
+        easy.add("test");
+        easy.add("test");
+        easy.add("test");
+        easy.add("test");
+        easy.add("test");
 
-        List<String> nowShowing = new ArrayList<String>();
-        nowShowing.add("The Conjuring");
-        nowShowing.add("Despicable Me 2");
-        nowShowing.add("Turbo");
-        nowShowing.add("Grown Ups 2");
-        nowShowing.add("Red 2");
-        nowShowing.add("The Wolverine");
+        List<String> medium = new ArrayList<String>();
+        medium.add("test");
+        medium.add("test");
+        medium.add("test");
+        medium.add("test");
+        medium.add("test");
+        medium.add("test");
 
-        List<String> comingSoon = new ArrayList<String>();
-        comingSoon.add("2 Guns");
-        comingSoon.add("The Smurfs 2");
-        comingSoon.add("The Spectacular Now");
-        comingSoon.add("The Canyons");
-        comingSoon.add("Europa Report");
+        List<String> hard = new ArrayList<String>();
+        hard.add("test");
+        hard.add("test");
+        hard.add("test");
+        hard.add("test");
+        hard.add("test");
 
-        listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), nowShowing);
-        listDataChild.put(listDataHeader.get(2), comingSoon);
+        listDataChild.put(listDataHeader.get(0), easy); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), medium);
+        listDataChild.put(listDataHeader.get(2), hard);
     }
 
 }
