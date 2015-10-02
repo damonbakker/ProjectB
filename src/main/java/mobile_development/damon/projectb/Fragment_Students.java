@@ -13,8 +13,6 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
-import com.tjerkw.slideexpandable.library.ActionSlideExpandableListView;
-
 import java.util.HashMap;
 import java.util.List;
 
