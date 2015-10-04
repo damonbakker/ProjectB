@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Damon on 10/4/2015.
  */
-public class ListAdapter_Projects extends ArrayAdapter
+public class ListAdapter_Projects extends ArrayAdapter<> // // TODO: 10/4/2015 Make adapter type class project
 {
     private Context _context;
     private int _layourresourceid;
@@ -19,15 +19,15 @@ public class ListAdapter_Projects extends ArrayAdapter
 
     public ListAdapter_Projects(Context context,int layoutResourceId,List<Project> projects)
     {
-        this._context=context;
-        this._layourresourceid=layoutResourceId;
+        //Call super constructor for extending class initialisation (has no default)
+        super(context,layoutResourceId);
         this._projects=projects;
     }
 
 
-    @Override
+  /*  @Override
     public View getView(int position, View convertView, ViewGroup parent)
     {
-
-    }
+        return true;
+    }*/
 }
