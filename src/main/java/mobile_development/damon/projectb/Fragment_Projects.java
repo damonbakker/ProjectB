@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
@@ -83,12 +84,11 @@ public class Fragment_Projects extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_projects, container, false);
-        layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
+       /* layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
         mainlistview_projects = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
 
         prepareListData();
 
-        listAdapter = new mobile_development.damon.projectb.ExpandableListAdapter(getActivity(),listDataHeader, listDataChild);
 
         // setting list adapter
         mainlistview_projects.setAdapter(listAdapter);
@@ -119,7 +119,26 @@ public class Fragment_Projects extends Fragment {
                         listDataHeader.get(groupPosition) + " Expanded",
                         Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
+
+        String[] stringarray = new String[10];
+        for (int i=0; i < stringarray.length; i++)
+        {
+            stringarray[i] = "String" + i;
+        }
+
+        ArrayAdapter myadapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,stringarray);
+        ListView stringlistview = (ListView) rootView.findViewById(R.id.listView_projects);
+        stringlistview.setAdapter(myadapter);
+
+
+
+
+
+
+
+
+
 
         return rootView;
 
@@ -154,43 +173,6 @@ public class Fragment_Projects extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    private void prepareListData() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
 
-        // Adding child data
-        listDataHeader.add("Easy");
-        listDataHeader.add("Medium");
-        listDataHeader.add("Hard");
-
-        // Adding child data
-        List<String> easy = new ArrayList<String>();
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-
-        List<String> medium = new ArrayList<String>();
-        medium.add("test");
-        medium.add("test");
-        medium.add("test");
-        medium.add("test");
-        medium.add("test");
-        medium.add("test");
-
-        List<String> hard = new ArrayList<String>();
-        hard.add("test");
-        hard.add("test");
-        hard.add("test");
-        hard.add("test");
-        hard.add("test");
-
-        listDataChild.put(listDataHeader.get(0), easy); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), medium);
-        listDataChild.put(listDataHeader.get(2), hard);
-    }
 
 }

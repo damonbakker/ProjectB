@@ -28,6 +28,7 @@
     <string name="placeholder_inventory">Inventory fragment :)</string>
     <string name="placeholder_feedback">Feedback fragment :)</string>
     <string name="placeholder_settings">Settings fragment :)</string>
+    <string name="title_activity_activity__new__project">Activity_New_Project</string>
 
 
 

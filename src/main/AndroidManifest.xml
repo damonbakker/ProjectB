@@ -35,6 +35,10 @@
             android:name=".Activity_Dashboard"
             android:label="@string/title_activity_activity__dashboard" >
         </activity>
+        <activity
+            android:name=".Activity_New_Project"
+            android:label="@string/title_activity_activity__new__project" >
+        </activity>
     </application>
 
 </manifest>

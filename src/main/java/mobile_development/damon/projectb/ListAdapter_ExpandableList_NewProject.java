@@ -14,14 +14,13 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter
+public class ListAdapter_ExpandableList_NewProject extends BaseExpandableListAdapter
 {
     private Context _context;
-    private List<String> _listDataHeader; // header titles
-    // child data in format of header title, child title
+    private List<String> _listDataHeader;
     private HashMap<String, List<String>> _listDataChild;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listChildData)
+    public ListAdapter_ExpandableList_NewProject(Context context, List<String> listDataHeader, HashMap<String, List<String>> listChildData)
     {
         this._context = context;
         this._listDataHeader = listDataHeader;
@@ -50,7 +49,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter
         if (convertView == null)
         {
             LayoutInflater infalInflater = (LayoutInflater) this._context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.list_item_projects, null);
+            convertView = infalInflater.inflate(R.layout.list_item_new_project, null);
         }
 
         TextView txtListChild = (TextView) convertView.findViewById(R.id.lblListItem);
