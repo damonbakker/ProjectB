@@ -1,5 +1,6 @@
 package mobile_development.damon.projectb;
 
+import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.LruCache;
@@ -12,7 +13,7 @@ import com.android.volley.toolbox.Volley;
 /**
  * Created by Damon on 8/28/2015.
  */
-public class NetworkHandler
+public class NetworkHandler extends Application
 {
     private static NetworkHandler mInstance;
     private RequestQueue mRequestQueue;

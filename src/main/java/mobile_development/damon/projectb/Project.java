@@ -8,12 +8,13 @@ import java.util.Date;
 public class Project
 {
     private String name;
-    private Boolean completion_status;
+    private int completion_status;
     private Date deadline;
     private String[] participants;
 
 
-    public Project(String name,Boolean completion_status, Date deadline,String[] participants)
+
+    public Project(String name,int completion_status, Date deadline,String[] participants)
     {
         name = this.name;
         completion_status = this.completion_status;
@@ -26,7 +27,7 @@ public class Project
         return this.name;
     }
 
-    public Boolean getCompletion_status()
+    public int getCompletion_status()
     {
         return this.completion_status;
     }

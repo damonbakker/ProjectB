@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +39,9 @@ public class Fragment_Projects extends Fragment {
     public ExpandableListView mainlistview_projects;
     public List<String> listDataHeader;
     public HashMap<String, List<String>> listDataChild;
+
+    private List<Project> project_data = new ArrayList<Project>();
+    public ListAdapter_Projects adapter;
 
     public RelativeLayout layout_fragment;
 
@@ -84,57 +88,23 @@ public class Fragment_Projects extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_projects, container, false);
-       /* layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
-        mainlistview_projects = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
 
-        prepareListData();
+        layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
+        ListView mainlistview = (ListView) rootView.findViewById(R.id.listView_projects);
 
-
-        // setting list adapter
-        mainlistview_projects.setAdapter(listAdapter);
-
-
-        mainlistview_projects.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
-        {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
-            {
-                Toast.makeText(
-                    getActivity(),
-                    listDataHeader.get(groupPosition)
-                            + " : "
-                            + listDataChild.get(
-                            listDataHeader.get(groupPosition)).get(
-                            childPosition), Toast.LENGTH_SHORT)
-                    .show();
-                return false;
-            }
-        });
-
-        mainlistview_projects.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-                Toast.makeText(getActivity(),
-                        listDataHeader.get(groupPosition) + " Expanded",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-        String[] stringarray = new String[10];
-        for (int i=0; i < stringarray.length; i++)
-        {
-            stringarray[i] = "String" + i;
-        }
-
-        ArrayAdapter myadapter = new ArrayAdapter(getActivity(),android.R.layout.simple_list_item_1,stringarray);
-        ListView stringlistview = (ListView) rootView.findViewById(R.id.listView_projects);
-        stringlistview.setAdapter(myadapter);
+        project_data.add(new Project("Simple firebase app",1,new Date(1111111111),null));
+        project_data.add(new Project("Simple firebase app",2,new Date(1111111111),null));
+        project_data.add(new Project("Simple firebase app",3,new Date(1111111111),null));
+        project_data.add(new Project("Simple firebase app",1,new Date(1111111111),null));
+        project_data.add(new Project("Simple firebase app",2,new Date(1111111111),null));
+        project_data.add(new Project("Simple firebase app",2,new Date(1111111111),null));
+        project_data.add(new Project("Simple firebase app",3,new Date(1111111111),null));
+        project_data.add(new Project("Simple firebase app",1,new Date(1111111111),null));
 
 
+        ListAdapter_Projects adapter = new ListAdapter_Projects(getActivity(),R.layout.list_item_project,project_data);
 
-
-
+        mainlistview.setAdapter(adapter);
 
 
 
