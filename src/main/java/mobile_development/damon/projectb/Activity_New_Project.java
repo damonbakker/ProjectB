@@ -34,10 +34,8 @@ public class Activity_New_Project extends AppCompatActivity
         prepareListData();
 
         listAdapter = new ListAdapter_ExpandableList_NewProject(getApplicationContext(),listDataHeader, listDataChild);
-
         // setting list adapter
         mainlistview_projects.setAdapter(listAdapter);
-
 
         mainlistview_projects.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override

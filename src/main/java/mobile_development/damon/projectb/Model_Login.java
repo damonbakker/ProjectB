@@ -71,7 +71,7 @@ public class Model_Login extends Activity
             {
                 case MotionEvent.ACTION_DOWN:
                     //pressed
-                    
+
 
                     //get pressed location(coordinates)
                     int x = (int)event.getX();
