@@ -26,6 +26,8 @@ public class Activity_New_Project extends AppCompatActivity
         setContentView(R.layout.activity_new_project);
 
 
+
+
         layout = (RelativeLayout) findViewById(R.id.layout_new_project);
         mainlistview_projects = (ExpandableListView) findViewById(R.id.Expandable_list_view);
 
@@ -69,38 +71,72 @@ public class Activity_New_Project extends AppCompatActivity
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
+        listDataHeader.add("Beginner");
         listDataHeader.add("Easy");
-        listDataHeader.add("Medium");
+        listDataHeader.add("Mediocre");
         listDataHeader.add("Hard");
+        listDataHeader.add("Veteran");
+        listDataHeader.add("Pro");
 
         // Adding child data
-        List<String> easy = new ArrayList<String>();
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
-        easy.add("test");
+        List<String> Beginner = new ArrayList<String>();
+        Beginner.add("test");
+        Beginner.add("test");
+        Beginner.add("test");
+        Beginner.add("test");
+        Beginner.add("test");
+        Beginner.add("test");
+        Beginner.add("test");
 
-        List<String> medium = new ArrayList<String>();
-        medium.add("test");
-        medium.add("test");
-        medium.add("test");
-        medium.add("test");
-        medium.add("test");
-        medium.add("test");
+        List<String> Easy = new ArrayList<String>();
+        Easy.add("test");
+        Easy.add("test");
+        Easy.add("test");
+        Easy.add("test");
+        Easy.add("test");
+        Easy.add("test");
 
-        List<String> hard = new ArrayList<String>();
-        hard.add("test");
-        hard.add("test");
-        hard.add("test");
-        hard.add("test");
-        hard.add("test");
+        List<String> Mediocre = new ArrayList<String>();
+        Mediocre.add("test");
+        Mediocre.add("test");
+        Mediocre.add("test");
+        Mediocre.add("test");
+        Mediocre.add("test");
+        Mediocre.add("test");
+        Mediocre.add("test");
 
-        listDataChild.put(listDataHeader.get(0), easy); // Header, Child data
-        listDataChild.put(listDataHeader.get(1), medium);
-        listDataChild.put(listDataHeader.get(2), hard);
+        List<String> Hard = new ArrayList<String>();
+        Hard.add("test");
+        Hard.add("test");
+        Hard.add("test");
+        Hard.add("test");
+        Hard.add("test");
+
+
+        List<String> Veteran = new ArrayList<String>();
+        Veteran.add("test");
+        Veteran.add("test");
+        Veteran.add("test");
+        Veteran.add("test");
+        Veteran.add("test");
+        Veteran.add("test");
+        Veteran.add("test");
+
+        List<String> Pro = new ArrayList<String>();
+        Pro.add("test");
+        Pro.add("test");
+        Pro.add("test");
+        Pro.add("test");
+        Pro.add("test");
+        Pro.add("test");
+        Pro.add("test");
+
+        listDataChild.put(listDataHeader.get(0), Beginner); // Header, Child data
+        listDataChild.put(listDataHeader.get(1), Easy);
+        listDataChild.put(listDataHeader.get(2), Mediocre);
+        listDataChild.put(listDataHeader.get(3), Hard);
+        listDataChild.put(listDataHeader.get(4), Veteran);
+        listDataChild.put(listDataHeader.get(5), Pro);
     }
 
 }

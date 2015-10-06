@@ -16,10 +16,10 @@ public class Project
 
     public Project(String name,int completion_status, Date deadline,String[] participants)
     {
-        name = this.name;
-        completion_status = this.completion_status;
-        deadline = this.deadline;
-        participants = this.participants;
+        this.name = name;
+        this.completion_status = completion_status;
+        this.deadline = deadline;
+        this.participants = participants;
     }
 
     public String getName()

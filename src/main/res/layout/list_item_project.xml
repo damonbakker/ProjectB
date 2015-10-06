@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@color/project_item_background"
+    android:background="@drawable/rounded_corner"
     >
 
     <TextView
@@ -12,11 +13,10 @@
         android:text="project_title"
         android:id="@+id/project_title"
         android:layout_marginLeft="5dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="5dp"
-        android:textColor="@color/text_color_projectlist"/>
+
+        android:textColor="@color/text_color_projectlist"
+        android:layout_above="@+id/project_status"
+        android:layout_centerHorizontal="true" />
 
 
     <TextView
@@ -30,23 +30,35 @@
         android:textColor="@color/text_color_projectlist"
         android:layout_centerHorizontal="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Horizontal progress bar"
-        android:textColor="@color/text_color_projectlist"
+    <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
         android:id="@+id/project_progress"
-        android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        app:rcBackgroundColor="@color/custom_progress_background"
+        app:rcBackgroundPadding="2dp"
+        app:rcMax="100"
+        app:rcProgress="50"
+        app:rcProgressColor="@color/custom_progress_orange_progress"
+        app:rcRadius="10dp"
+        android:layout_below="@+id/project_status"
         android:layout_centerHorizontal="true" />
+
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/project_result_icon"
         android:layout_marginRight="15dp"
-
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/md_black_1000"
+        android:id="@+id/project_eta_text"
+        android:layout_alignTop="@+id/project_status"
+        android:layout_alignEnd="@+id/project_result_icon" />
 
 </RelativeLayout>

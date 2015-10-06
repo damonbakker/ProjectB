@@ -1,9 +1,11 @@
 package mobile_development.damon.projectb;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,8 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -92,14 +96,26 @@ public class Fragment_Projects extends Fragment {
         layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
         ListView mainlistview = (ListView) rootView.findViewById(R.id.listView_projects);
 
-        project_data.add(new Project("Simple firebase app",1,new Date(1111111111),null));
-        project_data.add(new Project("Simple firebase app",2,new Date(1111111111),null));
-        project_data.add(new Project("Simple firebase app",3,new Date(1111111111),null));
-        project_data.add(new Project("Simple firebase app",1,new Date(1111111111),null));
-        project_data.add(new Project("Simple firebase app",2,new Date(1111111111),null));
-        project_data.add(new Project("Simple firebase app",2,new Date(1111111111),null));
-        project_data.add(new Project("Simple firebase app",3,new Date(1111111111),null));
-        project_data.add(new Project("Simple firebase app",1,new Date(1111111111),null));
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
+        fab.attachToListView(mainlistview);
+
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(getActivity(), Activity_New_Project.class);
+                startActivity(intent);
+            }
+        });
+
+        project_data.add(new Project("Simple firebase app",1,new Date(1444470118),null));
+        project_data.add(new Project("PHP filebrowser",1,new Date(1444470118),null));
+        project_data.add(new Project("C# databasebrowser",2,new Date(1444470118),null));
+        project_data.add(new Project("Mongo DB chat",2,new Date(1444470118),null));
+        project_data.add(new Project("Bootstrap website",2,new Date(1444470118),null));
+        project_data.add(new Project("Pi project",1,new Date(1444470118),null));
+        project_data.add(new Project("Difficult project",3,new Date(1444470118),null));
+        project_data.add(new Project("Even harder project",3,new Date(1444470118),null));
 
 
         ListAdapter_Projects adapter = new ListAdapter_Projects(getActivity(),R.layout.list_item_project,project_data);
