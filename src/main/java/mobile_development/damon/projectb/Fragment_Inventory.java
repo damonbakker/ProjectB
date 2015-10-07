@@ -7,6 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
+import android.widget.AdapterView;
+
+import com.daimajia.swipe.SwipeLayout;
 
 
 /**
@@ -64,7 +68,17 @@ public class Fragment_Inventory extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inventory, container, false);
+        View rootview =  inflater.inflate(R.layout.fragment_inventory, container, false);
+
+        GridView gridView = (GridView) rootview.findViewById(R.id.gridView_inventory);
+
+        //SwipeLayout swipeLayout = (SwipeLayout) rootview.findViewById(R.id.s);
+     /*   Grid
+        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
+*/
+
+
+        return rootview;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

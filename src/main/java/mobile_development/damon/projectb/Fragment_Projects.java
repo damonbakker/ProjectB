@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
@@ -94,15 +96,14 @@ public class Fragment_Projects extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_projects, container, false);
 
         layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
-        ListView mainlistview = (ListView) rootView.findViewById(R.id.listView_projects);
+        final ListView mainlistview = (ListView) rootView.findViewById(R.id.listView_projects);
+
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.attachToListView(mainlistview);
 
-        fab.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), Activity_New_Project.class);
                 startActivity(intent);
             }
@@ -115,14 +116,30 @@ public class Fragment_Projects extends Fragment {
         project_data.add(new Project("Bootstrap website",2,new Date(1444470118),null));
         project_data.add(new Project("Pi project",1,new Date(1444470118),null));
         project_data.add(new Project("Difficult project",3,new Date(1444470118),null));
-        project_data.add(new Project("Even harder project",3,new Date(1444470118),null));
+        project_data.add(new Project("Even harder project", 3, new Date(1444470118), null));
 
 
         ListAdapter_Projects adapter = new ListAdapter_Projects(getActivity(),R.layout.list_item_project,project_data);
 
+
         mainlistview.setAdapter(adapter);
 
+        mainlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> av, View view, int i, long l) {
+                Toast.makeText(getActivity(), "myPos " + i, Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        mainlistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int pos, long id) {
+
+                Toast.makeText(getActivity(), "ONLONGCLICK " + pos, Toast.LENGTH_SHORT).show();
+
+                return true;
+            }
+        });
 
 
 

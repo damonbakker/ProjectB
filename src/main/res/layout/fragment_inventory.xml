@@ -1,10 +1,23 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout_inventory"
     tools:context="mobile_development.damon.projectb.Fragment_Inventory">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/placeholder_inventory" />
 
-</FrameLayout>
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/gridView_inventory"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:numColumns="2"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+
+        />
+</RelativeLayout>
