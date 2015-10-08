@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.AdapterView;
+import android.widget.Toast;
+
 
 import com.daimajia.swipe.SwipeLayout;
+
+import java.util.jar.Attributes;
 
 
 /**
@@ -70,7 +75,7 @@ public class Fragment_Inventory extends Fragment {
         // Inflate the layout for this fragment
         View rootview =  inflater.inflate(R.layout.fragment_inventory, container, false);
 
-        GridView gridView = (GridView) rootview.findViewById(R.id.gridView_inventory);
+
 
         //SwipeLayout swipeLayout = (SwipeLayout) rootview.findViewById(R.id.s);
      /*   Grid
