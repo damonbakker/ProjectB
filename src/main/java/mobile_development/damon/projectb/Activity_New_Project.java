@@ -25,6 +25,12 @@ public class Activity_New_Project extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_project);
 
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_new_project);
+        setSupportActionBar(toolbar);
+
+        toolbar.setTitle("yolo");
+
+
 
 
 

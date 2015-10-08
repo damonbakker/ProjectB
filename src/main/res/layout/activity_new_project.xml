@@ -3,20 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/layout_new_project"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="mobile_development.damon.projectb.Activity_New_Project">
 
-
-    <ExpandableListView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_new_project"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Expandable_list_view"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="0dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="0dp" />
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:transitionName="actionBar"
+        app:popupTheme="@style/ActionBarPopupThemeOverlay"/>
 
+    <RelativeLayout
+        android:layout_below="@id/toolbar_new_project"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <ExpandableListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Expandable_list_view"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="0dp" />
+    </RelativeLayout>
 
 
 </RelativeLayout>

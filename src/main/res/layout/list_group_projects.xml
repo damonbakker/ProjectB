@@ -9,8 +9,9 @@
         android:id="@+id/lblListHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#FFFFFF"
         android:gravity="center_horizontal" />
+
 
 </LinearLayout>
