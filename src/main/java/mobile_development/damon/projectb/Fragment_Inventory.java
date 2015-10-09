@@ -75,12 +75,47 @@ public class Fragment_Inventory extends Fragment {
         // Inflate the layout for this fragment
         View rootview =  inflater.inflate(R.layout.fragment_inventory, container, false);
 
+        final GridView gridView = (GridView)rootview.findViewById(R.id.gridView_inventory);
+        final GridViewAdapter adapter = new GridViewAdapter(getActivity(),1,2);
+
+        adapter.setMode(com.daimajia.swipe.util.Attributes.Mode.Multiple);
+        gridView.setAdapter(adapter);
+        gridView.setSelected(false);
 
 
-        //SwipeLayout swipeLayout = (SwipeLayout) rootview.findViewById(R.id.s);
-     /*   Grid
-        swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
-*/
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("onItemLongClick", "onItemLongClick:" + position);
+                return false;
+            }
+        });
+
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("onItemClick", "onItemClick:" + position);
+            }
+        });
+
+
+        gridView.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("onItemSelected", "onItemSelected:" + position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+
 
 
         return rootview;
