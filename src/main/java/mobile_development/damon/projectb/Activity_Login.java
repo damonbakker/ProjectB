@@ -19,8 +19,10 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
@@ -226,11 +228,11 @@ public class Activity_Login extends AppCompatActivity
         }, new Response.ErrorListener()
         {
             @Override
-            public void onErrorResponse(VolleyError error) {
-
+            public void onErrorResponse(VolleyError error)
+            {
+                waiting_response.setVisibility(View.INVISIBLE);
                 Log.i("RESPONSE","RESPONSE FAILED");
                 Log.i("RESPONSE",error.getMessage());
-
 
 
 
@@ -253,6 +255,9 @@ public class Activity_Login extends AppCompatActivity
         };
 
         waiting_response.setVisibility(View.VISIBLE);
+        int socketTimeout = 10000;//30 seconds - change to what you want
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
         NetworkHandler.getInstance(Activity_Login.this).addToRequestQueue(stringRequest);
 
     }

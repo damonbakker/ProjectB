@@ -7,19 +7,25 @@ import java.util.Date;
  */
 public class Project
 {
+    private int id;
     private String name;
     private int completion_status;
     private Date deadline;
     private String[] participants;
 
 
-
-    public Project(String name,int completion_status, Date deadline,String[] participants)
+    public Project(int id,String name,int completion_status,Date deadline,String[] participants)
     {
+        this.id = id;
         this.name = name;
         this.completion_status = completion_status;
         this.deadline = deadline;
         this.participants = participants;
+    }
+
+    public int getId()
+    {
+        return this.id;
     }
 
     public String getName()

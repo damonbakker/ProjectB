@@ -4,6 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="100dp"
 
+
     >
 
     <TextView
@@ -41,7 +42,8 @@
         app:rcProgressColor="@color/custom_progress_orange_progress"
         app:rcRadius="10dp"
         android:layout_below="@+id/project_status"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        />
 
 
     <ImageView

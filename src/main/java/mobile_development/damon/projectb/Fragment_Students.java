@@ -83,6 +83,7 @@ public class Fragment_Students extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_students, container, false);
         View rootView = inflater.inflate(R.layout.fragment_students, container, false);
+
         layout_fragment = (FrameLayout) rootView.findViewById(R.id.layout_students);
         mainlistview = (ExpandableListView) rootView.findViewById(R.id.Expandable_list_view);
 
