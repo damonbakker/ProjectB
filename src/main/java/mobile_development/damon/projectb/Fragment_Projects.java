@@ -109,14 +109,14 @@ public class Fragment_Projects extends Fragment {
             }
         });
 
-        project_data.add(new Project("Simple firebase app",1,new Date(1444470118),null));
-        project_data.add(new Project("PHP filebrowser",1,new Date(1444470118),null));
-        project_data.add(new Project("C# databasebrowser",2,new Date(1444470118),null));
-        project_data.add(new Project("Mongo DB chat",2,new Date(1444470118),null));
-        project_data.add(new Project("Bootstrap website",2,new Date(1444470118),null));
-        project_data.add(new Project("Pi project",1,new Date(1444470118),null));
-        project_data.add(new Project("Difficult project",3,new Date(1444470118),null));
-        project_data.add(new Project("Even harder project", 3, new Date(1444470118), null));
+        project_data.add(new Project(1,"Simple firebase app",1,new Date(1444470118),null));
+        project_data.add(new Project(2,"PHP filebrowser",1,new Date(1444470118),null));
+        project_data.add(new Project(3,"C# databasebrowser",2,new Date(1444470118),null));
+        project_data.add(new Project(4,"Mongo DB chat",2,new Date(1444470118),null));
+        project_data.add(new Project(5,"Bootstrap website",2,new Date(1444470118),null));
+        project_data.add(new Project(6,"Pi project",1,new Date(1444470118),null));
+        project_data.add(new Project(7,"Difficult project",3,new Date(1444470118),null));
+        project_data.add(new Project(8,"Even harder project", 3, new Date(1444470118), null));
 
 
         ListAdapter_Projects adapter = new ListAdapter_Projects(getActivity(),R.layout.list_item_project,project_data);
