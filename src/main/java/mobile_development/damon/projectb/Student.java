@@ -15,14 +15,14 @@ public class Student
     private int leading;
     private Reward latest_apply;
 
-    public Student(int level, String name, int id, int planning, int design, int motivation, int code, int leading, Reward latest_apply) {
-        this.level = level;
-        this.name = name;
+    public Student(int id, String name, int level, int planning, int design, int code, int motivation, int leading, Reward latest_apply) {
         this.id = id;
+        this.name = name;
+        this.level = level;
         this.planning = planning;
         this.design = design;
-        this.motivation = motivation;
         this.code = code;
+        this.motivation = motivation;
         this.leading = leading;
         this.latest_apply = latest_apply;
     }

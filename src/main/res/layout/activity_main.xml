@@ -72,7 +72,6 @@
         android:layout_alignBottom="@+id/userInput_password"
         android:layout_alignEnd="@+id/userInput_password"
         android:layout_marginBottom="-58dp"
-
         android:layout_alignStart="@+id/userInput_password" />
 
     <TextView

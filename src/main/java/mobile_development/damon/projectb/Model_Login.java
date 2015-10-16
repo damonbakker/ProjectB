@@ -37,7 +37,10 @@ public class Model_Login extends Activity
     public String current_background_color = "#25ae90" ;
     public boolean Generator_initialised = false;
 
-
+    /**
+     *
+     * @return string (random hex color)
+     */
     public String Color_Generator(){
 
         if (!Generator_initialised)
@@ -63,6 +66,12 @@ public class Model_Login extends Activity
         return listPalette.get(random_index).toString();
     }
 
+    /**
+     *
+     * @param event animator
+     * @param layout_current current visible background
+     * @param layout_overlay current invisible background
+     */
 
     public void LoginBackgroundChange(MotionEvent event,final RelativeLayout layout_current,final RelativeLayout layout_overlay)
     {

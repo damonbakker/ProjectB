@@ -8,6 +8,7 @@
     <string name="hint_username">Username</string>
     <string name="hint_login_to_register">No account yet? Hold the "Login" button</string>
     <string name="hint_register_to_login">Hold the "Register" button to go back</string>
+    <string name="hint_feedback">We listen to the community</string>
 
 
     <string name="title_activity_register">RegisterActivity</string>

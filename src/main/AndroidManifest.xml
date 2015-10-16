@@ -28,17 +28,18 @@
             android:label="@string/title_activity_register"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme"
-            android:windowSoftInputMode="adjustResize" >
+            android:theme="@style/LoginTheme">
         </activity>
         <activity
             android:name=".Activity_Dashboard"
-            android:label="@string/title_activity_activity__dashboard" >
+            android:label="@string/title_activity_activity__dashboard"
+            >
         </activity>
         <activity
             android:name=".Activity_New_Project"
             android:label="@string/title_activity_activity__new__project" >
         </activity>
+
     </application>
 
 </manifest>
