@@ -1,5 +1,6 @@
 package mobile_development.damon.projectb;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -11,10 +12,10 @@ public class Project
     private String name;
     private int completion_status;
     private Date deadline;
-    private String[] participants;
+    private ArrayList<Student> participants;
 
 
-    public Project(int id,String name,int completion_status,Date deadline,String[] participants)
+    public Project(int id,String name,int completion_status,Date deadline,ArrayList<Student> participants)
     {
         this.id = id;
         this.name = name;
@@ -43,7 +44,7 @@ public class Project
         return this.deadline;
     }
 
-    public String[] getParticipants()
+    public ArrayList<Student> getParticipants()
     {
         return this.participants;
     }
