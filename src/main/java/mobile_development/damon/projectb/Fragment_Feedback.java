@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -86,6 +88,7 @@ public class Fragment_Feedback extends Fragment {
 
         charcounter = (TextView) rootView.findViewById(R.id.feedback_charcounter);
         input_feedback = (EditText) rootView.findViewById(R.id.userInput_feedback);
+        send_feedback = (Button) rootView.findViewById(R.id.button_feedback);
 
         final TextWatcher txtwatcher = new TextWatcher() {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -101,28 +104,10 @@ public class Fragment_Feedback extends Fragment {
         };
 
         input_feedback.addTextChangedListener(txtwatcher);
+        send_feedback.setOnClickListener(onClickListener);
 
 
 
-/*
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-// Add the buttons
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User clicked OK button
-            }
-        });
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                // User cancelled the dialog
-            }
-        });
-// Set other dialog properties
-
-
-// Create the AlertDialog
-        AlertDialog dialog = builder.create();
-        dialog.show();*/
 
         return rootView;
     }
@@ -134,6 +119,24 @@ public class Fragment_Feedback extends Fragment {
         }
     }
 
+    private View.OnClickListener onClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (input_feedback.getText().toString().trim().length() > 0)
+            {
+                Toast toast =  Toast.makeText(getActivity(), "Valid input", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+                input_feedback.setText("");
+            }
+            else
+            {
+                Toast toast =  Toast.makeText(getActivity(), "Invalid input", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER,0,0);
+                toast.show();
+            }
+        }
+    };
 
 
     @Override

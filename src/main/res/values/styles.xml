@@ -11,6 +11,8 @@
         <item name="android:textColorSecondary">@color/text_color_primary</item>
         <item name="android:textColorPrimary">@color/text_color_primary</item>
 
+        <item name="windowActionModeOverlay">true</item>
+
 
             <!-- MaterialDrawer specific values -->
             <item name="material_drawer_background">@color/material_drawer_background</item>
