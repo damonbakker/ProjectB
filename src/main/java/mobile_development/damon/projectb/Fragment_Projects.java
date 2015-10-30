@@ -109,16 +109,16 @@ public class Fragment_Projects extends Fragment {
                 startActivity(intent);
             }
         });
-        ArrayList<Student> participants = new ArrayList<Student>();
+      /*  ArrayList<Student> participants = new ArrayList<Student>();
         participants.add(1,new Student(1,"lol",5,5,5,5,5,5,null));
         participants.add(1,new Student(2,"lol",5,5,5,5,5,5,null));
         participants.add(1,new Student(3,"lol",5,5,5,5,5,5,null));
         participants.add(1,new Student(4,"lol",5,5,5,5,5,5,null));
-        participants.add(1,new Student(5,"lol",5,5,5,5,5,5,null));
+        participants.add(1,new Student(5,"lol",5,5,5,5,5,5,null));*/
 
 
 
-        project_data.add(new Project(1,"Simple firebase app",1,new Date(1444470118),participants));
+        project_data.add(new Project(1,"Simple firebase app",1,new Date(1444470118),null));
         project_data.add(new Project(2,"PHP filebrowser",1,new Date(1444470118),null));
         project_data.add(new Project(3,"C# databasebrowser",2,new Date(1444470118),null));
         project_data.add(new Project(4,"Mongo DB chat",2,new Date(1444470118),null));
