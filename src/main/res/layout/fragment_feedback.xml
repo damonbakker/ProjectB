@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Thank you for trying out ProjectB. If there are any bugs or feedback you would like report then you are at the right place."
+        android:text="Thank you for trying out ProjectB. If there are any bugs or feedback you would like report, then you are at the right place."
         android:id="@+id/textView_feedback_info"
         android:layout_marginTop="35dp"
         android:layout_alignParentTop="true"

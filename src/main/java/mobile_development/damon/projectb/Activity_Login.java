@@ -198,6 +198,7 @@ public class Activity_Login extends AppCompatActivity
                     JSONObject response_obj = new JSONObject(response);
                     boolean error = response_obj.getBoolean("error");
 
+
                     if (!error)
                     {
                         Toast toast =  Toast.makeText(getApplicationContext(), "login successful", Toast.LENGTH_SHORT);

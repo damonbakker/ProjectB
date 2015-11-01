@@ -32,6 +32,11 @@ public class Activity_Dashboard extends AppCompatActivity
        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
+
+
+
        final PrimaryDrawerItem item_dashboard = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(GoogleMaterial.Icon.gmd_home).withIdentifier(1);
        final SecondaryDrawerItem item_projects = new SecondaryDrawerItem().withName(R.string.drawer_item_projects).withIcon(GoogleMaterial.Icon.gmd_folder).withIdentifier(2);
        final SecondaryDrawerItem item_students = new SecondaryDrawerItem().withName(R.string.drawer_item_students).withIcon(GoogleMaterial.Icon.gmd_account_box).withIdentifier(3);
