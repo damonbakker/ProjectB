@@ -1,7 +1,6 @@
 package mobile_development.damon.projectb;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -184,7 +183,7 @@ public class Activity_Login extends AppCompatActivity
 
     private void CheckLogin(final String email, final String password)
     {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_APi, new Response.Listener<String>()
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
         {
             @Override
             public void onResponse(String response)

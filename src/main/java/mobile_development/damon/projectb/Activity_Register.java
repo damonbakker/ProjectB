@@ -1,6 +1,5 @@
 package mobile_development.damon.projectb;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.CountDownTimer;
@@ -172,7 +171,7 @@ public class Activity_Register extends AppCompatActivity
 
     private void Register(final String email, final String uname, final String password)
     {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_APi, new Response.Listener<String>()
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
         {
             @Override
             public void onResponse(String response)

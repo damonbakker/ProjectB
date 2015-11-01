@@ -28,6 +28,8 @@ public class Activity_New_Project extends AppCompatActivity
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_new_project);
         setSupportActionBar(toolbar);
 
+
+
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

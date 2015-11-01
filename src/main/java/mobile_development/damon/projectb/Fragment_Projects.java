@@ -1,6 +1,5 @@
 package mobile_development.damon.projectb;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,20 +11,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.melnykov.fab.FloatingActionButton;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -88,6 +94,8 @@ public class Fragment_Projects extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
 
     @Override
@@ -99,6 +107,7 @@ public class Fragment_Projects extends Fragment {
         layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
         final ListView mainlistview = (ListView) rootView.findViewById(R.id.listView_projects);
 
+        RetrieveUserProjects(1);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.attachToListView(mainlistview);
@@ -185,6 +194,84 @@ public class Fragment_Projects extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
+    private void RetrieveUserProjects(final int user_id)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+               // waiting_response.setVisibility(View.INVISIBLE);
+                Log.i("RESPONSE", "RESPONSE RECIEVED");
+                Log.i("RESPONSE",response);
 
+
+                try
+                {
+                    JSONObject response_obj = new JSONObject(response);
+                    //boolean error = response_obj.getBoolean("error");
+                    JSONArray data = response_obj.getJSONArray("data");
+
+
+                    //Log.i("RESPONSE",data.toString());
+                    Log.i("RESPONSE",data.toString());
+
+
+                 /*   if (!error)
+                    {
+                        Toast toast =  Toast.makeText(getActivity(), "Retrieval complete", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+
+
+                    }
+                    else
+                    {
+                        String error_msg = response_obj.getString("error_msg");
+                        Toast toast =  Toast.makeText(getActivity(), error_msg, Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
+
+                    }*/
+
+                }
+                catch (JSONException e)
+                {
+                    Log.i("RESPONSE",e.toString());
+                }
+
+
+            }
+
+        }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                //waiting_response.setVisibility(View.INVISIBLE);
+                Log.i("RESPONSE","RESPONSE FAILED");
+                Log.i("RESPONSE",error.getMessage());
+
+
+
+            }
+        })
+
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("tag", "retrieve_user_projects");
+                params.put("user_id", "1");
+
+                return params;
+            }
+
+        };
+
+        NetworkHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
 
 }
