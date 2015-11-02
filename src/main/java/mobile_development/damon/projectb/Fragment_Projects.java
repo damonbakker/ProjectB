@@ -107,7 +107,7 @@ public class Fragment_Projects extends Fragment {
         layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
         final ListView mainlistview = (ListView) rootView.findViewById(R.id.listView_projects);
 
-        RetrieveUserProjects(1);
+        RetrieveUserProjects(1,mainlistview);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.attachToListView(mainlistview);
@@ -125,22 +125,6 @@ public class Fragment_Projects extends Fragment {
         participants.add(1,new Student(4,"lol",5,5,5,5,5,5,null));
         participants.add(1,new Student(5,"lol",5,5,5,5,5,5,null));*/
 
-
-
-        project_data.add(new Project(1,"Simple firebase app",1,new Date(1444470118),null));
-        project_data.add(new Project(2,"PHP filebrowser",1,new Date(1444470118),null));
-        project_data.add(new Project(3,"C# databasebrowser",2,new Date(1444470118),null));
-        project_data.add(new Project(4,"Mongo DB chat",2,new Date(1444470118),null));
-        project_data.add(new Project(5,"Bootstrap website",2,new Date(1444470118),null));
-        project_data.add(new Project(6,"Pi project",1,new Date(1444470118),null));
-        project_data.add(new Project(7,"Difficult project",3,new Date(1444470118),null));
-        project_data.add(new Project(8,"Even harder project", 3, new Date(1444470118), null));
-
-
-        ListAdapter_Projects adapter = new ListAdapter_Projects(getActivity(),R.layout.list_item_project,project_data);
-
-
-        mainlistview.setAdapter(adapter);
 
         mainlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View view, int i, long l) {
@@ -194,7 +178,7 @@ public class Fragment_Projects extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    private void RetrieveUserProjects(final int user_id)
+    private void RetrieveUserProjects(final int user_id, final ListView mainlistview)
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
         {
@@ -203,36 +187,17 @@ public class Fragment_Projects extends Fragment {
             {
                // waiting_response.setVisibility(View.INVISIBLE);
                 Log.i("RESPONSE", "RESPONSE RECIEVED");
-                Log.i("RESPONSE",response);
 
 
                 try
                 {
                     JSONObject response_obj = new JSONObject(response);
-                    //boolean error = response_obj.getBoolean("error");
                     JSONArray data = response_obj.getJSONArray("data");
 
-
-                    //Log.i("RESPONSE",data.toString());
                     Log.i("RESPONSE",data.toString());
 
+                    FillListView(mainlistview,data);
 
-                 /*   if (!error)
-                    {
-                        Toast toast =  Toast.makeText(getActivity(), "Retrieval complete", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
-
-
-                    }
-                    else
-                    {
-                        String error_msg = response_obj.getString("error_msg");
-                        Toast toast =  Toast.makeText(getActivity(), error_msg, Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER,0,0);
-                        toast.show();
-
-                    }*/
 
                 }
                 catch (JSONException e)
@@ -274,4 +239,34 @@ public class Fragment_Projects extends Fragment {
         NetworkHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 
+    private void FillListView(ListView mainlistview,JSONArray data)
+    {
+        for (int i =0; i < data.length();i++)
+        {
+            try
+            {
+                JSONObject obj = data.getJSONObject(i);
+                project_data.add(new Project(obj.getInt("id"),obj.getString("name"),obj.getInt("completion_status"),null,null));
+            }
+            catch (JSONException e)
+            {
+                Log.i("RESPONSE",e.toString());
+            }
+        }
+
+
+
+      /*  project_data.add(new Project(1,"Simple firebase app",1,new Date(1444470118),null));
+        project_data.add(new Project(2,"PHP filebrowser",1,new Date(1444470118),null));
+        project_data.add(new Project(3,"C# databasebrowser",2,new Date(1444470118),null));
+        project_data.add(new Project(4,"Mongo DB chat",2,new Date(1444470118),null));
+        project_data.add(new Project(5, "Bootstrap website", 2, new Date(1444470118), null));
+        project_data.add(new Project(6,"Pi project",1,new Date(1444470118),null));
+        project_data.add(new Project(7, "Difficult project", 3, new Date(1444470118), null));
+        project_data.add(new Project(8, "Even harder project", 3, new Date(1444470118), null));*/
+
+        ListAdapter_Projects adapter = new ListAdapter_Projects(getActivity(),R.layout.list_item_project,project_data);
+
+        mainlistview.setAdapter(adapter);
+    }
 }
