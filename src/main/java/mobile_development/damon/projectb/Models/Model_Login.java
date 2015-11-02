@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Models;
 
 import android.animation.Animator;
 import android.app.Activity;

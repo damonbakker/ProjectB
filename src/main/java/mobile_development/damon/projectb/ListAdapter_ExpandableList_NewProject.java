@@ -14,13 +14,15 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
+import mobile_development.damon.projectb.Models.Project;
+
 public class ListAdapter_ExpandableList_NewProject extends BaseExpandableListAdapter
 {
     private Context _context;
     private List<String> _listDataHeader;
-    private HashMap<String, List<String>> _listDataChild;
+    private HashMap<String, List<Project>> _listDataChild;
 
-    public ListAdapter_ExpandableList_NewProject(Context context, List<String> listDataHeader, HashMap<String, List<String>> listChildData)
+    public ListAdapter_ExpandableList_NewProject(Context context, List<String> listDataHeader, HashMap<String, List<Project>> listChildData)
     {
         this._context = context;
         this._listDataHeader = listDataHeader;
@@ -30,8 +32,7 @@ public class ListAdapter_ExpandableList_NewProject extends BaseExpandableListAda
     @Override
     public Object getChild(int groupPosition, int childPosititon)
     {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition))
-                .get(childPosititon);
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition)).get(childPosititon).getName();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Models;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,9 +13,17 @@ public class Project
     private int completion_status;
     private Date deadline;
     private ArrayList<Student> participants;
+    private int difficulty;
 
 
-    public Project(int id,String name,int completion_status,Date deadline,ArrayList<Student> participants)
+    public Project(int id, String name, int difficulty)
+    {
+        this.id = id;
+        this.name = name;
+        this.difficulty = difficulty;
+    }
+
+    public Project(int id, String name, int completion_status, Date deadline, ArrayList<Student> participants)
     {
         this.id = id;
         this.name = name;
@@ -23,6 +31,8 @@ public class Project
         this.deadline = deadline;
         this.participants = participants;
     }
+
+
 
     public int getId()
     {
@@ -49,4 +59,7 @@ public class Project
         return this.participants;
     }
 
+    public int getDifficulty() {
+        return difficulty;
+    }
 }

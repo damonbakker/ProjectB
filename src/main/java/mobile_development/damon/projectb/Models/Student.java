@@ -1,4 +1,6 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Models;
+
+import mobile_development.damon.projectb.Models.Reward;
 
 /**
  * Created by damon on 10/15/2015.
