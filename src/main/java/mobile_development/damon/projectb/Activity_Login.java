@@ -66,7 +66,17 @@ public class Activity_Login extends AppCompatActivity
         {
 
             background_color = getIntent().getStringExtra("background_color");
-            login_view.setBackgroundColor(Color.parseColor(background_color));
+            try
+            {
+                login_view.setBackgroundColor(Color.parseColor(background_color));
+            }
+            catch(Exception e)
+            {
+                login_view.setBackgroundColor(Color.parseColor("#25ae90"));
+            }
+
+
+
         }
 
         input_email = (EditText) findViewById(R.id.userInput_email);
