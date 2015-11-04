@@ -209,7 +209,7 @@ public class Fragment_Projects extends Fragment {
                         try
                         {
                             JSONObject obj_project = data.getJSONObject(i);
-                            project_data.add(new Project(obj_project.getInt("id"),obj_project.getString("name"),obj_project.getInt("completion_status"),null,null));
+                            project_data.add(new Project(obj_project.getInt("id"),obj_project.getString("name"),obj_project.getInt("completion_status"),null,null,null,100));
                         }
                         catch (JSONException e)
                         {
