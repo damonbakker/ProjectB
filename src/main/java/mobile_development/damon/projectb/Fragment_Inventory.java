@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,6 +75,9 @@ public class Fragment_Inventory extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview =  inflater.inflate(R.layout.fragment_inventory, container, false);
+
+        assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Inventory");
 
         final GridView gridView = (GridView)rootview.findViewById(R.id.gridView_inventory);
         final GridViewAdapter adapter = new GridViewAdapter(getActivity(),1,2);

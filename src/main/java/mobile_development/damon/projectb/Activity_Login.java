@@ -57,42 +57,50 @@ public class Activity_Login extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {   //Load the parent activity and any saved instances if any are saved
         super.onCreate(savedInstanceState);
-        //Load layout
-        setContentView(R.layout.activity_main);
 
-        login_view  = (RelativeLayout) findViewById(R.id.main_layout);
-        login_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
-        register_view = (RelativeLayout) findViewById(R.id.register_layout);
-
-        if (getIntent().getExtras()!= null)
+        //check if user is logged in , if so send him through to the dashboard
+        if (SharedPreference.checklogin(getApplicationContext()))
+        {
+            Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+            startActivity(intent);
+        }
+        else
         {
 
-            background_color = getIntent().getStringExtra("background_color");
-            try
+            //Load layout
+            setContentView(R.layout.activity_main);
+
+            login_view  = (RelativeLayout) findViewById(R.id.main_layout);
+            login_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
+            register_view = (RelativeLayout) findViewById(R.id.register_layout);
+
+            if (getIntent().getExtras()!= null)
             {
-                login_view.setBackgroundColor(Color.parseColor(background_color));
-            }
-            catch(Exception e)
-            {
-                login_view.setBackgroundColor(Color.parseColor("#25ae90"));
-            }
+
+                background_color = getIntent().getStringExtra("background_color");
+                try
+                {
+                    login_view.setBackgroundColor(Color.parseColor(background_color));
+                }
+                catch(Exception e)
+                {
+                    login_view.setBackgroundColor(Color.parseColor("#25ae90"));
+                }
 
 
+
+            }
+
+            input_email = (EditText) findViewById(R.id.userInput_email);
+            input_password = (EditText) findViewById(R.id.userInput_password);
+            waiting_response = (ProgressBar) findViewById(R.id.progressBar_login);
+
+            Button button_login = (Button) findViewById(R.id.button_login);
+
+            button_login.setOnLongClickListener(onLongClickListener);
+            button_login.setOnClickListener(onClickListener);
 
         }
-
-        input_email = (EditText) findViewById(R.id.userInput_email);
-        input_password = (EditText) findViewById(R.id.userInput_password);
-        waiting_response = (ProgressBar) findViewById(R.id.progressBar_login);
-
-        Button button_login = (Button) findViewById(R.id.button_login);
-
-        button_login.setOnLongClickListener(onLongClickListener);
-        button_login.setOnClickListener(onClickListener);
-
-       // queue = NetworkHandler.getInstance(this.getApplicationContext()).getRequestQueue();
-
-
     }
 
 
@@ -145,8 +153,8 @@ public class Activity_Login extends AppCompatActivity
         public void onClick(View v)
         {
             Log.i("RESPONSE", "BUTTON_IS_CLICKED");
-            Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
-            startActivity(intent);
+            /*Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+            startActivity(intent);*/
            /* Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
             startActivity(intent);*/
 
@@ -208,13 +216,14 @@ public class Activity_Login extends AppCompatActivity
                 {
                     JSONObject response_obj = new JSONObject(response);
                     boolean error = response_obj.getBoolean("error");
-
+                    int id = response_obj.getInt("id");
 
                     if (!error)
                     {
-                        Toast toast =  Toast.makeText(getApplicationContext(), "login successful", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), "login successful", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
+                        SharedPreference.setLogin(getApplicationContext(), email,id);
                         Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
                         startActivity(intent);
 

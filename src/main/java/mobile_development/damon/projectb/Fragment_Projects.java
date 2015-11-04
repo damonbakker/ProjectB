@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.melnykov.fab.FloatingActionButton;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +34,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 import mobile_development.damon.projectb.Models.Project;
 
@@ -58,6 +64,7 @@ public class Fragment_Projects extends Fragment {
     public ListView mainlistview;
 
     public RelativeLayout layout_fragment;
+    public ProgressBar waiting_response;
 
 
     // TODO: Rename and change types of parameters
@@ -106,13 +113,19 @@ public class Fragment_Projects extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_projects, container, false);
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
+        assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Projects");
+
         layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
         mainlistview = (ListView) rootView.findViewById(R.id.listView_projects);
+        waiting_response = (ProgressBar) rootView.findViewById(R.id.waiting_response);
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.attachToListView(mainlistview);
 
         setListData(1);
+
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -181,7 +194,7 @@ public class Fragment_Projects extends Fragment {
             @Override
             public void onResponse(String response)
             {
-               // waiting_response.setVisibility(View.INVISIBLE);
+                waiting_response.setVisibility(View.INVISIBLE);
                 Log.i("RESPONSE", "RESPONSE RECIEVED");
 
                 try

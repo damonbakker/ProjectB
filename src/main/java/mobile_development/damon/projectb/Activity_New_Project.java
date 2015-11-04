@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ import mobile_development.damon.projectb.Models.Project;
 public class Activity_New_Project extends AppCompatActivity
 {
     public RelativeLayout layout;
+    public ProgressBar waiting_response;
 
     public android.widget.ExpandableListAdapter listAdapter;
     public ExpandableListView mainlistview_projects;
@@ -59,8 +61,10 @@ public class Activity_New_Project extends AppCompatActivity
 
         layout = (RelativeLayout) findViewById(R.id.layout_new_project);
         mainlistview_projects = (ExpandableListView) findViewById(R.id.Expandable_list_view);
+        waiting_response = (ProgressBar) findViewById(R.id.waiting_response);
 
         setListData(mainlistview_projects);
+
 
         mainlistview_projects.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
@@ -114,7 +118,7 @@ public class Activity_New_Project extends AppCompatActivity
             @Override
             public void onResponse(String response)
             {
-                // waiting_response.setVisibility(View.INVISIBLE);
+                waiting_response.setVisibility(View.INVISIBLE);
                 Log.i("RESPONSE", "RESPONSE RECIEVED");
 
                 try
