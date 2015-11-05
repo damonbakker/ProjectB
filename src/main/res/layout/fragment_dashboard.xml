@@ -4,9 +4,142 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="mobile_development.damon.projectb.Activity_DashboardFragment">
 
-    <TextView android:text="@string/placeholder_dashboard" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Level :"
+        android:textSize="30dp"
+        android:id="@+id/Level"
+        android:layout_marginTop="27dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="PP :"
+        android:textSize="30dp"
+        android:id="@+id/PP"
+        android:layout_below="@+id/Level"
+        android:layout_alignEnd="@+id/Level" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="222"
+        android:id="@+id/Level_value"
+
+        android:layout_above="@+id/PP"
+        android:layout_toEndOf="@+id/Level"
+        android:layout_marginStart="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="22222"
+        android:id="@+id/PP_value"
+        android:layout_alignBottom="@+id/PP"
+        android:layout_alignStart="@+id/Level_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Project Points"
+        android:id="@+id/PP_detail"
+        android:layout_below="@+id/PP_value"
+        android:layout_alignStart="@+id/PP_value" />
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:id="@+id/imageView"
+        android:scaleType="fitXY"
+        android:layout_marginTop="-15dp"
+        android:layout_alignTop="@+id/Level_value"
+        android:src="@drawable/avatar_placeholder_white"
+        android:layout_alignParentStart="true" />
+
+
+    <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        app:rcBackgroundColor="@color/custom_progress_background"
+        app:rcBackgroundPadding="5dp"
+        app:rcIconBackgroundColor="@color/custom_progress_green_header"
+        app:rcIconPadding="3dp"
+        app:rcIconSize="30dp"
+        app:rcIconSrc="@mipmap/ic_launcher"
+        app:rcMax="150"
+        app:rcProgress="150"
+        app:rcProgressColor="@color/custom_progress_green_progress"
+        app:rcRadius="5dp"
+        android:rotation="270"
+        android:id="@+id/view2"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentEnd="true" />
+
+    <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:rcBackgroundColor="@color/custom_progress_background"
+        app:rcBackgroundPadding="5dp"
+        app:rcIconBackgroundColor="@color/custom_progress_green_header"
+        app:rcIconPadding="3dp"
+        app:rcIconSize="30dp"
+        app:rcIconSrc="@mipmap/ic_launcher"
+        app:rcMax="150"
+        app:rcProgress="150"
+        app:rcProgressColor="@color/custom_progress_green_progress"
+        app:rcRadius="5dp"
+        android:rotation="270"
+        android:layout_alignTop="@+id/view2"
+        android:layout_toStartOf="@+id/PP_detail" />
+
+    <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:rcBackgroundColor="@color/custom_progress_background"
+        app:rcBackgroundPadding="5dp"
+        app:rcIconBackgroundColor="@color/custom_progress_green_header"
+        app:rcIconPadding="3dp"
+        app:rcIconSize="30dp"
+        app:rcIconSrc="@mipmap/ic_launcher"
+        app:rcMax="150"
+        app:rcProgress="150"
+        app:rcProgressColor="@color/custom_progress_green_progress"
+        app:rcRadius="5dp"
+        android:rotation="270"
+        android:id="@+id/view3"
+        android:layout_alignTop="@+id/view2"
+        android:layout_toStartOf="@+id/view2" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upgrade level"
+        android:id="@+id/button"
+        android:layout_below="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_alignEnd="@+id/imageView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="You have 6 projects waiting for review"
+        android:id="@+id/textView3"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>

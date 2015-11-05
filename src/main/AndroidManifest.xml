@@ -28,7 +28,9 @@
             android:label="@string/title_activity_register"
             android:noHistory="true"
             android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme">
+            android:theme="@style/LoginTheme"
+            android:windowSoftInputMode="adjustResize"
+            >
         </activity>
         <activity
             android:name=".Activity_Dashboard"

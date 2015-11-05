@@ -33,9 +33,8 @@ public class Activity_Dashboard extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
+        //initialise the jodatime datetime library for java.
         JodaTimeAndroid.init(this);
-
 
        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,7 +52,6 @@ public class Activity_Dashboard extends AppCompatActivity
        final android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
 
         result = new DrawerBuilder(this)
-                //this layout have to contain child layouts
                 .withRootView(R.id.drawer_container)
                 .withToolbar(toolbar)
                 .withActionBarDrawerToggleAnimated(true)
@@ -130,7 +128,11 @@ public class Activity_Dashboard extends AppCompatActivity
                 .withSavedInstance(savedInstanceState)
                 .build();
 
-
+        Fragment dashboardFragment = new Fragment_Dashboard();
+        fragmentManager.beginTransaction()
+                .replace(R.id.frame_container,dashboardFragment)
+                .addToBackStack(null)
+                .commit();
 
 
     }

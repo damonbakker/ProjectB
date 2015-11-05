@@ -19,8 +19,11 @@ public class Fragment_Dashboard extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        View rootview = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
         assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Dashboard");
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        return rootview;
     }
 }

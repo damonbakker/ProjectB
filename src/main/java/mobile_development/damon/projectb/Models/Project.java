@@ -20,13 +20,12 @@ public class Project
     private DateTime start_date;
 
 
-
     private DateTime end_date;
     private ArrayList<Student> participants;
     private int difficulty;
     private int chance;
 
-    //avaialable project
+    //available project
     public Project(int id, String name, int difficulty)
     {
         this.id = id;

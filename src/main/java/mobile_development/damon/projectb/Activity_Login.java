@@ -216,10 +216,10 @@ public class Activity_Login extends AppCompatActivity
                 {
                     JSONObject response_obj = new JSONObject(response);
                     boolean error = response_obj.getBoolean("error");
-                    int id = response_obj.getInt("id");
 
                     if (!error)
                     {
+                        int id = response_obj.getInt("id");
                         Toast toast = Toast.makeText(getApplicationContext(), "login successful", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -237,10 +237,11 @@ public class Activity_Login extends AppCompatActivity
 
                     }
 
+
                 }
                 catch (JSONException e)
                 {
-
+                    Log.i("RESPONSE", e.toString());
                 }
 
 

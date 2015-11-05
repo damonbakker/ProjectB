@@ -97,7 +97,6 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
         TextView title = (TextView) convertView.findViewById(R.id.project_title);
         TextView status = (TextView) convertView.findViewById(R.id.project_status);
         TextView eta = (TextView) convertView.findViewById(R.id.project_eta_text);
-        ImageView display_result = (ImageView) convertView.findViewById(R.id.project_result_icon);
         RoundCornerProgressBar progress = (RoundCornerProgressBar) convertView.findViewById(R.id.project_progress);
 
         Project p = _projectlist.get(position);
@@ -110,8 +109,6 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
             case 1:
                 status.setTextColor(_context.getResources().getColor(R.color.project_finished_success));
                 status.setText("Complete");
-                display_result.setColorFilter(_context.getResources().getColor(R.color.project_finished_success));
-                display_result.setImageResource(R.drawable.ic_check_circle_24dp);
                 eta.setText(" ");
                 progress.setProgress(100);
                 progress.setProgressColor(_context.getResources().getColor(R.color.project_finished_success));
@@ -122,8 +119,6 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
             case 2:
                 status.setTextColor(_context.getResources().getColor(R.color.project_finished_failed));
                 status.setText("Failed");
-                display_result.setColorFilter(_context.getResources().getColor(R.color.project_finished_failed));
-                display_result.setImageResource(R.drawable.ic_cancel_24dp);
                 progress.setProgress(100);
                 progress.setProgressColor(_context.getResources().getColor(R.color.project_finished_failed));
                 break;
@@ -131,9 +126,7 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
             case 3:
                 status.setTextColor(_context.getResources().getColor(R.color.project_finished_underway));
                 status.setText("Work in progress");
-                display_result.setColorFilter(_context.getResources().getColor(R.color.project_finished_underway));
                 eta.setText("D: 0" + "H: 0 ");
-                display_result.setImageResource(0);
                 progress.setProgress(50);
                 progress.setProgressColor(_context.getResources().getColor(R.color.project_finished_underway));
                 break;
