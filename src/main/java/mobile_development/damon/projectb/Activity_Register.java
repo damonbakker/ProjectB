@@ -35,6 +35,7 @@ public class Activity_Register extends AppCompatActivity
     public boolean touch_state = false;
     public boolean bugfix_state = false;
     public String background_color;
+    public String new_background_color = "#25ae90";
 
     public EditText input_email;
     public EditText input_uname;
@@ -56,23 +57,44 @@ public class Activity_Register extends AppCompatActivity
         register_view = (RelativeLayout) findViewById(R.id.register_layout);
         register_view_2 = (RelativeLayout) findViewById(R.id.underflow_layout);
         login_view = (RelativeLayout) findViewById(R.id.main_layout);
-        String new_background_color = getIntent().getStringExtra("background_color");
-        register_view.setBackgroundColor(Color.parseColor(new_background_color));
-        background_color = new_background_color;
+        // You can be pretty confident that the intent will not be null here.
+        Intent intent = getIntent();
+
+
+
+
+
+
+        try
+        {
+            new_background_color = getIntent().getStringExtra("background_color");
+            register_view.setBackgroundColor(Color.parseColor(new_background_color));
+        }
+        catch (Exception e)
+        {
+            register_view.setBackgroundColor(Color.parseColor("#25ae90"));
+        }
+
+        try
+        {
+            background_color = new_background_color;
+        }
+        catch (Exception e)
+        {
+            background_color = "#25ae90";
+        }
+
 
         input_email = (EditText) findViewById(R.id.userInput_email);
         input_uname = (EditText) findViewById(R.id.userInput_username);
         input_password = (EditText) findViewById(R.id.userInput_password);
         waiting_response = (ProgressBar) findViewById(R.id.progressBar_register);
-
-
         Button button_login = (Button) findViewById(R.id.button_register);
-
         button_login.setOnLongClickListener(onLongClickListener);
         button_login.setOnClickListener(onClickListener);
 
 
-        Log.i("1232131", background_color);
+
 
     }
 
@@ -97,13 +119,13 @@ public class Activity_Register extends AppCompatActivity
         public void onClick(View v)
         {
             String email = input_email.getText().toString();
-            String uname = input_uname.getText().toString();
+            String username = input_uname.getText().toString();
             String password = input_password.getText().toString();
 
-            if (email.trim().length() > 0 && password.trim().length() > 0 && uname.trim().length() > 0)
+            if (email.trim().length() > 0 && password.trim().length() > 0 && username.trim().length() > 0)
             {
 
-                Register(email,uname,password);
+                Register(email,username,password);
 
             }
             else
@@ -171,7 +193,7 @@ public class Activity_Register extends AppCompatActivity
 
     }
 
-    private void Register(final String email, final String uname, final String password)
+    private void Register(final String email, final String username, final String password)
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
         {
@@ -218,7 +240,7 @@ public class Activity_Register extends AppCompatActivity
             public void onErrorResponse(VolleyError error) {
 
                 Log.i("RESPONSE","RESPONSE FAILED");
-                Log.i("RESPONSE",error.getMessage());
+                Log.i("RESPONSE",error.getMessage().toString());
 
 
 
@@ -234,7 +256,7 @@ public class Activity_Register extends AppCompatActivity
                 Map<String, String> params = new HashMap<>();
                 params.put("tag", "register");
                 params.put("email", email);
-                params.put("uname",uname);
+                params.put("username",username);
                 params.put("password", password);
 
                 return params;

@@ -96,7 +96,6 @@ public class Activity_Login extends AppCompatActivity
             waiting_response = (ProgressBar) findViewById(R.id.progressBar_login);
 
             Button button_login = (Button) findViewById(R.id.button_login);
-
             button_login.setOnLongClickListener(onLongClickListener);
             button_login.setOnClickListener(onClickListener);
 
@@ -183,13 +182,6 @@ public class Activity_Login extends AppCompatActivity
         public boolean onLongClick(View v)
         {
 
-            Context context = getApplicationContext();
-            CharSequence text = "Long click successful";
-            int duration = Toast.LENGTH_LONG;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.setGravity(Gravity.CENTER,0,0);
-
-            //toast.show();
 
             Intent intent = new Intent(Activity_Login.this, Activity_Register.class);
             intent.putExtra("background_color",background_color);
