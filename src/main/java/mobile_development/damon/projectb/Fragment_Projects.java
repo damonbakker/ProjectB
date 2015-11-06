@@ -123,7 +123,7 @@ public class Fragment_Projects extends Fragment {
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab);
         fab.attachToListView(mainlistview);
 
-        setListData(1);
+        setListData();
 
 
 
@@ -187,7 +187,7 @@ public class Fragment_Projects extends Fragment {
         public void onFragmentInteraction(Uri uri);
     }
 
-    private void setListData(final int user_id)
+    private void setListData()
     {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
         {
@@ -250,7 +250,7 @@ public class Fragment_Projects extends Fragment {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
                 params.put("tag", "retrieve_user_projects");
-                params.put("user_id", "1");
+                params.put("user_id", String.valueOf(SharedPreference.getId(getActivity())));
 
                 return params;
             }

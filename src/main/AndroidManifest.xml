@@ -35,11 +35,14 @@
         <activity
             android:name=".Activity_Dashboard"
             android:label="@string/title_activity_activity__dashboard"
+            android:screenOrientation="portrait"
             >
         </activity>
         <activity
             android:name=".Activity_New_Project"
-            android:label="@string/title_activity_activity__new__project" >
+            android:label="@string/title_activity_activity__new__project"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
     </application>

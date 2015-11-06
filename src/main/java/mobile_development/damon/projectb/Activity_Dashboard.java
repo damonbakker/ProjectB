@@ -2,11 +2,11 @@ package mobile_development.damon.projectb;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +26,7 @@ public class Activity_Dashboard extends AppCompatActivity
 {
     private android.support.v7.widget.Toolbar mToolbar;
     private Drawer result;
+    public  boolean exit_state = false;
 
 
 
@@ -147,6 +148,28 @@ public class Activity_Dashboard extends AppCompatActivity
 
 
     }
+
+
+
+    @Override
+    public void onBackPressed() {
+        if (exit_state) {
+            Activity_Dashboard.this.finish();
+            return;
+        }
+
+        this.exit_state = true;
+        Toast.makeText(this, "Please press back once more to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                exit_state =false;
+            }
+        }, 2000);
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

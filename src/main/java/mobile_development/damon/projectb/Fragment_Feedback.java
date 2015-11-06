@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import mobile_development.damon.projectb.Models.Project;
 
 
 /**
@@ -123,15 +137,58 @@ public class Fragment_Feedback extends Fragment {
         }
     }
 
+    public void SendFeedback(final String feedback)
+    {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                Log.i("RESPONSE", "RESPONSE RECIEVED");
+                Log.i("RESPONSE",response);
+            }
+
+        }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                //waiting_response.setVisibility(View.INVISIBLE);
+                Log.i("RESPONSE","RESPONSE FAILED");
+                Log.i("RESPONSE",error.getMessage());
+
+            }
+        })
+
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("tag", "store_feedback");
+                params.put("user_id", String.valueOf(SharedPreference.getId(getActivity())));
+                params.put("feedback", feedback);
+
+                return params;
+            }
+
+        };
+
+        NetworkHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             if (input_feedback.getText().toString().trim().length() > 0)
             {
-                Toast toast =  Toast.makeText(getActivity(), "Valid input", Toast.LENGTH_SHORT);
+                SendFeedback(input_feedback.getText().toString());
+                Toast toast =  Toast.makeText(getActivity(), "Thank you for the feedback!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER,0,0);
                 toast.show();
                 input_feedback.setText("");
+
             }
             else
             {

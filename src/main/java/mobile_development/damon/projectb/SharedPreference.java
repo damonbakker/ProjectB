@@ -38,13 +38,18 @@ public class SharedPreference
         SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
         editor.remove(PREF_EMAIL);
         editor.remove(PREF_ID);
-        editor.putBoolean(PREF_LOGIN_CHECK,false);
+        editor.putBoolean(PREF_LOGIN_CHECK, false);
         editor.apply();
     }
 
     public static String getEmail(Context ctx)
     {
         return getSharedPreferences(ctx).getString(PREF_EMAIL, "");
+    }
+
+    public static int getId(Context ctx)
+    {
+        return getSharedPreferences(ctx).getInt(PREF_ID, 0);
     }
 
 
