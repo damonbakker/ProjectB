@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:backgroundTint="@color/quality1"
+    >
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/avatar"
+        android:scaleType="fitXY"
+        android:src="@drawable/avatar_placeholder_white"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/student_name"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/avatar"
+        android:layout_marginLeft="5dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="C:"
+        android:textColor="@color/coding"
+        android:id="@+id/coding_indicator"
+        android:layout_alignBottom="@+id/student_name"
+        android:layout_toEndOf="@+id/avatar"
+        android:layout_marginLeft="100dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="00"
+        android:id="@+id/coding_value"
+        android:layout_alignBottom="@+id/coding_indicator"
+        android:layout_toEndOf="@+id/coding_indicator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="P:"
+        android:textColor="@color/planning"
+        android:id="@+id/planning_indicator"
+        android:layout_alignBottom="@+id/coding_value"
+        android:layout_toEndOf="@+id/coding_indicator"
+        android:layout_marginLeft="32dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="00"
+        android:id="@+id/planning_value"
+        android:layout_alignBottom="@+id/coding_indicator"
+        android:layout_toEndOf="@+id/planning_indicator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="D:"
+        android:textColor="@color/design"
+        android:id="@+id/design_indicator"
+        android:layout_alignBottom="@+id/coding_value"
+        android:layout_toEndOf="@+id/planning_indicator"
+        android:layout_marginLeft="32dp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="00"
+        android:id="@+id/design_value"
+        android:layout_alignBottom="@+id/coding_indicator"
+        android:layout_toEndOf="@+id/design_indicator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="50"
+        android:id="@+id/level"
+        android:layout_alignBottom="@+id/student_name"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="25dp"
+        />
+</RelativeLayout>

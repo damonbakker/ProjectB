@@ -12,18 +12,18 @@ public class Student
     private int level;
     private int planning;
     private int design;
-    private int code;
+    private int coding;
     private int motivation;
     private int leading;
     private Reward latest_apply;
 
-    public Student(int id, String name, int level, int planning, int design, int code, int motivation, int leading, Reward latest_apply) {
+    public Student(int id, String name, int level, int planning, int design, int coding, int motivation, int leading, Reward latest_apply) {
         this.id = id;
         this.name = name;
         this.level = level;
         this.planning = planning;
         this.design = design;
-        this.code = code;
+        this.coding = coding;
         this.motivation = motivation;
         this.leading = leading;
         this.latest_apply = latest_apply;
@@ -50,8 +50,8 @@ public class Student
         return this.design;
     }
 
-    public int getCode() {
-        return this.code;
+    public int getCoding() {
+        return this.coding;
     }
 
     public int getMotivation() {

@@ -105,7 +105,7 @@ public class Activity_New_Project extends AppCompatActivity
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<Project>>();
 
-        // Adding child data
+        // Adding header data
         listDataHeader.add("Beginner");
         listDataHeader.add("Easy");
         listDataHeader.add("Mediocre");
@@ -221,64 +221,6 @@ public class Activity_New_Project extends AppCompatActivity
 
         NetworkHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
 
-
-
-        // Adding child data
-       /* List<String> Beginner = new ArrayList<String>();
-        Beginner.add("test");
-        Beginner.add("test");
-        Beginner.add("test");
-        Beginner.add("test");
-        Beginner.add("test");
-        Beginner.add("test");
-        Beginner.add("test");
-
-        List<Project> test = new ArrayList<Project>();
-        test.add(new Project(1,"lol",1));
-
-        List<String> Easy = new ArrayList<String>();
-        Easy.add("test");
-        Easy.add("test");
-        Easy.add("test");
-        Easy.add("test");
-        Easy.add("test");
-        Easy.add("test");
-
-        List<String> Mediocre = new ArrayList<String>();
-        Mediocre.add("test");
-        Mediocre.add("test");
-        Mediocre.add("test");
-        Mediocre.add("test");
-        Mediocre.add("test");
-        Mediocre.add("test");
-        Mediocre.add("test");
-
-        List<String> Hard = new ArrayList<String>();
-        Hard.add("test");
-        Hard.add("test");
-        Hard.add("test");
-        Hard.add("test");
-        Hard.add("test");
-
-
-        List<String> Veteran = new ArrayList<String>();
-        Veteran.add("test");
-        Veteran.add("test");
-        Veteran.add("test");
-        Veteran.add("test");
-        Veteran.add("test");
-        Veteran.add("test");
-        Veteran.add("test");
-
-        List<String> Pro = new ArrayList<String>();
-        Pro.add("test");
-        Pro.add("test");
-        Pro.add("test");
-        Pro.add("test");
-        Pro.add("test");
-        Pro.add("test");
-        Pro.add("test");
-*/
 
     }
 

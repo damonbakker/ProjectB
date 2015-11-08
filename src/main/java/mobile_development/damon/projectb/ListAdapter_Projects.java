@@ -24,8 +24,8 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
 {
     private LayoutInflater inflater;
     private Context _context;
-    private int _layourresourceid;
     private List<Project> _projectlist;
+    private int _layourresourceid;
     private Activity activity;
 
     public ListAdapter_Projects(Context context,int layoutResourceId,List<Project> projects)
@@ -39,7 +39,7 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
         inflater= ((Activity)context).getLayoutInflater();
     }
 
-    public void CalculatePROGRESS()
+    public void CalculateProgress()
     {
         Date startTime = null;
         Date currentDate = null;
@@ -59,18 +59,6 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
 
         Log.i("Difference", days+":"+hours+":"+minutes);
 
-
-
-        /*
-        * Get start and end DATE
-        * Calculate difference
-        * if difference is 10 days
-        * then if 5 days has surpassed progress is 50%
-        * implement this at later stage
-        *
-        *
-        *
-        * */
     }
 
     @Override
@@ -112,8 +100,6 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
                 eta.setText(" ");
                 progress.setProgress(100);
                 progress.setProgressColor(_context.getResources().getColor(R.color.project_finished_success));
-
-
                 break;
 
             case 2:

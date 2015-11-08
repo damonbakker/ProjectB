@@ -29,22 +29,22 @@
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"
-            android:windowSoftInputMode="adjustResize"
-            >
+            android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
             android:name=".Activity_Dashboard"
             android:label="@string/title_activity_activity__dashboard"
-            android:screenOrientation="portrait"
-            >
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".Activity_New_Project"
-            android:label="@string/title_activity_activity__new__project"
-            android:screenOrientation="portrait"
-            >
+            android:label="@string/title_activity_activity_new_project"
+            android:screenOrientation="portrait" >
         </activity>
-
+        <activity
+            android:name=".Activity_Assign_Project"
+            android:label="@string/title_activity_activity_assign_project" >
+        </activity>
     </application>
 
 </manifest>
