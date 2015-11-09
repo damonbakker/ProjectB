@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/layout_assign_project"
-    tools:context="mobile_development.damon.projectb.Activity_Assign_Project">
+    tools:context="mobile_development.damon.projectb.Activity_Student_Details">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_assign_project"
+        android:id="@+id/toolbar_new_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -17,20 +15,20 @@
         app:popupTheme="@style/ActionBarPopupThemeOverlay"/>
 
     <RelativeLayout
-        android:layout_below="@id/toolbar_assign_project"
+        android:layout_below="@id/toolbar_new_project"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
+
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Large Text"
-            android:id="@+id/project_name"
-            android:transitionName="project_name"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp" />
+            android:id="@+id/avatar"
+            android:transitionName="avatar"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
+
+
 
 </RelativeLayout>

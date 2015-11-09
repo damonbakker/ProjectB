@@ -31,6 +31,9 @@
     <string name="placeholder_settings">The creator of this app is lazy if you can read this :)</string>
     <string name="title_activity_activity_new_project">Activity_New_Project</string>
     <string name="title_activity_activity_assign_project">Activity_Assign_Project</string>
+    <string name="title_activity_activity__student__details">Activity_Student_Details</string>
+
+    <string name="transition_name_project">project_name</string>
 
 
 

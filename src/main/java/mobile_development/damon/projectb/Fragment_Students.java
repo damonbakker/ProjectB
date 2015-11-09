@@ -1,10 +1,15 @@
 package mobile_development.damon.projectb;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.TransitionInflater;
+import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +17,28 @@ import android.widget.AdapterView;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import mobile_development.damon.projectb.Models.Project;
 import mobile_development.damon.projectb.Models.Student;
 
 
@@ -46,6 +64,8 @@ public class Fragment_Students extends Fragment {
     public RelativeLayout layout_fragment;
     public ListView mainlistview;
     public ProgressBar waiting_response;
+    public  ImageView avatar;
+    public TextView username;
 
     public List<Student> student_data = new ArrayList<Student>();
 
@@ -88,18 +108,21 @@ public class Fragment_Students extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_students, container, false);
-        View rootView = inflater.inflate(R.layout.fragment_students, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_students, container, false);
 
         assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Students");
 
+
+
         layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_students);
         mainlistview = (ListView) rootView.findViewById(R.id.listView_students);
         waiting_response = (ProgressBar) rootView.findViewById(R.id.waiting_response);
+
 
         setListData();
 
@@ -107,6 +130,8 @@ public class Fragment_Students extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
                 Toast.makeText(getActivity(), "id " + student_data.get(i).getId(), Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -126,22 +151,77 @@ public class Fragment_Students extends Fragment {
 
     private void setListData()
     {
-        student_data.add(new Student(1,"kappa",1,2,3,4));
-        student_data.add(new Student(2,"kappa",1,2,3,4));
-        student_data.add(new Student(3,"kappa",1,2,3,4));
-        student_data.add(new Student(4,"kappa",1,2,3,4));
-        student_data.add(new Student(5,"kappa",1,2,3,4));
-        student_data.add(new Student(6,"kappa",1,2,3,4));
-        student_data.add(new Student(7,"kappa",1,2,3,4));
-        student_data.add(new Student(8,"kappa",1,2,3,4));
-        student_data.add(new Student(9,"kappa",1,2,3,4));
-        student_data.add(new Student(10,"kappa",1,2,3,4));
-        student_data.add(new Student(11,"kappa",1,2,3,4));
-        student_data.add(new Student(12,"kappa",1,2,3,4));
-        student_data.add(new Student(13,"kappa",1,2,3,4));
 
-        ListAdapter_Students adapter = new ListAdapter_Students(getActivity(),R.layout.list_item_student,student_data);
-        mainlistview.setAdapter(adapter);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+                waiting_response.setVisibility(View.INVISIBLE);
+                Log.i("RESPONSE", "RESPONSE RECIEVED");
+
+                try
+                {
+                    JSONObject response_obj = new JSONObject(response);
+                    JSONArray data = response_obj.getJSONArray("data");
+
+                    Log.i("RESPONSE",data.toString());
+
+                    for (int i =0; i < data.length();i++)
+                    {
+                        try
+                        {
+                            JSONObject obj_student = data.getJSONObject(i);
+                            student_data.add(new Student(obj_student.getInt("student_id"),obj_student.getString("name"),obj_student.getInt("level"),obj_student.getInt("planning"),obj_student.getInt("design"),obj_student.getInt("coding")));
+                        }
+                        catch (JSONException e)
+                        {
+                            Log.i("RESPONSE",e.toString());
+                        }
+                    }
+
+                    ListAdapter_Students adapter = new ListAdapter_Students(getActivity(),R.layout.list_item_student,student_data);
+                    mainlistview.setAdapter(adapter);
+
+
+                }
+                catch (JSONException e)
+                {
+                    Log.i("RESPONSE",e.toString());
+                }
+
+
+            }
+
+        }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.i("RESPONSE","RESPONSE FAILED");
+                Log.i("RESPONSE",error.getMessage());
+
+
+
+            }
+        })
+
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Posting parameters to login url
+                Map<String, String> params = new HashMap<>();
+                params.put("tag", "retrieve_user_students");
+                params.put("user_id", String.valueOf(SharedPreference.getId(getActivity())));
+
+                return params;
+            }
+
+        };
+
+        NetworkHandler.getInstance(getActivity()).addToRequestQueue(stringRequest);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

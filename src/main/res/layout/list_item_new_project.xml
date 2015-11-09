@@ -6,9 +6,10 @@
 
     <TextView
         android:id="@+id/lblListItem"
+        android:transitionName="project_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="17sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
       />

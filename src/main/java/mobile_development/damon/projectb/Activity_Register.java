@@ -60,11 +60,6 @@ public class Activity_Register extends AppCompatActivity
         // You can be pretty confident that the intent will not be null here.
         Intent intent = getIntent();
 
-
-
-
-
-
         try
         {
             new_background_color = getIntent().getStringExtra("background_color");

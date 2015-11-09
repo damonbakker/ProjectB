@@ -49,7 +49,6 @@ public class ListAdapter_Students extends ArrayAdapter<Student>
         return _studentlist.size();
     }
 
-
     @Override
     public long getItemId(int position) {
         return position;
@@ -75,19 +74,25 @@ public class ListAdapter_Students extends ArrayAdapter<Student>
 
         Student s = _studentlist.get(position);
 
-
-
-        if (s.getId() == 3)
+        if (s.getLevel() >= 85 && s.getLevel() <= 100)
+        {
+            layout.setBackgroundColor(_context.getResources().getColor(R.color.quality4));
+        }
+        if (s.getLevel() >= 55 && s.getLevel() <= 85)
         {
             layout.setBackgroundColor(_context.getResources().getColor(R.color.quality3));
         }
-        if (s.getId() == 4)
+        if (s.getLevel() >= 35 && s.getLevel() <= 55)
         {
             layout.setBackgroundColor(_context.getResources().getColor(R.color.quality2));
         }
-        if (s.getId() == 2)
+        if (s.getLevel() >= 15 && s.getLevel() <= 35)
         {
             layout.setBackgroundColor(_context.getResources().getColor(R.color.quality1));
+        }
+        if (s.getLevel() >= 1 && s.getLevel() <= 15)
+        {
+            layout.setBackgroundColor(_context.getResources().getColor(R.color.quality0));
         }
 
         student_name.setText(s.getName());
@@ -95,10 +100,6 @@ public class ListAdapter_Students extends ArrayAdapter<Student>
         planning.setText(String.valueOf(s.getPlanning()));
         design.setText(String.valueOf(s.getDesign()));
         level.setText(String.valueOf(s.getLevel()));
-
-
-
-
 
 
         return convertView;

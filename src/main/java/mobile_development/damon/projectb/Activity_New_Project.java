@@ -1,6 +1,10 @@
 package mobile_development.damon.projectb;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +13,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -45,6 +50,7 @@ public class Activity_New_Project extends AppCompatActivity
     public List<Project> Pro = new ArrayList<Project>();
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,17 +72,15 @@ public class Activity_New_Project extends AppCompatActivity
         setListData(mainlistview_projects);
 
 
+
         mainlistview_projects.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                Toast.makeText(
-                        getApplicationContext(),
-                        listDataHeader.get(groupPosition)
-                                + " : "
-                                + listDataChild.get(
-                                listDataHeader.get(groupPosition)).get(
-                                childPosition).getId(), Toast.LENGTH_SHORT)
-                        .show();
+
+
+                TextView tx = (TextView) v.findViewById(R.id.lblListItem);
+                StartAssignProjectActivity(v,tx.getText().toString());
+
                 return false;
             }
         });
@@ -97,6 +101,17 @@ public class Activity_New_Project extends AppCompatActivity
                 onBackPressed();
             }
         });
+
+    }
+
+    public void StartAssignProjectActivity(View v,String project_name)
+    {
+        Intent intent = new Intent(this, Activity_Assign_Project.class);
+// Pass data object in the bundle and populate details activity.
+        intent.putExtra("project_name",project_name);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, v, "project_name");
+        startActivity(intent, options.toBundle());
 
     }
 

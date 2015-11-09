@@ -37,13 +37,10 @@ public class Fragment_Dashboard extends Fragment {
 
     public RelativeLayout layout_fragment;
     public ProgressBar waiting_response;
-
     public TextView level,project_points,project_info,username;
     public ImageView avatar;
     public IconRoundCornerProgressBar progress_coding,progress_design,progress_planning;
-
     public Button upgrade_level;
-
 
     public Fragment_Dashboard()
     {
@@ -109,7 +106,6 @@ public class Fragment_Dashboard extends Fragment {
                     Log.i("RESPONSE", data_student_skills.toString());
 
 
-
                     username.setText(data_user_detail.getString("username"));
                     project_points.setText(data_user_detail.getString("project_points"));
                     level.setText(data_user_detail.getString("level"));
@@ -122,7 +118,9 @@ public class Fragment_Dashboard extends Fragment {
                     progress_planning.setMax(max_skills);
                     progress_design.setMax(max_skills);
 
-                    Log.i("MAX",String.valueOf(max_skills));
+                    progress_coding.setProgress(data_student_skills.getInt("total_coding"));
+                    progress_planning.setProgress(data_student_skills.getInt("total_planning"));
+                    progress_design.setProgress(data_student_skills.getInt("total_design"));
 
                     layout_fragment.setVisibility(View.VISIBLE);
 
@@ -132,7 +130,6 @@ public class Fragment_Dashboard extends Fragment {
                     Log.i("RESPONSE",e.toString());
                 }
 
-
             }
 
         }, new Response.ErrorListener()
@@ -140,12 +137,8 @@ public class Fragment_Dashboard extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error)
             {
-                //waiting_response.setVisibility(View.INVISIBLE);
                 Log.i("RESPONSE","RESPONSE FAILED");
                 Log.i("RESPONSE",error.getMessage());
-
-
-
             }
         })
 
