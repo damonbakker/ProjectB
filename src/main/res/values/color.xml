@@ -61,7 +61,15 @@
     <color name="planning">#49940c</color>
     <color name="design">#fabf0e</color>
 
-    <color name="quality1">#520011ff</color>
+
+    <color name="quality0">#00000000</color>
+    <color name="quality1">#2e0011ff</color>
+    <color name="quality2">#3222ff00</color>
+    <color name="quality3">#32fb00ff</color>
+    <color name="quality4">#bcff7700</color>
+
+
+
 
 
 

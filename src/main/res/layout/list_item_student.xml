@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:backgroundTint="@color/quality1"
+    android:id="@+id/layout_student_item"
+    android:background="@color/quality4"
     >
 
     <ImageView

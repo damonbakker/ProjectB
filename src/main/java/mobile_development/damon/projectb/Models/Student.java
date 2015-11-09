@@ -30,6 +30,15 @@ public class Student
     }
 
 
+    public Student(int id, String name, int level, int planning, int design, int coding) {
+        this.id = id;
+        this.name = name;
+        this.level = level;
+        this.planning = planning;
+        this.design = design;
+        this.coding = coding;
+    }
+
     public int getId() {
         return this.id;
     }

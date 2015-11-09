@@ -3,11 +3,13 @@ package mobile_development.damon.projectb;
 import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -62,6 +64,7 @@ public class ListAdapter_Students extends ArrayAdapter<Student>
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_item_student, parent, false);
 
+        RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.layout_student_item);
         ImageView student_avatar = (ImageView) convertView.findViewById(R.id.avatar);
 
         TextView student_name = (TextView) convertView.findViewById(R.id.student_name);
@@ -72,16 +75,26 @@ public class ListAdapter_Students extends ArrayAdapter<Student>
 
         Student s = _studentlist.get(position);
 
+
+
+        if (s.getId() == 3)
+        {
+            layout.setBackgroundColor(_context.getResources().getColor(R.color.quality3));
+        }
+        if (s.getId() == 4)
+        {
+            layout.setBackgroundColor(_context.getResources().getColor(R.color.quality2));
+        }
+        if (s.getId() == 2)
+        {
+            layout.setBackgroundColor(_context.getResources().getColor(R.color.quality1));
+        }
+
         student_name.setText(s.getName());
-        coding.setText(s.getCoding());
-        planning.setText(s.getPlanning());
-        design.setText(s.getDesign());
-        level.setText(s.getLevel());
-
-
-
-
-
+        coding.setText(String.valueOf(s.getCoding()));
+        planning.setText(String.valueOf(s.getPlanning()));
+        design.setText(String.valueOf(s.getDesign()));
+        level.setText(String.valueOf(s.getLevel()));
 
 
 
