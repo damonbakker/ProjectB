@@ -113,7 +113,7 @@ public class Fragment_Projects extends Fragment {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
         assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Projects");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_projects));
 
         layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_projects);
         mainlistview = (ListView) rootView.findViewById(R.id.listView_projects);

@@ -54,7 +54,7 @@ public class Fragment_Dashboard extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Dashboard");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_home));
 
         layout_fragment = (RelativeLayout )rootview.findViewById(R.id.layout_dashboard);
         waiting_response = (ProgressBar) rootview.findViewById(R.id.waiting_response);

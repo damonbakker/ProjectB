@@ -8,6 +8,7 @@ import mobile_development.damon.projectb.Models.Reward;
 public class Student
 {
     private int id;
+    private int user_student_id;
     private String name;
     private int level;
     private int planning;
@@ -16,6 +17,12 @@ public class Student
     private int motivation;
     private int leading;
     private Reward latest_apply;
+
+
+
+    public void setUser_student_id(int user_student_id) {
+        this.user_student_id = user_student_id;
+    }
 
     public Student(int id, String name, int level, int planning, int design, int coding, int motivation, int leading, Reward latest_apply) {
         this.id = id;
@@ -30,13 +37,16 @@ public class Student
     }
 
 
-    public Student(int id, String name, int level, int planning, int design, int coding) {
-        this.id = id;
+    public Student(int user_student_id, String name, int level, int planning, int design, int coding) {
+        this.user_student_id = user_student_id;
         this.name = name;
         this.level = level;
         this.planning = planning;
         this.design = design;
         this.coding = coding;
+    }
+    public int getUser_student_id() {
+        return user_student_id;
     }
 
     public int getId() {

@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="project_title"
+        android:text=""
         android:id="@+id/project_title"
         android:layout_marginLeft="5dp"
 

@@ -102,7 +102,7 @@ public class Fragment_Feedback extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_feedback, container, false);
 
         assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Feedback");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_toolbar_feedback);
 
         charcounter = (TextView) rootView.findViewById(R.id.feedback_charcounter);
         input_feedback = (EditText) rootView.findViewById(R.id.userInput_feedback);

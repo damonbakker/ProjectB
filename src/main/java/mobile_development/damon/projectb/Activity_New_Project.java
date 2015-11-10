@@ -62,7 +62,7 @@ public class Activity_New_Project extends AppCompatActivity
         assert getSupportActionBar() != null;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("New project");
+        getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_new_project));
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
         layout = (RelativeLayout) findViewById(R.id.layout_new_project);
@@ -70,7 +70,6 @@ public class Activity_New_Project extends AppCompatActivity
         waiting_response = (ProgressBar) findViewById(R.id.waiting_response);
 
         setListData(mainlistview_projects);
-
 
 
         mainlistview_projects.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
@@ -107,7 +106,7 @@ public class Activity_New_Project extends AppCompatActivity
     public void StartAssignProjectActivity(View v,String project_name)
     {
         Intent intent = new Intent(this, Activity_Assign_Project.class);
-// Pass data object in the bundle and populate details activity.
+        // Pass data object in the bundle and populate details activity.
         intent.putExtra("project_name",project_name);
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(this, v, "project_name");

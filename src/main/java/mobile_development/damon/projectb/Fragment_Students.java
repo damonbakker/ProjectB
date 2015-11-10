@@ -115,22 +115,22 @@ public class Fragment_Students extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_students, container, false);
 
         assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Students");
-
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_students));
 
 
         layout_fragment = (RelativeLayout) rootView.findViewById(R.id.layout_students);
         mainlistview = (ListView) rootView.findViewById(R.id.listView_students);
         waiting_response = (ProgressBar) rootView.findViewById(R.id.waiting_response);
 
-
         setListData();
 
         mainlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Toast.makeText(getActivity(), "id " + student_data.get(i).getId(), Toast.LENGTH_SHORT).show();
-
+                Intent intent = new Intent(getActivity(), Activity_Student_Details.class);
+                intent.putExtra("user_student_id",student_data.get(i).getUser_student_id());
+                intent.putExtra("student_name",student_data.get(i).getName());
+                getActivity().startActivity(intent);
 
             }
         });
@@ -172,7 +172,7 @@ public class Fragment_Students extends Fragment {
                         try
                         {
                             JSONObject obj_student = data.getJSONObject(i);
-                            student_data.add(new Student(obj_student.getInt("student_id"),obj_student.getString("name"),obj_student.getInt("level"),obj_student.getInt("planning"),obj_student.getInt("design"),obj_student.getInt("coding")));
+                            student_data.add(new Student(obj_student.getInt("id"),obj_student.getString("name"),obj_student.getInt("level"),obj_student.getInt("planning"),obj_student.getInt("design"),obj_student.getInt("coding")));
                         }
                         catch (JSONException e)
                         {

@@ -41,7 +41,7 @@ public class Activity_Dashboard extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         assert getSupportActionBar() != null;
-        getSupportActionBar().setTitle("Dashboard");
+        getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_home));
 
        final PrimaryDrawerItem item_dashboard = new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(GoogleMaterial.Icon.gmd_home).withIdentifier(1);
        final SecondaryDrawerItem item_projects = new SecondaryDrawerItem().withName(R.string.drawer_item_projects).withIcon(GoogleMaterial.Icon.gmd_folder).withIdentifier(2);
@@ -182,10 +182,10 @@ public class Activity_Dashboard extends AppCompatActivity
         {
             case R.id.action_logout:
 
-                AlertDialog.Builder builder =
+                AlertDialog.Builder builder_logout =
                         new AlertDialog.Builder(this);
-                builder.setTitle("Are you sure you want to log out?");
-                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                builder_logout.setTitle("Are you sure you want to log out?");
+                builder_logout.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
@@ -194,12 +194,19 @@ public class Activity_Dashboard extends AppCompatActivity
                         startActivity(intent);
                     }
                 });
-                builder.setNegativeButton("Cancel", null);
-                builder.show();
+                builder_logout.setNegativeButton("Cancel", null);
+                builder_logout.show();
 
                 break;
 
             case R.id.action_about:
+
+                AlertDialog.Builder builder_about =
+                        new AlertDialog.Builder(this);
+                builder_about.setTitle("About project B");
+                builder_about.setMessage(getResources().getString(R.string.about_app));
+                builder_about.setPositiveButton("Got it", null);
+                builder_about.show();
 
                 break;
 

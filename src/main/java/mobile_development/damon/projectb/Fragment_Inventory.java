@@ -77,7 +77,7 @@ public class Fragment_Inventory extends Fragment {
         View rootview =  inflater.inflate(R.layout.fragment_inventory, container, false);
 
         assert ((AppCompatActivity)getActivity()).getSupportActionBar() != null;
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Inventory");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_inventory));
 
         final GridView gridView = (GridView)rootview.findViewById(R.id.gridView_inventory);
         final GridViewAdapter adapter = new GridViewAdapter(getActivity(),1,2);

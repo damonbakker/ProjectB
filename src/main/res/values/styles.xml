@@ -49,10 +49,11 @@
         <item name="colorAccent">@color/colorPrimaryDark</item>
         <item name="android:textColorPrimary">#000000</item>
         <item name="android:background">#ffffff</item>
-
-
     </style>
 
+    <style name="menu_labels_style">
+        <item name="android:textColor">@color/text_color_primary</item>
+    </style>
 
 
 

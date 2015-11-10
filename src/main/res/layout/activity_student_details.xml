@@ -3,10 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+
     tools:context="mobile_development.damon.projectb.Activity_Student_Details">
 
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/right_labels"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        fab:fab_colorNormal="@color/accent"
+        fab:fab_colorPressed="@color/accent_pressed"
+        fab:fab_colorRipple="@color/ripple"
+        fab:fab_addButtonPlusIconColor="@color/background_dark"
+        fab:fab_addButtonSize="normal"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="left"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        >
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_apply_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/apply"
+            fab:fab_title="Apply an item"
+            fab:fab_size="mini"
+            fab:fab_colorPressed="@color/apply_pressed"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_discard_student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/discard"
+            fab:fab_size="mini"
+            fab:fab_title="Abandon student"
+            fab:fab_colorPressed="@color/discard_pressed"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_new_project"
+        android:id="@+id/toolbar_student_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -15,18 +56,47 @@
         app:popupTheme="@style/ActionBarPopupThemeOverlay"/>
 
     <RelativeLayout
-        android:layout_below="@id/toolbar_new_project"
+        android:layout_below="@id/toolbar_student_details"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/layout_student_details"
+        >
+
 
 
         <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/avatar"
+            android:scaleType="fitXY"
+            android:src="@drawable/avatar_placeholder_white"
+            android:layout_marginTop="46dp"
+            android:layout_marginStart="35dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/avatar"
-            android:transitionName="avatar"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Wouter"
+            android:id="@+id/student_name"
+            android:layout_marginStart="40dp"
+            android:layout_alignTop="@+id/avatar"
+            android:layout_toEndOf="@+id/avatar"
+            android:layout_marginTop="31dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Level:"
+            android:id="@+id/level"
+            android:layout_below="@+id/student_name"
+            android:layout_alignStart="@+id/student_name" />
+
+
+
     </RelativeLayout>
 
 

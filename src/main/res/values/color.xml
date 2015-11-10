@@ -69,6 +69,11 @@
     <color name="quality4">#bcff7700</color>
 
 
+    <color name="discard">#e41b1b</color>
+    <color name="discard_pressed">#9e0000</color>
+    <color name="apply">#1e5ee9</color>
+    <color name="apply_pressed">#2d4ce6</color>
+
 
 
 
