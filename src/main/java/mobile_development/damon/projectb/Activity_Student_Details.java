@@ -4,10 +4,14 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionInflater;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import mobile_development.damon.projectb.Models.Reward;
 
@@ -23,6 +27,8 @@ public class Activity_Student_Details extends AppCompatActivity {
     public int motivation;
     public int latest_apply_id;
     public Reward latest_apply;
+
+    public TextView value_coding,value_planning,value_design,value_motivation,value_leading;
 
 
     @Override
@@ -43,6 +49,10 @@ public class Activity_Student_Details extends AppCompatActivity {
         getSupportActionBar().setTitle(student_name);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
+        value_coding = (TextView) findViewById(R.id.value_coding);
+
+
+
         FloatingActionButton button = (FloatingActionButton) findViewById(R.id.fab_discard_student);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +60,7 @@ public class Activity_Student_Details extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "msg msg", Toast.LENGTH_SHORT).show();
             }
         });
+
 
 
 

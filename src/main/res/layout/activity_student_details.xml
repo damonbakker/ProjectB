@@ -8,44 +8,6 @@
     tools:context="mobile_development.damon.projectb.Activity_Student_Details">
 
 
-    <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/right_labels"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        fab:fab_colorNormal="@color/accent"
-        fab:fab_colorPressed="@color/accent_pressed"
-        fab:fab_colorRipple="@color/ripple"
-        fab:fab_addButtonPlusIconColor="@color/background_dark"
-        fab:fab_addButtonSize="normal"
-        fab:fab_labelStyle="@style/menu_labels_style"
-        fab:fab_labelsPosition="left"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        >
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_apply_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/apply"
-            fab:fab_title="Apply an item"
-            fab:fab_size="mini"
-            fab:fab_colorPressed="@color/apply_pressed"/>
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_discard_student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/discard"
-            fab:fab_size="mini"
-            fab:fab_title="Abandon student"
-            fab:fab_colorPressed="@color/discard_pressed"/>
-
-    </com.getbase.floatingactionbutton.FloatingActionsMenu>
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_student_details"
         android:layout_width="match_parent"
@@ -73,7 +35,8 @@
             android:layout_marginTop="46dp"
             android:layout_marginStart="35dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:visibility="visible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -89,16 +52,245 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Level:"
             android:id="@+id/level"
             android:layout_below="@+id/student_name"
             android:layout_alignStart="@+id/student_name" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Total projects completed"
+            android:id="@+id/total_projects_finished"
+            android:layout_marginTop="22dp"
+            android:layout_below="@+id/avatar"
+            android:layout_alignStart="@+id/avatar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_marginLeft="9dp"
+            android:text="12"
+            android:id="@+id/projects_total_finished_value"
+            android:layout_alignBottom="@+id/total_projects_finished"
+            android:layout_toEndOf="@+id/total_projects_finished" />
+
+        <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+            android:id="@+id/progress_planning"
+            android:layout_marginLeft="5dp"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            app:rcBackgroundColor="@color/custom_progress_background"
+            app:rcBackgroundPadding="4dp"
+            app:rcIconBackgroundColor="@color/custom_progress_green_header"
+            app:rcIconPadding="3dp"
+            app:rcIconSize="30dp"
+            app:rcIconSrc="@drawable/planning"
+            app:rcMax="100"
+            app:rcProgress="30"
+            app:rcProgressColor="@color/custom_progress_green_progress"
+            app:rcRadius="5dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+            android:id="@+id/progress_coding"
+            android:layout_width="280dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            app:rcBackgroundColor="@color/custom_progress_background"
+            app:rcBackgroundPadding="4dp"
+            app:rcIconBackgroundColor="@color/custom_progress_green_header"
+            app:rcIconPadding="3dp"
+            app:rcIconSize="30dp"
+            app:rcIconSrc="@drawable/coding"
+            app:rcMax="100"
+            app:rcProgress="30"
+            app:rcProgressColor="@color/custom_progress_green_progress"
+            app:rcRadius="5dp"
+            android:layout_below="@+id/progress_planning"
+             />
+
+        <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+            android:id="@+id/progress_design"
+            android:layout_width="280dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            app:rcBackgroundColor="@color/custom_progress_background"
+            app:rcBackgroundPadding="4dp"
+            app:rcIconBackgroundColor="@color/custom_progress_green_header"
+            app:rcIconPadding="3dp"
+            app:rcIconSize="30dp"
+            app:rcIconSrc="@drawable/design"
+            app:rcMax="100"
+            app:rcProgress="30"
+            app:rcProgressColor="@color/custom_progress_green_progress"
+            app:rcRadius="5dp"
+            android:layout_below="@+id/progress_coding"
+            />
+
+        <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+            android:id="@+id/progress_motivation"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:rcBackgroundColor="@color/custom_progress_background"
+            app:rcBackgroundPadding="4dp"
+            app:rcIconBackgroundColor="@color/custom_progress_green_header"
+            app:rcIconPadding="3dp"
+            app:rcIconSize="30dp"
+            app:rcIconSrc="@drawable/motivation"
+            app:rcMax="10"
+            app:rcProgress="3"
+            app:rcProgressColor="@color/custom_progress_green_progress"
+            app:rcRadius="5dp"
+            android:layout_below="@+id/progress_design"
+            />
+
+        <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
+            android:id="@+id/progress_leading"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            app:rcBackgroundColor="@color/custom_progress_background"
+            app:rcBackgroundPadding="4dp"
+            app:rcIconBackgroundColor="@color/custom_progress_green_header"
+            app:rcIconPadding="3dp"
+            app:rcIconSize="30dp"
+            app:rcIconSrc="@drawable/leading"
+            app:rcMax="5"
+            app:rcProgress="2"
+            app:rcProgressColor="@color/custom_progress_green_progress"
+            app:rcRadius="5dp"
+            android:layout_below="@+id/progress_motivation"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="90"
+            android:id="@+id/value_planning"
+            android:layout_alignBottom="@+id/progress_planning"
+            android:layout_toEndOf="@+id/progress_planning"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="23"
+            android:id="@+id/value_coding"
+            android:layout_alignBottom="@+id/progress_coding"
+            android:layout_toEndOf="@+id/progress_coding"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="5dp"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="32"
+            android:id="@+id/value_design"
+            android:layout_alignBottom="@+id/progress_design"
+            android:layout_toEndOf="@+id/progress_design"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="5"
+            android:id="@+id/value_motivation"
+            android:layout_alignBottom="@+id/progress_motivation"
+            android:layout_toEndOf="@+id/progress_motivation"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="5dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="2"
+            android:id="@+id/value_leading"
+            android:layout_alignBottom="@+id/progress_leading"
+            android:layout_toEndOf="@+id/progress_leading"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="5dp"
+            />
 
 
     </RelativeLayout>
 
+
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:id="@+id/fabmenu"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        fab:fab_colorNormal="@color/accent"
+        fab:fab_colorPressed="@color/accent_pressed"
+        fab:fab_colorRipple="@color/ripple"
+        fab:fab_addButtonPlusIconColor="@color/background_dark"
+        fab:fab_addButtonSize="normal"
+        fab:fab_labelStyle="@style/menu_labels_style"
+        fab:fab_labelsPosition="left"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        fab:fab_expandDirection="up"
+        >
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_apply_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/apply"
+            fab:fab_title="Apply an item"
+            fab:fab_size="mini"
+            fab:fab_labelStyle="@style/menu_labels_style"
+            fab:fab_colorPressed="@color/apply_pressed"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_discard_student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/discard"
+            fab:fab_size="mini"
+            fab:fab_title="Abandon student"
+            fab:fab_labelStyle="@style/menu_labels_style"
+            fab:fab_colorPressed="@color/discard_pressed"/>
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_change_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="@color/change_avatar"
+            fab:fab_size="mini"
+            fab:fab_title="Change avatar"
+            android:src="@drawable/ic_camera_alt_24dp"
+            fab:fab_labelStyle="@style/menu_labels_style"
+            fab:fab_colorPressed="@color/change_avatar_pressed"/>
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 
 </RelativeLayout>

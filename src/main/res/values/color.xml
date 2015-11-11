@@ -60,6 +60,8 @@
     <color name="coding">#0081cc</color>
     <color name="planning">#49940c</color>
     <color name="design">#fabf0e</color>
+    <color name="motivation">#e66e1e</color>
+    <color name="leading">#d90e0e</color>
 
 
     <color name="quality0">#00000000</color>
@@ -69,11 +71,14 @@
     <color name="quality4">#bcff7700</color>
 
 
-    <color name="discard">#e41b1b</color>
+    <color name="discard">#e13333</color>
     <color name="discard_pressed">#9e0000</color>
-    <color name="apply">#1e5ee9</color>
+    <color name="apply">#3069e4</color>
     <color name="apply_pressed">#2d4ce6</color>
+    <color name="change_avatar">#ffffff</color>
+    <color name="change_avatar_pressed">#9c9da3</color>
 
+    <color name="black_semi_transparent">#b2ffffff</color>
 
 
 

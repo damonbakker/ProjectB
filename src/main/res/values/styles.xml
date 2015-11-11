@@ -52,7 +52,8 @@
     </style>
 
     <style name="menu_labels_style">
-        <item name="android:textColor">@color/text_color_primary</item>
+        <item name="android:textColor">@color/md_black_1000</item>
+        <item name="android:background">@drawable/fab_label_background</item>
     </style>
 
 
