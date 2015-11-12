@@ -37,7 +37,7 @@ public class Fragment_Dashboard extends Fragment {
 
     public RelativeLayout layout_fragment;
     public ProgressBar waiting_response;
-    public TextView level,project_points,project_info,username;
+    public TextView level,project_points,project_info,username,level_indicator,project_points_indicator,project_points_tip;
     public ImageView avatar;
     public IconRoundCornerProgressBar progress_coding,progress_design,progress_planning;
     public Button upgrade_level;
@@ -64,14 +64,16 @@ public class Fragment_Dashboard extends Fragment {
         project_info = (TextView) rootview.findViewById(R.id.project_info);
         username = (TextView) rootview.findViewById(R.id.username);
         avatar = (ImageView) rootview.findViewById(R.id.avatar);
-
+        level_indicator = (TextView) rootview.findViewById(R.id.Level);
+        project_points_indicator = (TextView) rootview.findViewById(R.id.PP);
+        project_points_tip = (TextView) rootview.findViewById(R.id.PP_detail);
         progress_coding = (IconRoundCornerProgressBar) rootview.findViewById(R.id.progress_coding);
         progress_design = (IconRoundCornerProgressBar) rootview.findViewById(R.id.progress_design);
         progress_planning = (IconRoundCornerProgressBar) rootview.findViewById(R.id.progress_planning);
 
         upgrade_level = (Button) rootview.findViewById(R.id.upgrade_lvl);
 
-        layout_fragment.setVisibility(View.INVISIBLE);
+
 
         setDashboardData();
 
@@ -122,7 +124,18 @@ public class Fragment_Dashboard extends Fragment {
                     progress_planning.setProgress(data_student_skills.getInt("total_planning"));
                     progress_design.setProgress(data_student_skills.getInt("total_design"));
 
-                    layout_fragment.setVisibility(View.VISIBLE);
+                    level.setVisibility(View.VISIBLE);
+                    project_points.setVisibility(View.VISIBLE);
+                    project_info.setVisibility(View.VISIBLE);
+                    username.setVisibility(View.VISIBLE);
+                    avatar.setVisibility(View.VISIBLE);
+                    level_indicator.setVisibility(View.VISIBLE);
+                    project_points_indicator.setVisibility(View.VISIBLE);
+                    project_points_tip.setVisibility(View.VISIBLE);
+                    progress_coding.setVisibility(View.VISIBLE);
+                    progress_design.setVisibility(View.VISIBLE);
+                    progress_planning.setVisibility(View.VISIBLE);
+                    upgrade_level.setVisibility(View.VISIBLE);
 
                 }
                 catch (JSONException e)

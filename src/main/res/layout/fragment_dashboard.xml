@@ -19,7 +19,8 @@
         android:id="@+id/Level"
         android:layout_marginTop="27dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -29,7 +30,8 @@
         android:textSize="30dp"
         android:id="@+id/PP"
         android:layout_below="@+id/Level"
-        android:layout_alignEnd="@+id/Level" />
+        android:layout_alignEnd="@+id/Level"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -40,7 +42,8 @@
 
         android:layout_above="@+id/PP"
         android:layout_toEndOf="@+id/Level"
-        android:layout_marginStart="29dp" />
+        android:layout_marginStart="29dp"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -49,7 +52,8 @@
         android:text="22222"
         android:id="@+id/PP_value"
         android:layout_alignBottom="@+id/PP"
-        android:layout_alignStart="@+id/Level_value" />
+        android:layout_alignStart="@+id/Level_value"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -58,7 +62,8 @@
         android:text="Project Points"
         android:id="@+id/PP_detail"
         android:layout_below="@+id/PP_value"
-        android:layout_alignStart="@+id/PP_value" />
+        android:layout_alignStart="@+id/PP_value"
+        android:visibility="invisible" />
 
     <ImageView
         android:layout_width="120dp"
@@ -68,7 +73,8 @@
         android:src="@drawable/avatar_placeholder_white"
         android:layout_marginTop="-15dp"
         android:layout_alignTop="@+id/Level_value"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:visibility="invisible" />
 
     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
         android:id="@+id/progress_coding"
@@ -88,7 +94,8 @@
         android:layout_marginLeft="-6dp"
         android:layout_below="@+id/project_info"
         android:layout_alignStart="@+id/project_info"
-        android:layout_marginTop="120dp" />
+        android:layout_marginTop="120dp"
+        android:visibility="invisible" />
 
     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
         android:id="@+id/progress_planning"
@@ -108,7 +115,7 @@
         android:layout_alignLeft="@id/progress_coding"
         android:layout_alignBottom="@id/progress_coding"
         android:layout_marginLeft="80dp"
-        />
+        android:visibility="invisible" />
 
     <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
         android:id="@+id/progress_design"
@@ -128,7 +135,7 @@
         android:rotation="270"
         android:layout_alignLeft="@+id/progress_coding"
         android:layout_alignBottom="@id/progress_coding"
-         />
+        android:visibility="invisible" />
 
 
     <Button
@@ -141,7 +148,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="28dp"
         android:layout_marginLeft="-3dp"
-        />
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -150,7 +157,8 @@
         android:text="You have 6 projects waiting for review"
         android:id="@+id/project_info"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 
     <TextView
         android:layout_width="120dp"

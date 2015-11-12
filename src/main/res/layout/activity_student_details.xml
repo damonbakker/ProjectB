@@ -36,7 +36,7 @@
             android:layout_marginStart="35dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -47,7 +47,8 @@
             android:layout_marginStart="40dp"
             android:layout_alignTop="@+id/avatar"
             android:layout_toEndOf="@+id/avatar"
-            android:layout_marginTop="31dp" />
+            android:layout_marginTop="31dp"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -57,7 +58,8 @@
             android:text="Level:"
             android:id="@+id/level"
             android:layout_below="@+id/student_name"
-            android:layout_alignStart="@+id/student_name" />
+            android:layout_alignStart="@+id/student_name"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +69,8 @@
             android:id="@+id/total_projects_finished"
             android:layout_marginTop="22dp"
             android:layout_below="@+id/avatar"
-            android:layout_alignStart="@+id/avatar" />
+            android:layout_alignStart="@+id/avatar"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -77,7 +80,8 @@
             android:text="12"
             android:id="@+id/projects_total_finished_value"
             android:layout_alignBottom="@+id/total_projects_finished"
-            android:layout_toEndOf="@+id/total_projects_finished" />
+            android:layout_toEndOf="@+id/total_projects_finished"
+            android:visibility="invisible" />
 
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:id="@+id/progress_planning"
@@ -95,7 +99,8 @@
             app:rcProgressColor="@color/custom_progress_green_progress"
             app:rcRadius="5dp"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:visibility="invisible" />
 
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:id="@+id/progress_coding"
@@ -114,7 +119,7 @@
             app:rcProgressColor="@color/custom_progress_green_progress"
             app:rcRadius="5dp"
             android:layout_below="@+id/progress_planning"
-             />
+            android:visibility="invisible" />
 
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:id="@+id/progress_design"
@@ -133,7 +138,7 @@
             app:rcProgressColor="@color/custom_progress_green_progress"
             app:rcRadius="5dp"
             android:layout_below="@+id/progress_coding"
-            />
+            android:visibility="invisible" />
 
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:id="@+id/progress_motivation"
@@ -152,7 +157,7 @@
             app:rcProgressColor="@color/custom_progress_green_progress"
             app:rcRadius="5dp"
             android:layout_below="@+id/progress_design"
-            />
+            android:visibility="invisible" />
 
         <com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar
             android:id="@+id/progress_leading"
@@ -171,7 +176,7 @@
             app:rcProgressColor="@color/custom_progress_green_progress"
             app:rcRadius="5dp"
             android:layout_below="@+id/progress_motivation"
-            />
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -183,7 +188,7 @@
             android:layout_toEndOf="@+id/progress_planning"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="5dp"
-            />
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -196,7 +201,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="5dp"
 
-            />
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -208,7 +213,7 @@
             android:layout_toEndOf="@+id/progress_design"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="5dp"
-            />
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -220,7 +225,7 @@
             android:layout_toEndOf="@+id/progress_motivation"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="5dp"
-            />
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -232,7 +237,14 @@
             android:layout_toEndOf="@+id/progress_leading"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="5dp"
-            />
+            android:visibility="invisible" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/waiting_response"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true" />
 
 
     </RelativeLayout>
@@ -257,7 +269,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         fab:fab_expandDirection="up"
-        >
+        android:visibility="invisible">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_apply_item"
