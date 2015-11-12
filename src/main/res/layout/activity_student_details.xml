@@ -200,7 +200,6 @@
             android:layout_toEndOf="@+id/progress_coding"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="5dp"
-
             android:visibility="invisible" />
 
         <TextView
@@ -219,7 +218,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="5"
+            android:text="0"
             android:id="@+id/value_motivation"
             android:layout_alignBottom="@+id/progress_motivation"
             android:layout_toEndOf="@+id/progress_motivation"
@@ -245,6 +244,19 @@
             android:id="@+id/waiting_response"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="99"
+            android:id="@+id/level_value"
+            android:layout_alignBottom="@+id/level"
+            android:layout_toEndOf="@+id/level"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="5dp"
+            android:visibility="invisible"
+             />
 
 
     </RelativeLayout>

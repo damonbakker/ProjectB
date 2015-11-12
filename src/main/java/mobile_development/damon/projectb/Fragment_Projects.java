@@ -1,10 +1,14 @@
 package mobile_development.damon.projectb;
 
+
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,6 +65,7 @@ public class Fragment_Projects extends Fragment {
 
     public List<Project> project_data = new ArrayList<Project>();
     public ListView mainlistview;
+    public CharSequence dialog_options[] = new CharSequence[] {"Rush","Check details", "Abandon", "Restart"};
 
     public RelativeLayout layout_fragment;
     public ProgressBar waiting_response;
@@ -135,7 +140,7 @@ public class Fragment_Projects extends Fragment {
         mainlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View view, int i, long id) {
                // Toast.makeText(getActivity(), "myPos " + i, Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity(), "id " + project_data.get(i).getId(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "id " + project_data.get(i).getId(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -144,7 +149,15 @@ public class Fragment_Projects extends Fragment {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int pos, long id) {
 
-                Toast.makeText(getActivity(), "ONLONGCLICK " + pos, Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(project_data.get(pos).getName());
+                builder.setItems(dialog_options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int option_id) {
+
+                    }
+                });
+                builder.show();
 
                 return true;
             }

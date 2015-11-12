@@ -1,11 +1,13 @@
 package mobile_development.damon.projectb;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -68,6 +70,7 @@ public class Fragment_Students extends Fragment {
     public TextView username;
 
     public List<Student> student_data = new ArrayList<Student>();
+    public CharSequence dialog_options[] = new CharSequence[] {"Apply item", "Check details", "Abandon"};
 
 
     private OnFragmentInteractionListener mListener;
@@ -138,7 +141,16 @@ public class Fragment_Students extends Fragment {
         mainlistview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "ONLONGCLICK " + position, Toast.LENGTH_SHORT).show();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle(student_data.get(position).getName());
+                builder.setItems(dialog_options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int option_id) {
+
+                    }
+                });
+                builder.show();
                 return true;
             }
         });

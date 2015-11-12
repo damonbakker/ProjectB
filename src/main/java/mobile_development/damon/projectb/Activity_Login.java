@@ -1,7 +1,6 @@
 package mobile_development.damon.projectb;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -31,7 +30,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import mobile_development.damon.projectb.Models.Model_Login;
+import mobile_development.damon.projectb.Models.Login;
 
 
 public class Activity_Login extends AppCompatActivity
@@ -41,7 +40,7 @@ public class Activity_Login extends AppCompatActivity
     public boolean bugfix_state = false;
     public String background_color  = "#25ae90";
 
-    Model_Login lm = new Model_Login();
+    Login lm = new Login();
 
     public EditText input_email;
     public EditText input_password;

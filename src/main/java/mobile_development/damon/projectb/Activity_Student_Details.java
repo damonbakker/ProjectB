@@ -44,8 +44,9 @@ public class Activity_Student_Details extends AppCompatActivity {
     public int latest_apply_id;
     public Reward latest_apply;
 
-    public TextView value_coding,value_planning,value_design,value_motivation,value_leading,total_projects_info,total_projects_info_value,student_name_display,level_display;
+    public TextView value_coding,value_planning,value_design,value_motivation,value_leading,total_projects_info,total_projects_info_value,student_name_display,level_display,value_level;
     public IconRoundCornerProgressBar progress_planning,progress_design,progress_coding,progress_motivation,progress_leading;
+    public FloatingActionsMenu fabmenu;
     public ImageView avatar;
     public ProgressBar waiting_response;
 
@@ -71,8 +72,9 @@ public class Activity_Student_Details extends AppCompatActivity {
         value_coding = (TextView) findViewById(R.id.value_coding);
         value_planning = (TextView) findViewById(R.id.value_planning);
         value_design = (TextView) findViewById(R.id.value_design);
-        value_motivation = (TextView) findViewById(R.id.value_leading);
+        value_motivation = (TextView) findViewById(R.id.value_motivation);
         value_leading = (TextView) findViewById(R.id.value_leading);
+        value_level = (TextView) findViewById(R.id.level_value);
 
         progress_coding = (IconRoundCornerProgressBar) findViewById(R.id.progress_coding);
         progress_design = (IconRoundCornerProgressBar) findViewById(R.id.progress_design);
@@ -85,28 +87,11 @@ public class Activity_Student_Details extends AppCompatActivity {
         total_projects_info = (TextView) findViewById(R.id.total_projects_finished);
         total_projects_info_value = (TextView) findViewById(R.id.projects_total_finished_value);
 
+        fabmenu = (FloatingActionsMenu) findViewById(R.id.fabmenu);
         avatar = (ImageView) findViewById(R.id.avatar);
 
         setStudentData();
-        value_coding.setVisibility(View.VISIBLE);
-        value_planning.setVisibility(View.VISIBLE);
-        value_design.setVisibility(View.VISIBLE);
-        value_motivation.setVisibility(View.VISIBLE);
-        value_leading.setVisibility(View.VISIBLE);
 
-        avatar.setVisibility(View.VISIBLE);
-        total_projects_info.setVisibility(View.VISIBLE);
-        total_projects_info_value.setVisibility(View.VISIBLE);
-
-        progress_leading.setVisibility(View.VISIBLE);
-        progress_planning.setVisibility(View.VISIBLE);
-        progress_design.setVisibility(View.VISIBLE);
-        progress_coding.setVisibility(View.VISIBLE);
-        progress_motivation.setVisibility(View.VISIBLE);
-
-
-        FloatingActionsMenu fabmenu = (FloatingActionsMenu) findViewById(R.id.fabmenu);
-        fabmenu.setVisibility(View.VISIBLE);
 
 
 
@@ -135,8 +120,6 @@ public class Activity_Student_Details extends AppCompatActivity {
         });
 
 
-
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,8 +138,7 @@ public class Activity_Student_Details extends AppCompatActivity {
             @Override
             public void onResponse(String response)
             {
-                //waiting_response.setVisibility(View.INVISIBLE);
-
+                waiting_response.setVisibility(View.INVISIBLE);
                 Log.i("RESPONSE", "RESPONSE RECIEVED");
                 Log.i("RESPONSE", response);
 
@@ -165,7 +147,41 @@ public class Activity_Student_Details extends AppCompatActivity {
                 {
                     JSONObject response_obj = new JSONObject(response);
                     student_name_display.setText(student_name);
-                    total_projects_info_value.setText("project_count");
+                    total_projects_info_value.setText(response_obj.getString("project_count"));
+                    value_coding.setText(response_obj.getString("coding"));
+                    value_planning.setText(response_obj.getString("planning"));
+                    value_design.setText(response_obj.getString("design"));
+                    value_motivation.setText(response_obj.getString("motivation"));
+                    value_leading.setText(response_obj.getString("leading"));
+                    value_level.setText(response_obj.getString("level"));
+
+                    progress_coding.setProgress(response_obj.getInt("coding"));
+                    progress_design.setProgress(response_obj.getInt("design"));
+                    progress_planning.setProgress(response_obj.getInt("planning"));
+                    progress_motivation.setProgress(response_obj.getInt("motivation"));
+                    progress_leading.setProgress(response_obj.getInt("leading"));
+
+
+                    value_coding.setVisibility(View.VISIBLE);
+                    value_planning.setVisibility(View.VISIBLE);
+                    value_design.setVisibility(View.VISIBLE);
+                    value_motivation.setVisibility(View.VISIBLE);
+                    value_leading.setVisibility(View.VISIBLE);
+                    value_level.setVisibility(View.VISIBLE);
+
+                    avatar.setVisibility(View.VISIBLE);
+                    student_name_display.setVisibility(View.VISIBLE);
+                    level_display.setVisibility(View.VISIBLE);
+                    total_projects_info.setVisibility(View.VISIBLE);
+                    total_projects_info_value.setVisibility(View.VISIBLE);
+
+                    progress_leading.setVisibility(View.VISIBLE);
+                    progress_planning.setVisibility(View.VISIBLE);
+                    progress_design.setVisibility(View.VISIBLE);
+                    progress_coding.setVisibility(View.VISIBLE);
+                    progress_motivation.setVisibility(View.VISIBLE);
+                    fabmenu.setVisibility(View.VISIBLE);
+
                 }
                 catch (JSONException e)
                 {

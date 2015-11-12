@@ -26,7 +26,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import mobile_development.damon.projectb.Models.Model_Login;
+import mobile_development.damon.projectb.Models.Login;
 
 
 public class Activity_Register extends AppCompatActivity
@@ -42,7 +42,7 @@ public class Activity_Register extends AppCompatActivity
     public EditText input_password;
     public ProgressBar waiting_response;
 
-    Model_Login lm = new Model_Login();
+    Login lm = new Login();
 
     public RelativeLayout register_view;
     public RelativeLayout register_view_2;
