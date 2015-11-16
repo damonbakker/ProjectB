@@ -31,6 +31,7 @@ dependencies {
     compile 'com.akexorcist:RoundCornerProgressBar:2.0.3'
     compile 'com.android.support:recyclerview-v7:23.1.0'
     compile "com.daimajia.swipelayout:library:1.2.0@aar"
+    compile 'org.lucasr.twowayview:twowayview:0.1.4'
     compile('com.mikepenz:materialdrawer:4.0.5@aar') {
         transitive = true
     }

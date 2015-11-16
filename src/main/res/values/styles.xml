@@ -55,7 +55,9 @@
         <item name="android:background">@drawable/fab_label_background</item>
     </style>
 
-
+    <style name="TwoWayView">
+        <item name="android:orientation">horizontal</item>
+    </style>
 
 
 
