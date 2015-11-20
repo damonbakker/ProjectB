@@ -1,17 +1,17 @@
 package mobile_development.damon.projectb;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.lucasr.twowayview.TwoWayView;
 
 import java.util.ArrayList;
+
+import mobile_development.damon.projectb.Models.Project;
+import mobile_development.damon.projectb.Models.Student;
 
 public class Activity_Assign_Project extends AppCompatActivity {
 
@@ -31,33 +31,17 @@ public class Activity_Assign_Project extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_assign_project));
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
-        project_name = (TextView) findViewById(R.id.project_name);
+   /*     project_name = (TextView) findViewById(R.id.project_name);
 
         project_name.setText(getIntent().getStringExtra("project_name"));
+*/
+        ArrayList<Project> items = new ArrayList<Project>();
+        items.add(new Project(1,"lolol",1));
 
-        ArrayList<String> items = new ArrayList<String>();
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
-        items.add("Item 1");
-        items.add("Item 2");
-        items.add("Item 3");
-        items.add("Item 4");
 
-        ArrayAdapter<String> aItems = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, items);
+
+
+        ListAdapter_Assign_Project aItems = new ListAdapter_Assign_Project(this, R.layout.list_item_assign_student, items);
         TwoWayView lvTest = (TwoWayView) findViewById(R.id.lvItems);
         lvTest.setAdapter(aItems);
 
