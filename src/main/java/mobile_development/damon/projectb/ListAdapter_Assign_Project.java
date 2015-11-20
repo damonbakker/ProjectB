@@ -20,27 +20,27 @@ import mobile_development.damon.projectb.Models.Student;
 /**
  * Created by damon on 11/20/2015.
  */
-public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
+public class ListAdapter_Assign_Project extends ArrayAdapter<String> {
     private LayoutInflater inflater;
     private Context _context;
-    private List<Project> _studentlist;
+    private List<String> list;
     private int _layourresourceid;
     private Activity activity;
 
-    public ListAdapter_Assign_Project(Context context,int layoutResourceId,List<Project> projects)
+    public ListAdapter_Assign_Project(Context context,int layoutResourceId,List<String> list)
     {
         //Call super constructor for extending class initialisation (has no default)
         super(context,layoutResourceId);
         this._layourresourceid = layoutResourceId;
         this._context = context;
-        this._studentlist=projects;
+        this.list=list;
 
         inflater= ((Activity)context).getLayoutInflater();
     }
 
     @Override
     public int getCount() {
-        return _studentlist.size();
+        return list.size();
     }
 
     @Override
@@ -55,14 +55,12 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
             inflater = (LayoutInflater) activity
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
-            convertView = inflater.inflate(R.layout.list_item_project, parent, false);
+            convertView = inflater.inflate(R.layout.list_item_assign_student, parent, false);
 
-        TextView title = (TextView) convertView.findViewById(R.id.textView4);
+        TextView tvname = (TextView) convertView.findViewById(R.id.tvHome);
+        TextView tvhome = (TextView) convertView.findViewById(R.id.tvName);
 
-
-        Project p = _studentlist.get(position);
-
-        //title.setText(" ejaculation");
+        tvname.setText(list.get(position));
 
 
         return convertView;
