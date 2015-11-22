@@ -1,8 +1,10 @@
 package mobile_development.damon.projectb;
 
 import android.app.Activity;
+import android.content.ClipData;
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -62,8 +64,31 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<String> {
 
         tvname.setText(list.get(position));
 
-
+        convertView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                ClipData data = ClipData.newPlainText("", "");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+                v.startDrag(data, shadowBuilder, v, 0);
+              //  v.setVisibility(View.INVISIBLE);
+                return true;
+            }
+        });
         return convertView;
     }
+
+  /*  private final class MyTouchListener implements View.OnTouchListener {
+        public boolean onTouch(View view, MotionEvent motionEvent) {
+            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                ClipData data = ClipData.newPlainText("", "");
+                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
+                view.startDrag(data, shadowBuilder, view, 0);
+                view.setVisibility(View.INVISIBLE);
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }*/
 }
 

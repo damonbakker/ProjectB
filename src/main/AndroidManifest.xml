@@ -49,6 +49,14 @@
             android:name=".Activity_Student_Details"
             android:label="@string/title_activity_activity__student__details" >
         </activity>
+        <activity
+            android:name=".Models.Test_dragandrop"
+            android:label="@string/title_activity_test_dragandrop" >
+        </activity>
+        <activity
+            android:name=".Activity_dropandrop"
+            android:label="@string/title_activity_activity_dropandrop" >
+        </activity>
     </application>
 
 </manifest>

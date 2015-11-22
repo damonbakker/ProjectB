@@ -46,6 +46,8 @@
     <string name="transition_name_project">project_name</string>
 
     <string name="about_app">This app is part of my education and may not run efficient on your device. If you have any bugs or feedback to report then please go to the feedback section.</string>
+    <string name="title_activity_test_dragandrop">Test_dragandrop</string>
+    <string name="title_activity_activity_dropandrop">Activity_dropandrop</string>
 
 
 

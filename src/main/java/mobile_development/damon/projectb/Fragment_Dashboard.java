@@ -1,5 +1,6 @@
 package mobile_development.damon.projectb;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -72,6 +73,16 @@ public class Fragment_Dashboard extends Fragment {
         progress_planning = (IconRoundCornerProgressBar) rootview.findViewById(R.id.progress_planning);
 
         upgrade_level = (Button) rootview.findViewById(R.id.upgrade_lvl);
+
+        upgrade_level.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Activity_dropandrop.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
