@@ -62,6 +62,15 @@
 
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/kappa"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/accent"
+            ></RelativeLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>
