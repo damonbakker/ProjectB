@@ -1,5 +1,10 @@
 package mobile_development.damon.projectb.Models;
 
+import android.graphics.Bitmap;
+import android.util.Base64;
+
+import java.io.ByteArrayOutputStream;
+
 import mobile_development.damon.projectb.Models.Reward;
 
 /**
@@ -84,4 +89,13 @@ public class Student
     public Reward getLatest_apply() {
         return this.latest_apply;
     }
+
+    public static String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
+
 }

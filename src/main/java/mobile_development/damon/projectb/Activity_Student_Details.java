@@ -1,8 +1,14 @@
 package mobile_development.damon.projectb;
 
+import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -15,6 +21,7 @@ import android.widget.Toast;
 
 import com.akexorcist.roundcornerprogressbar.IconRoundCornerProgressBar;
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -27,9 +34,11 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 
 import mobile_development.damon.projectb.Models.Reward;
+import mobile_development.damon.projectb.Models.Student;
 
 public class Activity_Student_Details extends AppCompatActivity {
 
@@ -49,6 +58,15 @@ public class Activity_Student_Details extends AppCompatActivity {
     public FloatingActionsMenu fabmenu;
     public ImageView avatar;
     public ProgressBar waiting_response;
+
+    //keep track of camera capture intent
+    final int CAMERA_CAPTURE = 1;
+    //keep track of cropping intent
+    final int PIC_CROP = 2;
+    //captured picture uri
+    private Uri picUri;
+    //Bitmap from crop
+    Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,6 +134,18 @@ public class Activity_Student_Details extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Change avatar", Toast.LENGTH_SHORT).show();
+                try {
+                    //use standard intent to capture an image
+                    Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    //we will handle the returned data in onActivityResult
+                    startActivityForResult(captureIntent, CAMERA_CAPTURE);
+                }
+                catch(ActivityNotFoundException anfe){
+                    //display an error message
+                    String errorMessage = "Whoops - your device doesn't support capturing images!";
+                    Toast toast = Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT);
+                    toast.show();
+                }
             }
         });
 
@@ -129,6 +159,100 @@ public class Activity_Student_Details extends AppCompatActivity {
 
 
 
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            //user is returning from capturing an image using the camera
+            if(requestCode == CAMERA_CAPTURE){
+                //get the Uri for the captured image
+                picUri = data.getData();
+                //carry out the crop operation
+                performCrop();
+            }
+
+            //user is returning from cropping the image
+            else if(requestCode == PIC_CROP)
+            {
+                //get the returned data
+                Bundle extras = data.getExtras();
+                //set bitmap to cropped image
+                bitmap = extras.getParcelable("data");
+                //set image to current bitmap(avoids a request)
+                avatar.setImageBitmap(bitmap);
+                uploadImage();
+            }
+        }
+    }
+    private void performCrop()
+    {
+        try
+        {
+            //call the standard crop action intent (the user device may not support it)
+            Intent cropIntent = new Intent("com.android.camera.action.CROP");
+            //indicate image type and Uri
+            cropIntent.setDataAndType(picUri, "image/*");
+            //set crop properties
+            cropIntent.putExtra("crop", "true");
+            //indicate aspect of desired crop
+            cropIntent.putExtra("aspectX", 1);
+            cropIntent.putExtra("aspectY", 1);
+            //indicate output X and Y
+            cropIntent.putExtra("outputX", 256);
+            cropIntent.putExtra("outputY", 256);
+            //retrieve data on return
+            cropIntent.putExtra("return-data", true);
+            //start the activity - we handle returning in onActivityResult
+            startActivityForResult(cropIntent, PIC_CROP);
+        }
+        catch(ActivityNotFoundException anfe){
+            //display an error message
+            String errorMessage = "Whoops - your device doesn't support the crop action";
+            Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+
+    private void uploadImage(){
+        //Showing the progress dialog
+        final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API,new Response.Listener<String>()
+        {
+                    @Override
+                    public void onResponse(String s) {
+                        //Disimissing the progress dialog
+                        loading.dismiss();
+                        //Showing toast message of the response
+                        Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError volleyError) {
+                        //Dismissing the progress dialog
+                        loading.dismiss();
+                        //Showing toast
+                        Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }){
+            @Override
+            protected Map<String, String> getParams()
+            {
+                //Converting Bitmap to String
+                String image = Student.getStringImage(bitmap);
+                String name = "Testimage";
+                Map<String,String> params = new Hashtable<>();
+                params.put("tag","set_student_avatar");
+                params.put("unique_student_id",String.valueOf(student_id));
+                params.put("image", image);
+                params.put("name", name);
+
+                return params;
+            }
+        };
+
+        //Adding to the Request Queue
+        NetworkHandler.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
     private void setStudentData()

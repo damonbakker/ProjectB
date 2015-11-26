@@ -57,6 +57,7 @@
             android:name=".Activity_dropandrop"
             android:label="@string/title_activity_activity_dropandrop" >
         </activity>
+
     </application>
 
 </manifest>
