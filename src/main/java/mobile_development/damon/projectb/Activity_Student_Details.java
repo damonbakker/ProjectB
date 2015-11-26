@@ -25,6 +25,8 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -37,10 +39,12 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+import mobile_development.damon.projectb.Models.CircularNetworkImageView;
 import mobile_development.damon.projectb.Models.Reward;
 import mobile_development.damon.projectb.Models.Student;
 
 public class Activity_Student_Details extends AppCompatActivity {
+
 
     public int student_id;
     public String student_name;
@@ -52,12 +56,14 @@ public class Activity_Student_Details extends AppCompatActivity {
     public int motivation;
     public int latest_apply_id;
     public Reward latest_apply;
+    public String avatarurl;
 
     public TextView value_coding,value_planning,value_design,value_motivation,value_leading,total_projects_info,total_projects_info_value,student_name_display,level_display,value_level;
     public IconRoundCornerProgressBar progress_planning,progress_design,progress_coding,progress_motivation,progress_leading;
     public FloatingActionsMenu fabmenu;
-    public ImageView avatar;
+    public CircularNetworkImageView avatar;
     public ProgressBar waiting_response;
+    public CircularNetworkImageView networkimageview;
 
     //keep track of camera capture intent
     final int CAMERA_CAPTURE = 1;
@@ -106,7 +112,10 @@ public class Activity_Student_Details extends AppCompatActivity {
         total_projects_info_value = (TextView) findViewById(R.id.projects_total_finished_value);
 
         fabmenu = (FloatingActionsMenu) findViewById(R.id.fabmenu);
-        avatar = (ImageView) findViewById(R.id.avatar);
+        avatar = (CircularNetworkImageView) findViewById(R.id.avatar);
+
+
+
 
         setStudentData();
 
@@ -180,6 +189,7 @@ public class Activity_Student_Details extends AppCompatActivity {
                 bitmap = extras.getParcelable("data");
                 //set image to current bitmap(avoids a request)
                 avatar.setImageBitmap(bitmap);
+
                 uploadImage();
             }
         }
@@ -221,7 +231,10 @@ public class Activity_Student_Details extends AppCompatActivity {
                     @Override
                     public void onResponse(String s) {
                         //Disimissing the progress dialog
-                        loading.dismiss();
+
+                        loading.dismiss(
+                        );
+                        Log.i("RESPONSE", s);
                         //Showing toast message of the response
                         Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
                     }
@@ -240,12 +253,11 @@ public class Activity_Student_Details extends AppCompatActivity {
             {
                 //Converting Bitmap to String
                 String image = Student.getStringImage(bitmap);
-                String name = "Testimage";
+                Log.i("TEST",image);
                 Map<String,String> params = new Hashtable<>();
                 params.put("tag","set_student_avatar");
                 params.put("unique_student_id",String.valueOf(student_id));
                 params.put("image", image);
-                params.put("name", name);
 
                 return params;
             }
@@ -270,6 +282,7 @@ public class Activity_Student_Details extends AppCompatActivity {
                 try
                 {
                     JSONObject response_obj = new JSONObject(response);
+
                     student_name_display.setText(student_name);
                     total_projects_info_value.setText(response_obj.getString("project_count"));
                     value_coding.setText(response_obj.getString("coding"));
@@ -285,13 +298,18 @@ public class Activity_Student_Details extends AppCompatActivity {
                     progress_motivation.setProgress(response_obj.getInt("motivation"));
                     progress_leading.setProgress(response_obj.getInt("leading"));
 
-
                     value_coding.setVisibility(View.VISIBLE);
                     value_planning.setVisibility(View.VISIBLE);
                     value_design.setVisibility(View.VISIBLE);
                     value_motivation.setVisibility(View.VISIBLE);
                     value_leading.setVisibility(View.VISIBLE);
                     value_level.setVisibility(View.VISIBLE);
+
+                    if(response_obj.getString("avatar") != null)
+                    {
+                        avatarurl = response_obj.getString("avatar");
+                        avatar.setImageUrl(avatarurl,NetworkHandler.getInstance(getApplicationContext()).getImageLoader());
+                    }
 
                     avatar.setVisibility(View.VISIBLE);
                     student_name_display.setVisibility(View.VISIBLE);

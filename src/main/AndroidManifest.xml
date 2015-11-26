@@ -43,10 +43,12 @@
         </activity>
         <activity
             android:name=".Activity_Assign_Project"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_activity_assign_project" >
         </activity>
         <activity
             android:name=".Activity_Student_Details"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_activity__student__details" >
         </activity>
         <activity
