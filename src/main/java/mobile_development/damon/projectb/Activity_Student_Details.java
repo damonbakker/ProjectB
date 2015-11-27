@@ -251,10 +251,11 @@ public class Activity_Student_Details extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API,new Response.Listener<String>()
         {
                     @Override
-                    public void onResponse(String s)
+                    public void onResponse(String response)
                     {
                         loading.dismiss();
-                        Log.i("RESPONSE",s);
+                        Log.i("RESPONSE", "RESPONSE RECIEVED");
+                        Log.i("RESPONSE",response);
                     }
                 },
                 new Response.ErrorListener()
