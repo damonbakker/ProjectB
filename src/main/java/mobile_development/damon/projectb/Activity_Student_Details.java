@@ -35,7 +35,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -73,7 +75,7 @@ public class Activity_Student_Details extends AppCompatActivity {
     //captured picture uri
     private Uri picUri;
     //Bitmap from crop
-    Bitmap bitmap;
+    private Bitmap bitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,16 +119,15 @@ public class Activity_Student_Details extends AppCompatActivity {
 
 
 
-
         setStudentData();
-
 
 
 
         FloatingActionButton abandon_student = (FloatingActionButton) findViewById(R.id.fab_discard_student);
         abandon_student.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Toast.makeText(getApplicationContext(), "Abandon student", Toast.LENGTH_SHORT).show();
             }
         });
@@ -134,23 +135,27 @@ public class Activity_Student_Details extends AppCompatActivity {
         FloatingActionButton apply_student = (FloatingActionButton) findViewById(R.id.fab_apply_item);
         apply_student.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Toast.makeText(getApplicationContext(), "Apply item", Toast.LENGTH_SHORT).show();
             }
         });
 
         FloatingActionButton avatar_student = (FloatingActionButton) findViewById(R.id.fab_change_avatar);
-        avatar_student.setOnClickListener(new View.OnClickListener() {
+        avatar_student.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Change avatar", Toast.LENGTH_SHORT).show();
-                try {
+                try
+                {
                     //use standard intent to capture an image
                     Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    //we will handle the returned data in onActivityResult
+                    //handle the returned data in onActivityResult
                     startActivityForResult(captureIntent, CAMERA_CAPTURE);
                 }
-                catch(ActivityNotFoundException anfe){
+                catch(ActivityNotFoundException anfe)
+                {
                     //display an error message
                     String errorMessage = "Whoops - your device doesn't support capturing images!";
                     Toast toast = Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT);
@@ -160,7 +165,8 @@ public class Activity_Student_Details extends AppCompatActivity {
         });
 
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -172,12 +178,20 @@ public class Activity_Student_Details extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK)
+        {
             //user is returning from capturing an image using the camera
             if(requestCode == CAMERA_CAPTURE){
                 //get the Uri for the captured image
+
+                //set bitmap of default camera img
                 picUri = data.getData();
                 //carry out the crop operation
+                Bitmap picture = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                picture.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
+                bitmap = picture;
                 performCrop();
             }
 
@@ -212,50 +226,53 @@ public class Activity_Student_Details extends AppCompatActivity {
             cropIntent.putExtra("outputY", 256);
             //retrieve data on return
             cropIntent.putExtra("return-data", true);
-            //start the activity - we handle returning in onActivityResult
+            //start the activity - handle returning in onActivityResult
             startActivityForResult(cropIntent, PIC_CROP);
 
 
         }
-        catch(ActivityNotFoundException anfe){
-            //display an error message
-            String errorMessage = "Whoops - your device doesn't support the crop action";
-            Toast toast = Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT);
-            toast.show();
+        catch(ActivityNotFoundException anfe)
+        {
+
+            Log.i("CROPPING","NO NATIVE cropping suppported");
+
+            avatar.setImageBitmap(bitmap);
+            uploadImage();
+
+
         }
     }
 
-    private void uploadImage(){
+    private void uploadImage()
+    {
         //Showing the progress dialog
         final ProgressDialog loading = ProgressDialog.show(this, "Uploading...", "Please wait...", false, false);
+
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API,new Response.Listener<String>()
         {
                     @Override
-                    public void onResponse(String s) {
-                        //Disimissing the progress dialog
-
-                        loading.dismiss(
-                        );
-                        Log.i("RESPONSE", s);
-                        //Showing toast message of the response
-                        Toast.makeText(getApplicationContext(), s , Toast.LENGTH_LONG).show();
+                    public void onResponse(String s)
+                    {
+                        loading.dismiss();
+                        Log.i("RESPONSE",s);
                     }
                 },
-                new Response.ErrorListener() {
+                new Response.ErrorListener()
+                {
                     @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        //Dismissing the progress dialog
+                    public void onErrorResponse(VolleyError volleyError)
+                    {
                         loading.dismiss();
-                        //Showing toast
-                        Toast.makeText(getApplicationContext(), volleyError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Oops, something went wrong", Toast.LENGTH_LONG).show();
+                        Log.i("RESPONSE", volleyError.getMessage());
                     }
-                }){
+                })
+        {
             @Override
             protected Map<String, String> getParams()
             {
                 //Converting Bitmap to String
                 String image = Student.getStringImage(bitmap);
-                Log.i("TEST",image);
                 Map<String,String> params = new Hashtable<>();
                 params.put("tag","set_student_avatar");
                 params.put("unique_student_id",String.valueOf(student_id));
