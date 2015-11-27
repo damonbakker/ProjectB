@@ -35,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -189,7 +190,6 @@ public class Activity_Student_Details extends AppCompatActivity {
                 bitmap = extras.getParcelable("data");
                 //set image to current bitmap(avoids a request)
                 avatar.setImageBitmap(bitmap);
-
                 uploadImage();
             }
         }
@@ -201,7 +201,7 @@ public class Activity_Student_Details extends AppCompatActivity {
             //call the standard crop action intent (the user device may not support it)
             Intent cropIntent = new Intent("com.android.camera.action.CROP");
             //indicate image type and Uri
-            cropIntent.setDataAndType(picUri, "image/*");
+            cropIntent.setDataAndType(picUri, "image");
             //set crop properties
             cropIntent.putExtra("crop", "true");
             //indicate aspect of desired crop
@@ -214,6 +214,8 @@ public class Activity_Student_Details extends AppCompatActivity {
             cropIntent.putExtra("return-data", true);
             //start the activity - we handle returning in onActivityResult
             startActivityForResult(cropIntent, PIC_CROP);
+
+
         }
         catch(ActivityNotFoundException anfe){
             //display an error message
