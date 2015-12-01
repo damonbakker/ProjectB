@@ -2,6 +2,7 @@ package mobile_development.damon.projectb;
 
 import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -38,6 +40,8 @@ import org.w3c.dom.Text;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
@@ -61,6 +65,8 @@ public class Activity_Student_Details extends AppCompatActivity {
     public Reward latest_apply;
     public String avatarurl;
 
+    public CharSequence dialog_options[] = new CharSequence[] {"Take a picture", "Choose existing"};
+
     public TextView value_coding,value_planning,value_design,value_motivation,value_leading,total_projects_info,total_projects_info_value,student_name_display,level_display,value_level;
     public IconRoundCornerProgressBar progress_planning,progress_design,progress_coding,progress_motivation,progress_leading;
     public FloatingActionsMenu fabmenu;
@@ -70,12 +76,16 @@ public class Activity_Student_Details extends AppCompatActivity {
 
     //keep track of camera capture intent
     final int CAMERA_CAPTURE = 1;
+    //keep track of the image pick intent
+    final int PICK_IMAGE_REQUEST = 2;
     //keep track of cropping intent
-    final int PIC_CROP = 2;
+    final int PIC_CROP = 3;
     //captured picture uri
     private Uri picUri;
     //Bitmap from crop
     private Bitmap bitmap;
+    //Temporary bitmap pre convert
+    private Bitmap picture;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,8 +136,7 @@ public class Activity_Student_Details extends AppCompatActivity {
         FloatingActionButton abandon_student = (FloatingActionButton) findViewById(R.id.fab_discard_student);
         abandon_student.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "Abandon student", Toast.LENGTH_SHORT).show();
             }
         });
@@ -137,7 +146,9 @@ public class Activity_Student_Details extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Toast.makeText(getApplicationContext(), "Apply item", Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
 
@@ -145,28 +156,49 @@ public class Activity_Student_Details extends AppCompatActivity {
         avatar_student.setOnClickListener(new View.OnClickListener()
         {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "Change avatar", Toast.LENGTH_SHORT).show();
-                try
-                {
-                    //use standard intent to capture an image
-                    Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    //handle the returned data in onActivityResult
-                    startActivityForResult(captureIntent, CAMERA_CAPTURE);
-                }
-                catch(ActivityNotFoundException anfe)
-                {
-                    //display an error message
-                    String errorMessage = "Whoops - your device doesn't support capturing images!";
-                    Toast toast = Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT);
-                    toast.show();
-                }
+            public void onClick(View v)
+            {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Student_Details.this);
+                builder.setTitle("Change student avatar");
+                builder.setItems(dialog_options, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int option_id) {
+                        if (option_id == 0) {
+                            try {
+                                //use standard intent to capture an image
+                                Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                //handle the returned data in onActivityResult
+                                startActivityForResult(captureIntent, CAMERA_CAPTURE);
+                            } catch (ActivityNotFoundException anfe) {
+                                //display an error message
+                                String errorMessage = "Whoops - your device doesn't support capturing images!";
+                                Toast toast = Toast.makeText(getApplicationContext(), errorMessage, Toast.LENGTH_SHORT);
+                                toast.show();
+                            }
+
+                        }
+                        if (option_id == 1)
+                        {
+                            Intent intent = new Intent();
+                            // Show only images, no videos or anything else
+                            intent.setType("image/*");
+                            intent.setAction(Intent.ACTION_GET_CONTENT);
+
+                            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+                        }
+
+
+                    }
+                });
+                builder.show();
+
+
             }
         });
 
 
-        toolbar.setNavigationOnClickListener(new View.OnClickListener()
-        {
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -182,22 +214,46 @@ public class Activity_Student_Details extends AppCompatActivity {
         {
             //user is returning from capturing an image using the camera
             if(requestCode == CAMERA_CAPTURE){
-                //get the Uri for the captured image
-
-                //set bitmap of default camera img
+                Log.i("RESULT","CAMERA PICK");
                 picUri = data.getData();
-                //carry out the crop operation
                 Bitmap picture = (Bitmap) data.getExtras().get("data");
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 picture.compress(Bitmap.CompressFormat.JPEG, 100, stream);
 
                 bitmap = picture;
+
+                //carry out the crop operation
                 performCrop();
+            }
+
+            else if(requestCode == PICK_IMAGE_REQUEST)
+            {
+                picUri = data.getData();
+                try
+                {
+                    picture = MediaStore.Images.Media.getBitmap(getContentResolver(), picUri);
+                    Log.i("RESULT_PICK", String.valueOf(bitmap));
+                }
+                catch (IOException e)
+                {
+                    Log.i("ERROR",e.toString());
+                }
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                picture.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+
+                bitmap = picture;
+
+                //carry out the crop operation
+                performCrop();
+
+                Log.i("RESULT","PICKED IMAGE");
             }
 
             //user is returning from cropping the image
             else if(requestCode == PIC_CROP)
             {
+                Log.i("RESULT","CROP");
                 //get the returned data
                 Bundle extras = data.getExtras();
                 //set bitmap to cropped image
@@ -206,6 +262,7 @@ public class Activity_Student_Details extends AppCompatActivity {
                 avatar.setImageBitmap(bitmap);
                 uploadImage();
             }
+
         }
     }
     private void performCrop()
