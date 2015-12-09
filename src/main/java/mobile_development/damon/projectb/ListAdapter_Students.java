@@ -17,6 +17,7 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 import java.util.ArrayList;
 import java.util.List;
 
+import mobile_development.damon.projectb.Models.CircularNetworkImageView;
 import mobile_development.damon.projectb.Models.Project;
 import mobile_development.damon.projectb.Models.Student;
 
@@ -64,7 +65,7 @@ public class ListAdapter_Students extends ArrayAdapter<Student>
             convertView = inflater.inflate(R.layout.list_item_student, parent, false);
 
         RelativeLayout layout = (RelativeLayout) convertView.findViewById(R.id.layout_student_item);
-        ImageView student_avatar = (ImageView) convertView.findViewById(R.id.avatar);
+        CircularNetworkImageView student_avatar = (CircularNetworkImageView) convertView.findViewById(R.id.avatar);
 
         TextView student_name = (TextView) convertView.findViewById(R.id.student_name);
         TextView coding = (TextView) convertView.findViewById(R.id.coding_value);

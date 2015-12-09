@@ -1,18 +1,72 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="100dp"
-
-    android:layout_height="match_parent" >
-
+    android:layout_height="60dp" >
 
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:id="@+id/imageView"
         android:src="@drawable/ic_account_box_24dp"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="C :"
+        android:id="@+id/coding_indicator"
+        android:textColor="@color/coding"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/planning_indicator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="00"
+        android:id="@+id/coding_value"
+        android:layout_alignBottom="@+id/coding_indicator"
+        android:layout_toEndOf="@+id/coding_indicator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="P :"
+        android:id="@+id/planning_indicator"
+        android:layout_centerVertical="true"
+        android:textColor="@color/planning"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="26dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="00"
+        android:id="@+id/planning_value"
+        android:layout_alignBottom="@+id/planning_indicator"
+        android:layout_toEndOf="@+id/coding_indicator" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="D :"
+        android:id="@+id/design_indicator"
+        android:textColor="@color/design"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/planning_indicator" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="00"
+        android:id="@+id/design_value"
+        android:layout_alignBottom="@+id/design_indicator"
+        android:layout_toEndOf="@+id/design_indicator" />
 
 
-</LinearLayout>
+
+</RelativeLayout>
