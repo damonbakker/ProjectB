@@ -66,12 +66,7 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_item_assign_student, parent, false);
 
-
-
-      //  TextView tvname = (TextView) convertView.findViewById(R.id.tvHome);
-       // TextView tvhome = (TextView) convertView.findViewById(R.id.tvName);
-            CircularNetworkImageView student_avatar = (CircularNetworkImageView) convertView.findViewById(R.id.avatar);
-       // tvname.setText(list.get(position));
+        CircularNetworkImageView student_avatar = (CircularNetworkImageView) convertView.findViewById(R.id.avatar);
 
         Student s = _studentlist.get(position);
 
@@ -79,7 +74,6 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
         {
             try
             {
-                Log.i("GOOD",s.getAvatar_url());
                 student_avatar.setDefaultImageResId(R.drawable.avatar_placeholder_white);
                 student_avatar.setErrorImageResId(R.drawable.avatar_placeholder_white);
                 //  student_avatar.setAdjustViewBounds(true);
@@ -95,7 +89,8 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ClipData data = ClipData.newPlainText("test", _studentlist.get(position).getName());
+                ClipData data = ClipData.newPlainText("test", String.valueOf(position));
+                Log.i("Dragstart",_studentlist.get(position).getName());
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(data, shadowBuilder, v, 0);
               //  v.setVisibility(View.INVISIBLE);
@@ -107,18 +102,6 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
 
 
 
-  /*  private final class MyTouchListener implements View.OnTouchListener {
-        public boolean onTouch(View view, MotionEvent motionEvent) {
-            if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                ClipData data = ClipData.newPlainText("", "");
-                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(view);
-                view.startDrag(data, shadowBuilder, view, 0);
-                view.setVisibility(View.INVISIBLE);
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }*/
+
 }
 

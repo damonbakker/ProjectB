@@ -63,6 +63,7 @@
 
         </RelativeLayout>
 
+       <!-- student item Left-->
         <RelativeLayout
             android:id="@+id/student_item_3"
             android:layout_width="105dp"
@@ -75,7 +76,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:id="@+id/avatar3"
-                android:src="@drawable/ic_account_box_24dp"
+                android:src="@drawable/avatar_placeholder_white"
                 android:scaleType="fitXY"/>
 
 
@@ -138,6 +139,7 @@
 
         </RelativeLayout>
 
+        <!--student item Center-->
         <RelativeLayout
             android:id="@+id/student_item_2"
             android:layout_width="105dp"
@@ -151,7 +153,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:id="@+id/avatar2"
-                android:src="@drawable/ic_account_box_24dp"
+                android:src="@drawable/avatar_placeholder_white"
                 android:scaleType="fitXY"/>
 
 
@@ -214,6 +216,7 @@
 
         </RelativeLayout>
 
+        <!--student item Right-->
         <RelativeLayout
             android:id="@+id/student_item_1"
             android:layout_width="105dp"
@@ -226,7 +229,7 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:id="@+id/avatar"
-                android:src="@drawable/ic_account_box_24dp"
+                android:src="@drawable/avatar_placeholder_white"
                 android:scaleType="fitXY"/>
 
 
