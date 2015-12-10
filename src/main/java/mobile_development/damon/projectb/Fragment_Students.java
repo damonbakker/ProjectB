@@ -184,7 +184,7 @@ public class Fragment_Students extends Fragment {
                         try
                         {
                             JSONObject obj_student = data.getJSONObject(i);
-                            student_data.add(new Student(obj_student.getInt("id"),obj_student.getString("name"),obj_student.getInt("level"),obj_student.getInt("planning"),obj_student.getInt("design"),obj_student.getInt("coding")));
+                            student_data.add(new Student(obj_student.getInt("id"),obj_student.getString("name"),obj_student.getInt("level"),obj_student.getInt("planning"),obj_student.getInt("design"),obj_student.getInt("coding"),obj_student.getString("avatar")));
                         }
                         catch (JSONException e)
                         {

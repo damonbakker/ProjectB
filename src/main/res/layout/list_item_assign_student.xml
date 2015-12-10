@@ -3,12 +3,13 @@
     android:layout_height="60dp" >
 
 
-    <ImageView
+    <mobile_development.damon.projectb.Models.CircularNetworkImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:id="@+id/imageView"
+        android:id="@+id/avatar"
         android:src="@drawable/ic_account_box_24dp"
-        />
+        android:scaleType="fitXY"/>
+
 
     <TextView
         android:layout_width="wrap_content"

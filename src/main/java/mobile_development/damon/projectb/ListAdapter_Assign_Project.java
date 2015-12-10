@@ -22,6 +22,7 @@ import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 
 import java.util.List;
 
+import mobile_development.damon.projectb.Models.CircularNetworkImageView;
 import mobile_development.damon.projectb.Models.Project;
 import mobile_development.damon.projectb.Models.Student;
 
@@ -31,7 +32,7 @@ import mobile_development.damon.projectb.Models.Student;
 public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
     private LayoutInflater inflater;
     private Context _context;
-    private List<Student> list;
+    private List<Student> _studentlist;
     private int _layourresourceid;
     private Activity activity;
 
@@ -41,14 +42,14 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
         super(context,layoutResourceId);
         this._layourresourceid = layoutResourceId;
         this._context = context;
-        this.list=list;
+        this._studentlist = list;
 
         inflater= ((Activity)context).getLayoutInflater();
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return _studentlist.size();
     }
 
     @Override
@@ -65,15 +66,36 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
         if (convertView == null)
             convertView = inflater.inflate(R.layout.list_item_assign_student, parent, false);
 
+
+
       //  TextView tvname = (TextView) convertView.findViewById(R.id.tvHome);
        // TextView tvhome = (TextView) convertView.findViewById(R.id.tvName);
-            ImageView myimg = (ImageView) convertView.findViewById(R.id.imageView);
+            CircularNetworkImageView student_avatar = (CircularNetworkImageView) convertView.findViewById(R.id.avatar);
        // tvname.setText(list.get(position));
+
+        Student s = _studentlist.get(position);
+
+        if (s.getAvatar_url() != null)
+        {
+            try
+            {
+                Log.i("GOOD",s.getAvatar_url());
+                student_avatar.setDefaultImageResId(R.drawable.avatar_placeholder_white);
+                student_avatar.setErrorImageResId(R.drawable.avatar_placeholder_white);
+                //  student_avatar.setAdjustViewBounds(true);
+                student_avatar.setImageUrl(s.getAvatar_url(),NetworkHandler.getInstance(_context).getImageLoader());
+            }
+            catch (Exception e)
+            {
+                Log.i("FAIL", e.toString());
+            }
+        }
+
 
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ClipData data = ClipData.newPlainText("test", list.get(position).getName());
+                ClipData data = ClipData.newPlainText("test", _studentlist.get(position).getName());
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(data, shadowBuilder, v, 0);
               //  v.setVisibility(View.INVISIBLE);

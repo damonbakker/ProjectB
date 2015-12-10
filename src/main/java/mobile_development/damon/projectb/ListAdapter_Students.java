@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.media.Image;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -101,6 +102,22 @@ public class ListAdapter_Students extends ArrayAdapter<Student>
         planning.setText(String.valueOf(s.getPlanning()));
         design.setText(String.valueOf(s.getDesign()));
         level.setText(String.valueOf(s.getLevel()));
+
+        if (s.getAvatar_url() != null)
+        {
+            try
+            {
+                Log.i("GOOD",s.getAvatar_url());
+                student_avatar.setDefaultImageResId(R.drawable.avatar_placeholder_white);
+                student_avatar.setErrorImageResId(R.drawable.avatar_placeholder_white);
+              //  student_avatar.setAdjustViewBounds(true);
+                student_avatar.setImageUrl(s.getAvatar_url(),NetworkHandler.getInstance(_context).getImageLoader());
+            }
+            catch (Exception e)
+            {
+                Log.i("FAIL", e.toString());
+            }
+        }
 
 
         return convertView;

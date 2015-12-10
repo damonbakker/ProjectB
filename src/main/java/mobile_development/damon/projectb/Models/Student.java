@@ -21,6 +21,7 @@ public class Student
     private int coding;
     private int motivation;
     private int leading;
+    private String avatar_url;
     private Reward latest_apply;
 
 
@@ -43,7 +44,7 @@ public class Student
     }
 
 
-    public Student(int user_student_id, String name, int level, int planning, int design, int coding)
+    public Student(int user_student_id, String name, int level, int planning, int design, int coding,String avatar)
     {
         this.user_student_id = user_student_id;
         this.name = name;
@@ -51,6 +52,7 @@ public class Student
         this.planning = planning;
         this.design = design;
         this.coding = coding;
+        this.avatar_url = avatar;
     }
     public int getUser_student_id() {
         return user_student_id;
@@ -98,6 +100,10 @@ public class Student
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
+    }
+
+    public String getAvatar_url() {
+        return avatar_url;
     }
 
 }
