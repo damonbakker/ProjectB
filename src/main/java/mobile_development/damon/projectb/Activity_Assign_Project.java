@@ -7,8 +7,6 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,9 +23,11 @@ import org.lucasr.twowayview.TwoWayView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import mobile_development.damon.projectb.Models.CircularNetworkImageView;
 import mobile_development.damon.projectb.Models.Student;
@@ -40,18 +40,34 @@ public class Activity_Assign_Project extends AppCompatActivity {
     public TextView coding_indicator,coding_value,planning_indicator,planning_value,design_indicator,design_value;
     public TextView coding_indicator2,coding_value2,planning_indicator2,planning_value2,design_indicator2,design_value2;
     public TextView coding_indicator3,coding_value3,planning_indicator3,planning_value3,design_indicator3,design_value3;
+    public TextView display_info_left,display_info_middle,display_info_right;
     public CircularNetworkImageView avatarleft,avatarmiddle,avatarright;
 
     public TwoWayView mainlist;
 
 
     public List<Student> student_data = new ArrayList<>();
-    public List<Student> active_student_data = new ArrayList<>();
+
+    //hashmap with key:field position and value is position in active_student_data FOR checking if student is already placed
+    Map<Integer, Integer> active_student_position_map = new ConcurrentHashMap<>();
+    //for assigning dynamic integers for position of student spots
+    Map<String, Integer> student_field_position_map = new HashMap<>();
+
+    public List<Student> active_student_data = Arrays.asList(new Student[5]);
+
+
+    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_project);
+
+        student_field_position_map.put("left", 3);
+        student_field_position_map.put("middle", 2);
+        student_field_position_map.put("right",1);
+
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_assign_project);
         setSupportActionBar(toolbar);
@@ -98,6 +114,10 @@ public class Activity_Assign_Project extends AppCompatActivity {
         design_value2 = (TextView) findViewById(R.id.design_value2);
         design_value3 = (TextView) findViewById(R.id.design_value3);
 
+        display_info_left = (TextView) findViewById(R.id.display_placeholder_text_left);
+        display_info_right = (TextView) findViewById(R.id.display_placeholder_text_right);
+        display_info_middle = (TextView) findViewById(R.id.display_placeholder_text_middle);
+
 
         assigned_student_right.setOnDragListener(new RightStudentDragListener());
         assigned_student_middle.setOnDragListener(new MiddleStudentDragListener());
@@ -132,10 +152,29 @@ public class Activity_Assign_Project extends AppCompatActivity {
 
                     break;
                 case DragEvent.ACTION_DROP:
-                    // Dropped, reassign View to ViewGroup
                     View view = (View) event.getLocalState();
+                    //get student position in list from clipdata
+                    ClipData.Item item = event.getClipData().getItemAt(0);
+                    int student_position = Integer.parseInt(item.getText().toString());
 
-                    Log.i("CANCER", v.toString());
+                    //retrieve student from location in list
+                    Student s = student_data.get(student_position);
+
+                    //check if the student is already assigned somewhere
+                    if (CheckStudentSpot(student_field_position_map.get("middle"),student_position))
+                    {
+
+                        int student_field_position_id = student_field_position_map.get("middle");
+
+                        //write the student to the map that contains all active students
+                        active_student_data.set(student_field_position_id - 1, s);
+                        //write the position of the student to the map that keeps track of who is where
+                        active_student_position_map.put(student_field_position_id, student_position);
+                        //change visible dataset
+                        setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s,planning_indicator2,coding_indicator2,design_indicator2,display_info_middle);
+
+                    }
+
                     Toast toast =  Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
@@ -168,8 +207,28 @@ public class Activity_Assign_Project extends AppCompatActivity {
                 case DragEvent.ACTION_DROP:
 
                     View view = (View) event.getLocalState();
+                    //get student position in list from clipdata
+                    ClipData.Item item = event.getClipData().getItemAt(0);
+                    int student_position = Integer.parseInt(item.getText().toString());
 
-                    Log.i("CANCER", v.toString());
+                    //retrieve student from location in list
+                    Student s = student_data.get(student_position);
+
+                    //check if the student is already assigned somewhere
+                    if (CheckStudentSpot(student_field_position_map.get("right"),student_position))
+                    {
+
+                        int student_field_position_id = student_field_position_map.get("right");
+
+                        //write the student to the map that contains all active students
+                        active_student_data.set(student_field_position_id - 1, s);
+                        //write the position of the student to the map that keeps track of who is where
+                        active_student_position_map.put(student_field_position_id, student_position);
+                        //change visible dataset
+                        setStudentData(avatarright, coding_value, planning_value, design_value, s,design_indicator,planning_indicator,coding_indicator,display_info_right);
+
+                    }
+
                     Toast toast =  Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
                     toast.show();
@@ -201,14 +260,27 @@ public class Activity_Assign_Project extends AppCompatActivity {
                 case DragEvent.ACTION_DROP:
 
                     View view = (View) event.getLocalState();
+                    //get student position in list from clipdata
                     ClipData.Item item = event.getClipData().getItemAt(0);
                     int student_position = Integer.parseInt(item.getText().toString());
 
-                    avatarleft.setImageUrl(student_data.get(student_position).getAvatar_url(),NetworkHandler.getInstance(Activity_Assign_Project.this).getImageLoader());
+                    //retrieve student from location in list
                     Student s = student_data.get(student_position);
-                    active_student_data.add(s);
 
-                    setStudentData(avatarleft,coding_value3,planning_value3,design_value3,s);
+                    //check if the student is already assigned somewhere
+                    if (CheckStudentSpot(student_field_position_map.get("left"),student_position))
+                    {
+
+                        int student_field_position_id = student_field_position_map.get("left");
+
+                        //write the student to the map that contains all active students
+                        active_student_data.set(student_field_position_id - 1, s);
+                        //write the position of the student to the map that keeps track of who is where
+                        active_student_position_map.put(student_field_position_id, student_position);
+                        //change visible dataset
+                        setStudentData(avatarleft, coding_value3, planning_value3, design_value3, s,planning_indicator3,design_indicator3,coding_indicator3,display_info_left);
+
+                    }
 
                     Toast toast =  Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
@@ -294,8 +366,61 @@ public class Activity_Assign_Project extends AppCompatActivity {
 
     }
 
-    public void setStudentData(CircularNetworkImageView avatar,TextView coding_value,TextView planning_value,TextView design_value,Student active_student)
+    public void setStudentData(CircularNetworkImageView avatar,TextView coding_value,TextView planning_value,TextView design_value,Student active_student,TextView planning_indicator,TextView coding_indicator,TextView design_indicator,TextView info_display)
     {
+        try{
+
+            Log.i("SetSTudentdataright",active_student_position_map.get(1).toString());
+        }
+        catch (Exception e)
+        {
+            Log.i("SetSTudentdataright","null");
+
+        }
+        try{
+            Log.i("SetSTudentdatamiddle",active_student_position_map.get(2).toString());
+
+        }
+        catch (Exception e)
+        {
+            Log.i("SetSTudentdatamiddle","null");
+
+        }
+        try{
+            Log.i("SetSTudentdataleft",active_student_position_map.get(3).toString());
+
+        }
+        catch (Exception e)
+        {
+            Log.i("SetSTudentdataleft","null");
+
+        }
+
+        Log.i("new","ACTIVE STUDENTSnow");
+
+        for (int i = 0; i < active_student_data.size(); i++)
+        {
+            if (active_student_data.get(i) != null )
+            {
+                Log.i("NOWSTUDENTDATA",active_student_data.get(i).getName());
+                Log.i("total coding",String.valueOf(active_student_data.get(i).getCoding()));
+            }
+        }
+
+        if (avatar.getVisibility() == View.INVISIBLE)
+        {
+            avatar.setVisibility(View.VISIBLE);
+            coding_value.setVisibility(View.VISIBLE);
+            design_value.setVisibility(View.VISIBLE);
+            planning_value.setVisibility(View.VISIBLE);
+            coding_indicator.setVisibility(View.VISIBLE);
+            design_indicator.setVisibility(View.VISIBLE);
+            planning_indicator.setVisibility(View.VISIBLE);
+
+            info_display.setVisibility(View.INVISIBLE);
+
+        }
+
         if (active_student.getAvatar_url() != "null")
         {
             avatar.setImageUrl(active_student.getAvatar_url(), NetworkHandler.getInstance(Activity_Assign_Project.this).getImageLoader());
@@ -304,8 +429,21 @@ public class Activity_Assign_Project extends AppCompatActivity {
         {
             avatar.setImageResource(R.drawable.avatar_placeholder_white);
         }
+
         coding_value.setText(String.valueOf(active_student.getCoding()));
         planning_value.setText(String.valueOf(active_student.getPlanning()));
         design_value.setText(String.valueOf(active_student.getDesign()));
+    }
+
+    public boolean CheckStudentSpot(int position_field,int id)
+    {
+        if (active_student_position_map.containsValue(id))
+        {
+            Log.i("Checkstudent","STUDENT ID ALREADY PLACED");
+            Log.i("Checkstudent","You can't use a student twice");
+            return false;
+        }
+
+        return true;
     }
 }

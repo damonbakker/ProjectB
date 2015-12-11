@@ -77,7 +77,8 @@
                 android:layout_height="60dp"
                 android:id="@+id/avatar3"
                 android:src="@drawable/avatar_placeholder_white"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:visibility="invisible" />
 
 
             <TextView
@@ -88,7 +89,8 @@
                 android:id="@+id/coding_indicator3"
                 android:textColor="@color/coding"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/planning_indicator3" />
+                android:layout_alignStart="@+id/planning_indicator3"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -97,7 +99,8 @@
                 android:text="00"
                 android:id="@+id/coding_value3"
                 android:layout_alignBottom="@+id/coding_indicator3"
-                android:layout_toEndOf="@+id/coding_indicator3" />
+                android:layout_toEndOf="@+id/coding_indicator3"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -107,7 +110,8 @@
                 android:id="@+id/planning_indicator3"
                 android:textColor="@color/planning"
                 android:layout_below="@+id/coding_indicator3"
-                android:layout_toEndOf="@+id/avatar3" />
+                android:layout_toEndOf="@+id/avatar3"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,7 +120,8 @@
                 android:text="00"
                 android:id="@+id/planning_value3"
                 android:layout_alignBottom="@+id/planning_indicator3"
-                android:layout_toEndOf="@+id/coding_indicator3" />
+                android:layout_toEndOf="@+id/coding_indicator3"
+                android:visibility="invisible" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,7 +130,8 @@
                 android:id="@+id/design_indicator3"
                 android:textColor="@color/design"
                 android:layout_below="@+id/planning_indicator3"
-                android:layout_toStartOf="@+id/planning_value3" />
+                android:layout_toStartOf="@+id/planning_value3"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -134,7 +140,18 @@
                 android:text="00"
                 android:id="@+id/design_value3"
                 android:layout_alignBottom="@+id/design_indicator3"
-                android:layout_toEndOf="@+id/design_indicator3" />
+                android:layout_toEndOf="@+id/design_indicator3"
+                android:visibility="invisible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/assign_student_display_info"
+                android:id="@+id/display_placeholder_text_left"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:layout_centerHorizontal="true" />
 
 
         </RelativeLayout>
@@ -154,7 +171,8 @@
                 android:layout_height="60dp"
                 android:id="@+id/avatar2"
                 android:src="@drawable/avatar_placeholder_white"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:visibility="invisible" />
 
 
             <TextView
@@ -165,7 +183,8 @@
                 android:id="@+id/coding_indicator2"
                 android:textColor="@color/coding"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/planning_indicator2" />
+                android:layout_alignStart="@+id/planning_indicator2"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -174,7 +193,8 @@
                 android:text="00"
                 android:id="@+id/coding_value2"
                 android:layout_alignBottom="@+id/coding_indicator2"
-                android:layout_toEndOf="@+id/coding_indicator2" />
+                android:layout_toEndOf="@+id/coding_indicator2"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -184,7 +204,8 @@
                 android:id="@+id/planning_indicator2"
                 android:textColor="@color/planning"
                 android:layout_below="@+id/coding_indicator2"
-                android:layout_toEndOf="@+id/avatar2" />
+                android:layout_toEndOf="@+id/avatar2"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -193,7 +214,8 @@
                 android:text="00"
                 android:id="@+id/planning_value2"
                 android:layout_alignBottom="@+id/planning_indicator2"
-                android:layout_toEndOf="@+id/coding_indicator2" />
+                android:layout_toEndOf="@+id/coding_indicator2"
+                android:visibility="invisible" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -202,7 +224,8 @@
                 android:id="@+id/design_indicator2"
                 android:textColor="@color/design"
                 android:layout_below="@+id/planning_indicator2"
-                android:layout_toStartOf="@+id/planning_value2" />
+                android:layout_toStartOf="@+id/planning_value2"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -211,7 +234,18 @@
                 android:text="00"
                 android:id="@+id/design_value2"
                 android:layout_alignBottom="@+id/design_indicator2"
-                android:layout_toEndOf="@+id/design_indicator2" />
+                android:layout_toEndOf="@+id/design_indicator2"
+                android:visibility="invisible" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/assign_student_display_info"
+                android:id="@+id/display_placeholder_text_middle"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:layout_centerHorizontal="true" />
 
 
         </RelativeLayout>
@@ -230,7 +264,8 @@
                 android:layout_height="60dp"
                 android:id="@+id/avatar"
                 android:src="@drawable/avatar_placeholder_white"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:visibility="invisible" />
 
 
             <TextView
@@ -241,7 +276,8 @@
                 android:id="@+id/coding_indicator"
                 android:textColor="@color/coding"
                 android:layout_alignParentTop="true"
-                android:layout_alignStart="@+id/planning_indicator" />
+                android:layout_alignStart="@+id/planning_indicator"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -250,7 +286,8 @@
                 android:text="00"
                 android:id="@+id/coding_value"
                 android:layout_alignBottom="@+id/coding_indicator"
-                android:layout_toEndOf="@+id/coding_indicator" />
+                android:layout_toEndOf="@+id/coding_indicator"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -260,7 +297,8 @@
                 android:id="@+id/planning_indicator"
                 android:textColor="@color/planning"
                 android:layout_below="@+id/coding_indicator"
-                android:layout_toEndOf="@+id/avatar" />
+                android:layout_toEndOf="@+id/avatar"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -269,7 +307,8 @@
                 android:text="00"
                 android:id="@+id/planning_value"
                 android:layout_alignBottom="@+id/planning_indicator"
-                android:layout_toEndOf="@+id/coding_indicator" />
+                android:layout_toEndOf="@+id/coding_indicator"
+                android:visibility="invisible" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -278,7 +317,8 @@
                 android:id="@+id/design_indicator"
                 android:textColor="@color/design"
                 android:layout_below="@+id/planning_indicator"
-                android:layout_toStartOf="@+id/planning_value" />
+                android:layout_toStartOf="@+id/planning_value"
+                android:visibility="invisible" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -287,8 +327,18 @@
                 android:text="00"
                 android:id="@+id/design_value"
                 android:layout_alignBottom="@+id/design_indicator"
-                android:layout_toEndOf="@+id/design_indicator" />
+                android:layout_toEndOf="@+id/design_indicator"
+                android:visibility="invisible" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/assign_student_display_info"
+                android:id="@+id/display_placeholder_text_right"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
 

@@ -50,5 +50,8 @@
     <string name="title_activity_activity_dropandrop">Activity_dropandrop</string>
     <string name="title_activity_activity__crop_avatar">Activity_CropAvatar</string>
 
+    <string name="assign_student_display_info">Student</string>
+
+
 
 </resources>
