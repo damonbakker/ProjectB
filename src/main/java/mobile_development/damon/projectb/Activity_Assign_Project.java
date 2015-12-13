@@ -16,6 +16,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
+import org.joda.time.DateTime;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,6 +38,7 @@ import mobile_development.damon.projectb.Models.Student;
 public class Activity_Assign_Project extends AppCompatActivity {
 
     public TextView project_name;
+    public int project_id;
 
     public RelativeLayout assigned_student_left,assigned_student_right,assigned_student_middle;
     public TextView coding_indicator,coding_value,planning_indicator,planning_value,design_indicator,design_value;
@@ -44,6 +48,17 @@ public class Activity_Assign_Project extends AppCompatActivity {
     public CircularNetworkImageView avatarleft,avatarmiddle,avatarright;
 
     public TwoWayView mainlist;
+
+    public int totalcoding;
+    public int totalplanning;
+    public int totaldesign;
+
+    public int coding_weight;
+    public int planning_weight;
+    public int design_weight;
+    public int difficulty;
+    public DateTime duration;
+
 
 
     public List<Student> student_data = new ArrayList<>();
@@ -77,6 +92,11 @@ public class Activity_Assign_Project extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_assign_project));
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+
+        Bundle extras= getIntent().getExtras();
+        project_id = extras.getInt("project_id");
+        Log.i("extras",String.valueOf(project_id));
+
 
         project_name = (TextView) findViewById(R.id.project_name);
         mainlist = (TwoWayView) findViewById(R.id.lvItems);
@@ -123,6 +143,7 @@ public class Activity_Assign_Project extends AppCompatActivity {
         assigned_student_middle.setOnDragListener(new MiddleStudentDragListener());
         assigned_student_left.setOnDragListener(new LeftStudentDragListener());
 
+        setProjectData();
         setListData();
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -236,6 +257,7 @@ public class Activity_Assign_Project extends AppCompatActivity {
                     break;
 
                 default:
+
                     break;
             }
             return true;
@@ -366,6 +388,64 @@ public class Activity_Assign_Project extends AppCompatActivity {
 
     }
 
+    private void setProjectData()
+    {
+        StringRequest stringProjectRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
+        {
+            @Override
+            public void onResponse(String response)
+            {
+
+                Log.i("RESPONSE", "RESPONSE RECIEVED");
+                Log.i("RESPONSE", response);
+                Log.i("RESPONSE", response);
+                Log.i("RESPONSE", response);
+                Log.i("RESPONSE", response);
+                Log.i("RESPONSE", response);
+
+/*
+                try
+                {
+                    JSONObject response_obj = new JSONObject(response);
+                    Log.i("RESPONSE",response_obj.toString());
+                    Log.i("RESPONSE",response_obj.getString("name"));
+
+                }
+                catch (JSONException e)
+                {
+                    Log.i("RESPONSE",e.toString());
+                }*/
+
+            }
+
+        }, new Response.ErrorListener()
+        {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.i("RESPONSE","RESPONSE FAILED");
+                Log.i("RESPONSE",error.getMessage());
+            }
+        })
+
+        {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                // Posting parameters to login url
+
+                Map<String, String> params = new HashMap<>();
+                params.put("tag", "retrieve_project");
+                params.put("project_id",String.valueOf(project_id));
+
+                return params;
+            }
+
+        };
+        NetworkHandler.getInstance(Activity_Assign_Project.this).addToRequestQueue(stringProjectRequest);
+
+    }
+
     public void setStudentData(CircularNetworkImageView avatar,TextView coding_value,TextView planning_value,TextView design_value,Student active_student,TextView planning_indicator,TextView coding_indicator,TextView design_indicator,TextView info_display)
     {
         try{
@@ -398,14 +478,29 @@ public class Activity_Assign_Project extends AppCompatActivity {
 
         Log.i("new","ACTIVE STUDENTSnow");
 
+        int coding = 0;
+        int planning = 0;
+        int design = 0;
         for (int i = 0; i < active_student_data.size(); i++)
         {
-            if (active_student_data.get(i) != null )
+            if (active_student_data.get(i) != null)
             {
                 Log.i("NOWSTUDENTDATA",active_student_data.get(i).getName());
                 Log.i("total coding",String.valueOf(active_student_data.get(i).getCoding()));
+
+                coding = coding + active_student_data.get(i).getCoding();
+                planning = planning + active_student_data.get(i).getDesign();
+                design = design + active_student_data.get(i).getPlanning();
             }
         }
+
+        totalcoding = coding;
+        totalplanning = planning;
+        totaldesign = design;
+
+        Log.i("totaldesign",String.valueOf(totaldesign));
+        Log.i("totalplannng",String.valueOf(totalplanning));
+        Log.i("totalcoding",String.valueOf(totalcoding));
 
         if (avatar.getVisibility() == View.INVISIBLE)
         {
@@ -440,7 +535,7 @@ public class Activity_Assign_Project extends AppCompatActivity {
         if (active_student_position_map.containsValue(id))
         {
             Log.i("Checkstudent","STUDENT ID ALREADY PLACED");
-            Log.i("Checkstudent","You can't use a student twice");
+            Log.i("Checkstudent", "You can't use a student twice");
             return false;
         }
 

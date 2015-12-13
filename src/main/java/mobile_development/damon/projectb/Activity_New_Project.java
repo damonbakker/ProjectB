@@ -78,7 +78,7 @@ public class Activity_New_Project extends AppCompatActivity
 
 
                 TextView tx = (TextView) v.findViewById(R.id.lblListItem);
-                StartAssignProjectActivity(v,tx.getText().toString());
+                StartAssignProjectActivity(v,tx.getText().toString(),listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getId());
 
                 return false;
             }
@@ -103,11 +103,13 @@ public class Activity_New_Project extends AppCompatActivity
 
     }
 
-    public void StartAssignProjectActivity(View v,String project_name)
+    public void StartAssignProjectActivity(View v,String project_name,int project_id)
     {
-        Intent intent = new Intent(this, Activity_Assign_Project.class);
+        Intent intent = new Intent(Activity_New_Project.this, Activity_Assign_Project.class);
         // Pass data object in the bundle and populate details activity.
         intent.putExtra("project_name",project_name);
+        intent.putExtra("project_id",project_id);
+        Log.i("Postingresponse",String.valueOf(project_id));
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(this, v, "project_name");
         startActivity(intent, options.toBundle());
