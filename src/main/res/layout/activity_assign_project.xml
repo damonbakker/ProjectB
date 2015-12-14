@@ -38,9 +38,17 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="45 minutes"
-            android:id="@+id/textView3"
+            android:id="@+id/project_duration"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/project_name" />
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/chart1"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:layout_below="@+id/project_name"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentStart="true" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -70,7 +78,8 @@
             android:layout_height="75dp"
             android:tag="left"
             android:layout_alignTop="@+id/student_item_2"
-            android:layout_toStartOf="@+id/student_item_2">
+            android:layout_toStartOf="@+id/student_item_2"
+            >
 
             <mobile_development.damon.projectb.Models.CircularNetworkImageView
                 android:layout_width="60dp"
@@ -163,7 +172,7 @@
             android:layout_height="75dp"
             android:tag="middle"
             android:layout_above="@+id/relativeLayout"
-            android:layout_alignEnd="@+id/textView3"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="18dp">
 
             <mobile_development.damon.projectb.Models.CircularNetworkImageView
@@ -256,6 +265,7 @@
             android:layout_width="105dp"
             android:layout_height="75dp"
             android:tag="right"
+            android:layout_marginLeft="3dp"
             android:layout_alignTop="@+id/student_item_2"
             android:layout_toEndOf="@+id/student_item_2">
 
@@ -341,6 +351,61 @@
                 android:layout_centerHorizontal="true" />
 
         </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="C :"
+            android:id="@+id/total_coding_indicator"
+            android:layout_marginTop="33dp"
+            android:textColor="@color/coding"
+            android:layout_below="@+id/project_duration"
+            android:layout_toEndOf="@+id/chart1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="P : "
+            android:textColor="@color/planning"
+            android:id="@+id/total_planning_indicator"
+            android:layout_below="@+id/total_coding_indicator"
+            android:layout_toEndOf="@+id/chart1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="D :"
+            android:textColor="@color/design"
+            android:id="@+id/total_design_indicator"
+            android:layout_below="@+id/total_planning_indicator"
+            android:layout_toEndOf="@+id/chart1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/md_white_1000"
+            android:id="@+id/total_planning_value"
+            android:layout_below="@+id/total_coding_indicator"
+            android:layout_toEndOf="@+id/total_coding_indicator" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/total_coding_value"
+            android:textColor="@color/md_white_1000"
+            android:layout_above="@+id/total_planning_value"
+            android:layout_toEndOf="@+id/total_coding_indicator" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/total_design_value"
+            android:textColor="@color/md_white_1000"
+            android:layout_alignTop="@+id/total_design_indicator"
+            android:layout_alignStart="@+id/total_planning_value" />
 
     </RelativeLayout>
 

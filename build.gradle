@@ -18,6 +18,9 @@ android {
         }
     }
 }
+repositories {
+    maven { url "https://jitpack.io" }
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -37,4 +40,5 @@ dependencies {
         transitive = true
     }
     compile 'com.mikepenz:google-material-typeface:1.2.0.1@aar'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
 }

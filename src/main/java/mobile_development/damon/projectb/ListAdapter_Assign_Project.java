@@ -67,8 +67,18 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
             convertView = inflater.inflate(R.layout.list_item_assign_student, parent, false);
 
         CircularNetworkImageView student_avatar = (CircularNetworkImageView) convertView.findViewById(R.id.avatar);
+        TextView coding_value = (TextView) convertView.findViewById(R.id.coding_value_student);
+        TextView planning_value = (TextView) convertView.findViewById(R.id.planning_value_student);
+        TextView design_value = (TextView) convertView.findViewById(R.id.design_value_student);
 
         Student s = _studentlist.get(position);
+
+
+
+            coding_value.setText(String.valueOf(s.getCoding()));
+            planning_value.setText(String.valueOf(s.getPlanning()));
+            design_value.setText(String.valueOf(s.getDesign()));
+
 
         if (s.getAvatar_url() != null)
         {

@@ -1,5 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="100dp"
+    android:layout_width="110dp"
     android:layout_height="60dp" >
 
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="00"
-        android:id="@+id/coding_value"
+        android:id="@+id/coding_value_student"
         android:layout_alignBottom="@+id/coding_indicator"
         android:layout_toEndOf="@+id/coding_indicator" />
 
@@ -36,17 +36,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="P :"
         android:id="@+id/planning_indicator"
+
         android:layout_centerVertical="true"
         android:textColor="@color/planning"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="26dp" />
+        android:layout_marginEnd="28dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="00"
-        android:id="@+id/planning_value"
+        android:id="@+id/planning_value_student"
         android:layout_alignBottom="@+id/planning_indicator"
         android:layout_toEndOf="@+id/coding_indicator" />
     <TextView
@@ -64,7 +65,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="00"
-        android:id="@+id/design_value"
+        android:id="@+id/design_value_student"
         android:layout_alignBottom="@+id/design_indicator"
         android:layout_toEndOf="@+id/design_indicator" />
 
