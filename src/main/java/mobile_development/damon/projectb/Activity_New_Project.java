@@ -49,6 +49,7 @@ public class Activity_New_Project extends AppCompatActivity
     public List<Project> Veteran = new ArrayList<Project>();
     public List<Project> Pro = new ArrayList<Project>();
 
+    public int student_level;
 
 
     @Override
@@ -76,9 +77,8 @@ public class Activity_New_Project extends AppCompatActivity
             @Override
             public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
 
-
                 TextView tx = (TextView) v.findViewById(R.id.lblListItem);
-                StartAssignProjectActivity(v,tx.getText().toString(),listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getId());
+                StartAssignProjectActivity(v, tx.getText().toString(), listDataChild.get(listDataHeader.get(groupPosition)).get(childPosition).getId());
 
                 return false;
             }
@@ -121,13 +121,7 @@ public class Activity_New_Project extends AppCompatActivity
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<Project>>();
 
-        // Adding header data
-        listDataHeader.add("Beginner");
-        listDataHeader.add("Easy");
-        listDataHeader.add("Mediocre");
-        listDataHeader.add("Hard");
-        listDataHeader.add("Veteran");
-        listDataHeader.add("Pro");
+
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, AppConfig.URL_API, new Response.Listener<String>()
         {
@@ -187,12 +181,50 @@ public class Activity_New_Project extends AppCompatActivity
 
                     }
 
-                    listDataChild.put(listDataHeader.get(0), Beginner); // Header, Child data
-                    listDataChild.put(listDataHeader.get(1), Easy);
-                    listDataChild.put(listDataHeader.get(2), Mediocre);
-                    listDataChild.put(listDataHeader.get(3), Hard);
-                    listDataChild.put(listDataHeader.get(4), Veteran);
-                    listDataChild.put(listDataHeader.get(5), Pro);
+                    // Adding header data
+
+
+
+
+
+
+                    if (!Beginner.isEmpty())
+                    {
+                        listDataHeader.add("Beginner");
+                        listDataChild.put(listDataHeader.get(0), Beginner); // Header, Child data
+                    }
+                    if (!Easy.isEmpty())
+                    {
+                        listDataHeader.add("Easy");
+                        listDataChild.put(listDataHeader.get(1), Easy);
+                    }
+                    if (!Mediocre.isEmpty())
+                    {
+                        listDataHeader.add("Mediocre");
+                        listDataChild.put(listDataHeader.get(2), Mediocre);
+                    }
+                    if (!Hard.isEmpty())
+                    {
+                        listDataHeader.add("Hard");
+                        listDataChild.put(listDataHeader.get(3), Hard);
+                    }
+                    if (!Veteran.isEmpty())
+                    {
+                        listDataHeader.add("Veteran");
+                        listDataChild.put(listDataHeader.get(4), Veteran);
+                    }
+                    if (!Pro.isEmpty())
+                    {
+                        listDataHeader.add("Pro");
+                        listDataChild.put(listDataHeader.get(5), Pro);
+                    }
+
+
+
+
+
+
+
 
 
                     listAdapter = new ListAdapter_ExpandableList_NewProject(getApplicationContext(),listDataHeader, listDataChild);
@@ -229,6 +261,7 @@ public class Activity_New_Project extends AppCompatActivity
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
                 params.put("tag", "retrieve_projects");
+                params.put("user_id",String.valueOf(SharedPreference.getId(Activity_New_Project.this)));
 
                 return params;
             }

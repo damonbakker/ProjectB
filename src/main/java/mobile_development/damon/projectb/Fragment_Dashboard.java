@@ -49,8 +49,7 @@ public class Fragment_Dashboard extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState)
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
     {
         View rootview = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
@@ -77,8 +76,7 @@ public class Fragment_Dashboard extends Fragment {
         upgrade_level.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Activity_dropandrop.class);
-                startActivity(intent);
+
             }
         });
 

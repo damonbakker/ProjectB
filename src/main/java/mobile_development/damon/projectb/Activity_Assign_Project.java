@@ -1,6 +1,7 @@
 package mobile_development.damon.projectb;
 
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,11 +93,6 @@ public class Activity_Assign_Project extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_project);
 
-        student_field_position_map.put("left", 3);
-        student_field_position_map.put("middle", 2);
-        student_field_position_map.put("right", 1);
-
-
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar_assign_project);
         setSupportActionBar(toolbar);
 
@@ -105,20 +102,22 @@ public class Activity_Assign_Project extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_assign_project));
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
-        Bundle extras= getIntent().getExtras();
-        project_id = extras.getInt("project_id");
-        Log.i("extras", String.valueOf(project_id));
-
+        student_field_position_map.put("left", 3);
+        student_field_position_map.put("middle", 2);
+        student_field_position_map.put("right", 1);
 
         project_name = (TextView) findViewById(R.id.project_name);
         mainlist = (TwoWayView) findViewById(R.id.lvItems);
-        project_name.setText(getIntent().getStringExtra("project_name"));
         project_duration = (TextView) findViewById(R.id.project_duration);
+
+        Bundle extras= getIntent().getExtras();
+        project_id = extras.getInt("project_id");
+        project_name.setText(getIntent().getStringExtra("project_name"));
+        Log.i("extras", String.valueOf(project_id));
 
         total_coding_value = (TextView) findViewById(R.id.total_coding_value);
         total_design_value = (TextView) findViewById(R.id.total_design_value);
         total_planning_value = (TextView) findViewById(R.id.total_planning_value);
-
 
         assigned_student_right = (RelativeLayout) findViewById(R.id.student_item_1);
         assigned_student_middle = (RelativeLayout) findViewById(R.id.student_item_2);
@@ -181,16 +180,12 @@ public class Activity_Assign_Project extends AppCompatActivity {
 
         project_chart.getLegend().setEnabled(false);
 
-
-        assigned_student_right.setOnDragListener(new RightStudentDragListener());
-        assigned_student_middle.setOnDragListener(new MiddleStudentDragListener());
-        assigned_student_left.setOnDragListener(new LeftStudentDragListener());
+        assigned_student_right.setOnDragListener(AssignStudentDragListener);
+        assigned_student_middle.setOnDragListener(AssignStudentDragListener);
+        assigned_student_left.setOnDragListener(AssignStudentDragListener);
 
         setProjectData();
         setListData();
-
-
-
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,11 +212,65 @@ public class Activity_Assign_Project extends AppCompatActivity {
         return s;
     }
 
-    public View.OnDragListener myOnDragListener = new View.OnDragListener() {
+    public View.OnDragListener AssignStudentDragListener = new View.OnDragListener() {
 
         @Override
-        public boolean onDrag(View v, DragEvent event) {
+        public boolean onDrag(View v, DragEvent event)
+        {
+            int action = event.getAction();
+            switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
+                    //do nothing
 
+                    break;
+                case DragEvent.ACTION_DRAG_ENTERED:
+                    Log.i("DRAG", "BINNEN DRAG");
+                    break;
+                case DragEvent.ACTION_DRAG_EXITED:
+
+                    break;
+                case DragEvent.ACTION_DROP:
+                    //Dragged object for the drop
+                    View view = (View) event.getLocalState();
+
+                    //get student position in list from ClipData
+                    ClipData.Item item = event.getClipData().getItemAt(0);
+                    int student_position = Integer.parseInt(item.getText().toString());
+
+                    //retrieve student from location in list
+                    Student s = student_data.get(student_position);
+
+                    switch (v.getId())
+                    {
+                        case R.id.student_item_1:
+                            break;
+                    }
+
+                    Log.i("VIEWID",String.valueOf(v.getId()));
+                    Log.i("VIEWID RIGHT",String.valueOf(R.id.student_item_1));
+
+                    //check if the student is already assigned somewhere
+                    if (CheckStudentSpot(student_field_position_map.get("middle"), student_position))
+                    {
+                        int student_field_position_id = student_field_position_map.get("middle");
+
+                        //write the student to the map that contains all active students
+                        active_student_data.set(student_field_position_id - 1, s);
+                        //write the position of the student to the map that keeps track of who is where
+                        active_student_position_map.put(student_field_position_id, student_position);
+                        //change visible dataset
+                        setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s, planning_indicator2, coding_indicator2, design_indicator2, display_info_middle);
+
+                    }
+
+                    Toast toast = Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+
+                    break;
+                default:
+                    break;
+            }
 
             return true;
         }
@@ -231,7 +280,8 @@ public class Activity_Assign_Project extends AppCompatActivity {
     public class MiddleStudentDragListener implements View.OnDragListener {
 
         @Override
-        public boolean onDrag(View v, DragEvent event) {
+        public boolean onDrag(View v, DragEvent event)
+        {
             int action = event.getAction();
             switch (event.getAction()) {
                 case DragEvent.ACTION_DRAG_STARTED:

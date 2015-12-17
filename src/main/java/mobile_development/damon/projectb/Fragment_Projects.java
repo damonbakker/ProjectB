@@ -44,17 +44,8 @@ import java.util.Map;
 import mobile_development.damon.projectb.Models.Project;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link Fragment_Projects.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link Fragment_Projects#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class Fragment_Projects extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class Fragment_Projects extends Fragment
+{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -248,9 +239,6 @@ public class Fragment_Projects extends Fragment {
                 //waiting_response.setVisibility(View.INVISIBLE);
                 Log.i("RESPONSE","RESPONSE FAILED");
                 Log.i("RESPONSE",error.getMessage());
-
-
-
             }
         })
 
@@ -258,7 +246,7 @@ public class Fragment_Projects extends Fragment {
             @Override
             protected Map<String, String> getParams()
             {
-                // Posting parameters to login url
+                //posting parameters to login url
                 Map<String, String> params = new HashMap<>();
                 params.put("tag", "retrieve_user_projects");
                 params.put("user_id", String.valueOf(SharedPreference.getId(getActivity())));
