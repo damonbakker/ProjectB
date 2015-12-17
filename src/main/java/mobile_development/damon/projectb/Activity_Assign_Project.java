@@ -217,6 +217,17 @@ public class Activity_Assign_Project extends AppCompatActivity {
         return s;
     }
 
+    public View.OnDragListener myOnDragListener = new View.OnDragListener() {
+
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+
+
+            return true;
+        }
+
+    };
+
     public class MiddleStudentDragListener implements View.OnDragListener {
 
         @Override
