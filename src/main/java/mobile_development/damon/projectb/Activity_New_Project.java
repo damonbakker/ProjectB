@@ -1,12 +1,14 @@
 package mobile_development.damon.projectb;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
@@ -224,8 +226,8 @@ public class Activity_New_Project extends AppCompatActivity
 
 
 
-
-
+                    View footerView = ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.list_footer_new_project, null, false);
+                    mainlistview_projects.addFooterView(footerView);
 
                     listAdapter = new ListAdapter_ExpandableList_NewProject(getApplicationContext(),listDataHeader, listDataChild);
                     // setting list adapter
