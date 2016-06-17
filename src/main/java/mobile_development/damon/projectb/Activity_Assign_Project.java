@@ -89,7 +89,8 @@ public class Activity_Assign_Project extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_project);
 
@@ -103,7 +104,7 @@ public class Activity_Assign_Project extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
         student_field_position_map.put("left", 3);
-        student_field_position_map.put("middle", 2);
+        student_field_position_map.put("center", 2);
         student_field_position_map.put("right", 1);
 
         project_name = (TextView) findViewById(R.id.project_name);
@@ -250,9 +251,9 @@ public class Activity_Assign_Project extends AppCompatActivity {
                     Log.i("VIEWID RIGHT",String.valueOf(R.id.student_item_1));
 
                     //check if the student is already assigned somewhere
-                    if (CheckStudentSpot(student_field_position_map.get("middle"), student_position))
+                    if (CheckStudentSpot(student_field_position_map.get("center"), student_position))
                     {
-                        int student_field_position_id = student_field_position_map.get("middle");
+                        int student_field_position_id = student_field_position_map.get("center");
 
                         //write the student to the map that contains all active students
                         active_student_data.set(student_field_position_id - 1, s);
@@ -304,10 +305,10 @@ public class Activity_Assign_Project extends AppCompatActivity {
                     Student s = student_data.get(student_position);
 
                     //check if the student is already assigned somewhere
-                    if (CheckStudentSpot(student_field_position_map.get("middle"),student_position))
+                    if (CheckStudentSpot(student_field_position_map.get("center"),student_position))
                     {
 
-                        int student_field_position_id = student_field_position_map.get("middle");
+                        int student_field_position_id = student_field_position_map.get("center");
 
                         //write the student to the map that contains all active students
                         active_student_data.set(student_field_position_id - 1, s);

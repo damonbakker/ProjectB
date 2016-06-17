@@ -25,11 +25,6 @@ public class Student
     private Reward latest_apply;
 
 
-
-    public void setUser_student_id(int user_student_id) {
-        this.user_student_id = user_student_id;
-    }
-
     public Student(int id, String name, int level, int planning, int design, int coding, int motivation, int leading, Reward latest_apply)
     {
         this.id = id;
@@ -43,7 +38,6 @@ public class Student
         this.latest_apply = latest_apply;
     }
 
-
     public Student(int user_student_id, String name, int level, int planning, int design, int coding,String avatar)
     {
         this.user_student_id = user_student_id;
@@ -54,6 +48,11 @@ public class Student
         this.coding = coding;
         this.avatar_url = avatar;
     }
+
+    public void setUser_student_id(int user_student_id) {
+        this.user_student_id = user_student_id;
+    }
+
     public int getUser_student_id() {
         return user_student_id;
     }
