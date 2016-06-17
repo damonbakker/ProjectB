@@ -5,5 +5,5 @@ package mobile_development.damon.projectb;
  */
 public class AppConfig
 {
-    public static String URL_API = "http://api.projectb.me/";
+    public static final String URL_API = "http://api.projectb.me/";
 }

@@ -1,6 +1,5 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Fragments.Main;
 
-import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,23 +10,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 
-import com.daimajia.swipe.SwipeLayout;
-
-import java.util.jar.Attributes;
+import mobile_development.damon.projectb.Adapters.GridViewAdapter;
+import mobile_development.damon.projectb.R;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Fragment_Inventory.OnFragmentInteractionListener} interface
+ * {@link Inventory.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment_Inventory#newInstance} factory method to
+ * Use the {@link Inventory#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Inventory extends Fragment {
+public class Inventory extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,8 +45,8 @@ public class Fragment_Inventory extends Fragment {
      * @return A new instance of fragment Fragment_Inventory.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_Inventory newInstance(String param1, String param2) {
-        Fragment_Inventory fragment = new Fragment_Inventory();
+    public static Inventory newInstance(String param1, String param2) {
+        Inventory fragment = new Inventory();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -57,7 +54,7 @@ public class Fragment_Inventory extends Fragment {
         return fragment;
     }
 
-    public Fragment_Inventory() {
+    public Inventory() {
         // Required empty public constructor
     }
 

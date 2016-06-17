@@ -42,14 +42,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import mobile_development.damon.projectb.AppConfig;
-import mobile_development.damon.projectb.ListAdapter_Assign_Project;
+import mobile_development.damon.projectb.Adapters.AssignProjectAdapter;
 import mobile_development.damon.projectb.Models.CircularNetworkImageView;
 import mobile_development.damon.projectb.Models.Student;
 import mobile_development.damon.projectb.NetworkHandler;
 import mobile_development.damon.projectb.R;
 import mobile_development.damon.projectb.SharedPreference;
 
-public class Activity_Assign_Project extends AppCompatActivity {
+public class AssignProject extends AppCompatActivity {
 
     public TextView project_name,project_duration,total_design_value,total_coding_value,total_planning_value;
     public int project_id;
@@ -473,7 +473,7 @@ public class Activity_Assign_Project extends AppCompatActivity {
                         }
                     }
 
-                    ListAdapter_Assign_Project adapter = new ListAdapter_Assign_Project(Activity_Assign_Project.this,R.layout.list_item_assign_student,student_data);
+                    AssignProjectAdapter adapter = new AssignProjectAdapter(AssignProject.this,R.layout.list_item_assign_student,student_data);
                     mainlist.setAdapter(adapter);
 
 
@@ -503,14 +503,14 @@ public class Activity_Assign_Project extends AppCompatActivity {
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
                 params.put("tag", "retrieve_user_students");
-                params.put("user_id", String.valueOf(SharedPreference.getId(Activity_Assign_Project.this)));
+                params.put("user_id", String.valueOf(SharedPreference.getId(AssignProject.this)));
 
                 return params;
             }
 
         };
 
-        NetworkHandler.getInstance(Activity_Assign_Project.this).addToRequestQueue(stringRequest);
+        NetworkHandler.getInstance(AssignProject.this).addToRequestQueue(stringRequest);
 
     }
 
@@ -576,7 +576,7 @@ public class Activity_Assign_Project extends AppCompatActivity {
             }
 
         };
-        NetworkHandler.getInstance(Activity_Assign_Project.this).addToRequestQueue(stringProjectRequest);
+        NetworkHandler.getInstance(AssignProject.this).addToRequestQueue(stringProjectRequest);
 
     }
 
@@ -656,7 +656,7 @@ public class Activity_Assign_Project extends AppCompatActivity {
 
         if (active_student.getAvatar_url() != "null")
         {
-            avatar.setImageUrl(active_student.getAvatar_url(), NetworkHandler.getInstance(Activity_Assign_Project.this).getImageLoader());
+            avatar.setImageUrl(active_student.getAvatar_url(), NetworkHandler.getInstance(AssignProject.this).getImageLoader());
         }
         else
         {
@@ -685,9 +685,9 @@ public class Activity_Assign_Project extends AppCompatActivity {
         // add a lot of colors
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
-        colors.add(ContextCompat.getColor(Activity_Assign_Project.this, R.color.coding));
-        colors.add(ContextCompat.getColor(Activity_Assign_Project.this, R.color.planning));
-        colors.add(ContextCompat.getColor(Activity_Assign_Project.this, R.color.design));
+        colors.add(ContextCompat.getColor(AssignProject.this, R.color.coding));
+        colors.add(ContextCompat.getColor(AssignProject.this, R.color.planning));
+        colors.add(ContextCompat.getColor(AssignProject.this, R.color.design));
 
 
         dataSet.setColors(colors);

@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Fragments.Main;
 
 
 import android.content.DialogInterface;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.AppCompatDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +19,12 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.melnykov.fab.FloatingActionButton;
-
-import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,11 +36,16 @@ import java.util.List;
 import java.util.Map;
 
 
-
+import mobile_development.damon.projectb.Activities.NewProject;
+import mobile_development.damon.projectb.AppConfig;
+import mobile_development.damon.projectb.Adapters.ProjectsAdapter;
 import mobile_development.damon.projectb.Models.Project;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
+import mobile_development.damon.projectb.SharedPreference;
 
 
-public class Fragment_Projects extends Fragment
+public class Projects extends Fragment
 {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -77,8 +78,8 @@ public class Fragment_Projects extends Fragment
      * @return A new instance of fragment Fragment_Projects.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_Projects newInstance(String param1, String param2) {
-        Fragment_Projects fragment = new Fragment_Projects();
+    public static Projects newInstance(String param1, String param2) {
+        Projects fragment = new Projects();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -86,7 +87,7 @@ public class Fragment_Projects extends Fragment
         return fragment;
     }
 
-    public Fragment_Projects() {
+    public Projects() {
         // Required empty public constructor
     }
 
@@ -123,7 +124,7 @@ public class Fragment_Projects extends Fragment
 
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Activity_New_Project.class);
+                Intent intent = new Intent(getActivity(), NewProject.class);
                 startActivity(intent);
             }
         });
@@ -219,7 +220,7 @@ public class Fragment_Projects extends Fragment
                         }
                     }
 
-                    ListAdapter_Projects adapter = new ListAdapter_Projects(getActivity(),R.layout.list_item_project,project_data);
+                    ProjectsAdapter adapter = new ProjectsAdapter(getActivity(),R.layout.list_item_project,project_data);
                     mainlistview.setAdapter(adapter);
 
                 }

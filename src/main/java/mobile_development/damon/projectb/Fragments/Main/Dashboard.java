@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Fragments.Main;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
@@ -29,12 +29,16 @@ import org.w3c.dom.Text;
 import java.util.HashMap;
 import java.util.Map;
 
+import mobile_development.damon.projectb.AppConfig;
 import mobile_development.damon.projectb.Models.Project;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
+import mobile_development.damon.projectb.SharedPreference;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class Fragment_Dashboard extends Fragment {
+public class Dashboard extends Fragment {
 
     public RelativeLayout layout_fragment;
     public ProgressBar waiting_response;
@@ -43,7 +47,7 @@ public class Fragment_Dashboard extends Fragment {
     public IconRoundCornerProgressBar progress_coding,progress_design,progress_planning;
     public Button upgrade_level;
 
-    public Fragment_Dashboard()
+    public Dashboard()
     {
 
     }

@@ -27,12 +27,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mobile_development.damon.projectb.AppConfig;
-import mobile_development.damon.projectb.Models.Login;
 import mobile_development.damon.projectb.NetworkHandler;
 import mobile_development.damon.projectb.R;
 
 
-public class Activity_Register extends AppCompatActivity
+public class Register extends AppCompatActivity
 {
 
     public boolean touch_state = false;
@@ -45,7 +44,7 @@ public class Activity_Register extends AppCompatActivity
     public EditText input_password;
     public ProgressBar waiting_response;
 
-    Login lm = new Login();
+    mobile_development.damon.projectb.Models.Login lm = new mobile_development.damon.projectb.Models.Login();
 
     public RelativeLayout register_view;
     public RelativeLayout register_view_2;
@@ -98,7 +97,7 @@ public class Activity_Register extends AppCompatActivity
 
     public void returnTo_sender()
     {
-        Intent intent = new Intent(Activity_Register.this, Activity_Login.class);
+        Intent intent = new Intent(Register.this, Login.class);
         intent.putExtra("background_color", background_color);
         startActivity(intent);
         overridePendingTransition(R.anim.pull_from_left, R.anim.push_to_right);
@@ -263,7 +262,7 @@ public class Activity_Register extends AppCompatActivity
         };
 
         waiting_response.setVisibility(View.VISIBLE);
-        NetworkHandler.getInstance(Activity_Register.this).addToRequestQueue(stringRequest);
+        NetworkHandler.getInstance(Register.this).addToRequestQueue(stringRequest);
     }
 
 

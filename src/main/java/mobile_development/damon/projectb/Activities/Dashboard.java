@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +22,17 @@ import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
-public class Activity_Dashboard extends AppCompatActivity
+import mobile_development.damon.projectb.Fragments.Main.Feedback;
+import mobile_development.damon.projectb.Fragments.Main.Inventory;
+import mobile_development.damon.projectb.Fragments.Main.Projects;
+import mobile_development.damon.projectb.Fragments.Main.Settings;
+import mobile_development.damon.projectb.Fragments.Main.Students;
+import mobile_development.damon.projectb.R;
+import mobile_development.damon.projectb.SharedPreference;
+
+
+/*Uses the Main fragments*/
+public class Dashboard extends AppCompatActivity
 {
     private android.support.v7.widget.Toolbar mToolbar;
     private Drawer result;
@@ -72,7 +82,7 @@ public class Activity_Dashboard extends AppCompatActivity
 
                         switch (drawerItem.getIdentifier()) {
                             case 1:
-                                Fragment dashboardFragment = new Fragment_Dashboard();
+                                Fragment dashboardFragment = new mobile_development.damon.projectb.Fragments.Main.Dashboard();
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container,dashboardFragment)
                                         .addToBackStack(null)
@@ -80,7 +90,7 @@ public class Activity_Dashboard extends AppCompatActivity
 
                                 break;
                             case 2:
-                                Fragment projectsFragment = new Fragment_Projects();
+                                Fragment projectsFragment = new Projects();
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container,projectsFragment)
                                         .addToBackStack(null)
@@ -88,7 +98,7 @@ public class Activity_Dashboard extends AppCompatActivity
 
                                 break;
                             case 3:
-                                Fragment studentsFragment = new Fragment_Students();
+                                Fragment studentsFragment = new Students();
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container,studentsFragment)
                                         .addToBackStack(null)
@@ -96,14 +106,14 @@ public class Activity_Dashboard extends AppCompatActivity
 
                                 break;
                             case 4:
-                                Fragment inventoryFragment = new Fragment_Inventory();
+                                Fragment inventoryFragment = new Inventory();
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container,inventoryFragment)
                                         .addToBackStack(null)
                                         .commit();
                                 break;
                             case 5:
-                                Fragment feedbackFragment = new Fragment_Feedback();
+                                Fragment feedbackFragment = new Feedback();
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container,feedbackFragment)
                                         .addToBackStack(null)
@@ -111,7 +121,7 @@ public class Activity_Dashboard extends AppCompatActivity
 
                                 break;
                             case 6:
-                                Fragment settingsFragment = new Fragment_Settings();
+                                Fragment settingsFragment = new Settings();
                                 fragmentManager.beginTransaction()
                                         .replace(R.id.frame_container,settingsFragment)
                                         .addToBackStack(null)
@@ -129,7 +139,7 @@ public class Activity_Dashboard extends AppCompatActivity
                 .withSavedInstance(savedInstanceState)
                 .build();
 
-        Fragment dashboardFragment = new Fragment_Dashboard();
+        Fragment dashboardFragment = new mobile_development.damon.projectb.Fragments.Main.Dashboard();
         fragmentManager.beginTransaction()
                 .replace(R.id.frame_container,dashboardFragment)
                 .addToBackStack(null)
@@ -154,7 +164,7 @@ public class Activity_Dashboard extends AppCompatActivity
     @Override
     public void onBackPressed() {
         if (exit_state) {
-            Activity_Dashboard.this.finish();
+            Dashboard.this.finish();
             return;
         }
 
@@ -190,7 +200,8 @@ public class Activity_Dashboard extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int which)
                     {
                         SharedPreference.unsetLogin(getApplicationContext());
-                        Intent intent = new Intent(Activity_Dashboard.this, Activity_Login.class);
+                        Intent intent = new Intent(Dashboard.this, Login.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                     }
                 });

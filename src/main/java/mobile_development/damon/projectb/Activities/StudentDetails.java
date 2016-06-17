@@ -40,7 +40,7 @@ import mobile_development.damon.projectb.Models.Student;
 import mobile_development.damon.projectb.NetworkHandler;
 import mobile_development.damon.projectb.R;
 
-public class Activity_Student_Details extends AppCompatActivity {
+public class StudentDetails extends AppCompatActivity {
 
 
     public int student_id;
@@ -149,7 +149,7 @@ public class Activity_Student_Details extends AppCompatActivity {
             public void onClick(View v)
             {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Student_Details.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(StudentDetails.this);
                 builder.setTitle("Change student avatar");
                 builder.setItems(dialog_options, new DialogInterface.OnClickListener() {
                     @Override

@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Adapters;
 
 /**
  * Created by damon on 10/9/2015.
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+
+import mobile_development.damon.projectb.R;
 
 public class GridViewAdapter extends BaseSwipeAdapter {
 

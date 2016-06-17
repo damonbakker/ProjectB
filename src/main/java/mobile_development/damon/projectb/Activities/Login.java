@@ -30,23 +30,20 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import mobile_development.damon.projectb.Activity_Dashboard;
-import mobile_development.damon.projectb.Activity_Register;
 import mobile_development.damon.projectb.AppConfig;
-import mobile_development.damon.projectb.Models.Login;
 import mobile_development.damon.projectb.NetworkHandler;
 import mobile_development.damon.projectb.R;
 import mobile_development.damon.projectb.SharedPreference;
 
 
-public class Activity_Login extends AppCompatActivity
+public class Login extends AppCompatActivity
 {
 
     public boolean touch_state = false;
     public boolean bugfix_state = false;
     public String background_color  = "#25ae90";
 
-    Login lm = new Login();
+    mobile_development.damon.projectb.Models.Login lm = new mobile_development.damon.projectb.Models.Login();
 
     public EditText input_email;
     public EditText input_password;
@@ -66,7 +63,7 @@ public class Activity_Login extends AppCompatActivity
         //check if user is logged in , if so send him through to the dashboard
         if (SharedPreference.checklogin(getApplicationContext()))
         {
-            Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+            Intent intent = new Intent(Login.this, Dashboard.class);
             startActivity(intent);
         }
         else
@@ -188,7 +185,7 @@ public class Activity_Login extends AppCompatActivity
         {
 
 
-            Intent intent = new Intent(Activity_Login.this, Activity_Register.class);
+            Intent intent = new Intent(Login.this, Register.class);
             intent.putExtra("background_color",background_color);
             startActivity(intent);
             overridePendingTransition(R.anim.pull_from_right, R.anim.push_to_left);
@@ -221,7 +218,7 @@ public class Activity_Login extends AppCompatActivity
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                         SharedPreference.setLogin(getApplicationContext(), email,id);
-                        Intent intent = new Intent(Activity_Login.this, Activity_Dashboard.class);
+                        Intent intent = new Intent(Login.this, Dashboard.class);
                         startActivity(intent);
 
                     }
@@ -277,7 +274,7 @@ public class Activity_Login extends AppCompatActivity
         int socketTimeout = 10000;//30 seconds - change to what you want
         RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
-        NetworkHandler.getInstance(Activity_Login.this).addToRequestQueue(stringRequest);
+        NetworkHandler.getInstance(Login.this).addToRequestQueue(stringRequest);
 
     }
 

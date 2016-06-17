@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_assign_project"
-    tools:context="mobile_development.damon.projectb.Activity_Assign_Project">
+    tools:context=".Activities.AssignProject">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_assign_project"

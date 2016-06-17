@@ -30,13 +30,13 @@ import java.util.List;
 import java.util.Map;
 
 import mobile_development.damon.projectb.AppConfig;
-import mobile_development.damon.projectb.ListAdapter_ExpandableList_NewProject;
+import mobile_development.damon.projectb.Adapters.ExpandableListNewProjectAdapter;
 import mobile_development.damon.projectb.Models.Project;
 import mobile_development.damon.projectb.NetworkHandler;
 import mobile_development.damon.projectb.R;
 import mobile_development.damon.projectb.SharedPreference;
 
-public class Activity_New_Project extends AppCompatActivity
+public class NewProject extends AppCompatActivity
 {
     public RelativeLayout layout;
     public ProgressBar waiting_response;
@@ -109,7 +109,7 @@ public class Activity_New_Project extends AppCompatActivity
 
     public void StartAssignProjectActivity(View v,String project_name,int project_id)
     {
-        Intent intent = new Intent(Activity_New_Project.this, Activity_Assign_Project.class);
+        Intent intent = new Intent(NewProject.this, AssignProject.class);
         // Pass data object in the bundle and populate details activity.
         intent.putExtra("project_name",project_name);
         intent.putExtra("project_id",project_id);
@@ -231,7 +231,7 @@ public class Activity_New_Project extends AppCompatActivity
                     View footerView = ((LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.list_footer_new_project, null, false);
                     mainlistview_projects.addFooterView(footerView);
 
-                    listAdapter = new ListAdapter_ExpandableList_NewProject(getApplicationContext(),listDataHeader, listDataChild);
+                    listAdapter = new ExpandableListNewProjectAdapter(getApplicationContext(),listDataHeader, listDataChild);
                     // setting list adapter
                     mainlistview_projects.setAdapter(listAdapter);
 
@@ -265,7 +265,7 @@ public class Activity_New_Project extends AppCompatActivity
                 // Posting parameters to login url
                 Map<String, String> params = new HashMap<>();
                 params.put("tag", "retrieve_projects");
-                params.put("user_id",String.valueOf(SharedPreference.getId(Activity_New_Project.this)));
+                params.put("user_id",String.valueOf(SharedPreference.getId(NewProject.this)));
 
                 return params;
             }

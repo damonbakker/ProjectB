@@ -1,11 +1,8 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Fragments.Main;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,26 +21,24 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 
-import mobile_development.damon.projectb.Models.Project;
+import mobile_development.damon.projectb.AppConfig;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
+import mobile_development.damon.projectb.SharedPreference;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Fragment_Feedback.OnFragmentInteractionListener} interface
+ * {@link Feedback.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment_Feedback#newInstance} factory method to
+ * Use the {@link Feedback#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Feedback extends Fragment {
+public class Feedback extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -70,8 +64,8 @@ public class Fragment_Feedback extends Fragment {
      * @return A new instance of fragment Fragment_Feedback.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_Feedback newInstance(String param1, String param2) {
-        Fragment_Feedback fragment = new Fragment_Feedback();
+    public static Feedback newInstance(String param1, String param2) {
+        Feedback fragment = new Feedback();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -79,7 +73,7 @@ public class Fragment_Feedback extends Fragment {
         return fragment;
     }
 
-    public Fragment_Feedback() {
+    public Feedback() {
         // Required empty public constructor
     }
 
@@ -192,9 +186,10 @@ public class Fragment_Feedback extends Fragment {
             }
             else
             {
-                Toast toast =  Toast.makeText(getActivity(), "Invalid input", Toast.LENGTH_SHORT);
+                //No input
+                /*Toast toast =  Toast.makeText(getActivity(), "Invalid input", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER,0,0);
-                toast.show();
+                toast.show();*/
             }
         }
     };

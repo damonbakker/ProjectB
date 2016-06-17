@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,11 +16,12 @@ import java.util.Date;
 import java.util.List;
 
 import mobile_development.damon.projectb.Models.Project;
+import mobile_development.damon.projectb.R;
 
 /**
  * Created by Damon on 10/4/2015.
  */
-public class ListAdapter_Projects extends ArrayAdapter<Project>
+public class ProjectsAdapter extends ArrayAdapter<Project>
 {
     private LayoutInflater inflater;
     private Context _context;
@@ -28,7 +29,7 @@ public class ListAdapter_Projects extends ArrayAdapter<Project>
     private int _layourresourceid;
     private Activity activity;
 
-    public ListAdapter_Projects(Context context,int layoutResourceId,List<Project> projects)
+    public ProjectsAdapter(Context context, int layoutResourceId, List<Project> projects)
     {
         //Call super constructor for extending class initialisation (has no default)
         super(context,layoutResourceId);

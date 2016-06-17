@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Adapters;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +8,11 @@ import android.widget.TextView;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 import mobile_development.damon.projectb.R;
 
-public class ListAdapter_Inventory extends BaseSwipeAdapter {
+public class InventoryAdapter extends BaseSwipeAdapter {
 
     private Context mContext;
 
-    public ListAdapter_Inventory(Context mContext) {
+    public InventoryAdapter(Context mContext) {
         this.mContext = mContext;
     }
 

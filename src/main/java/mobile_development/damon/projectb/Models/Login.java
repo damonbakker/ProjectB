@@ -27,7 +27,7 @@ import java.util.Random;
  */
 
 
-public class Login extends Activity
+public class Login
 {
 
 
@@ -72,15 +72,12 @@ public class Login extends Activity
      * @param layout_current current visible background
      * @param layout_overlay current invisible background
      */
-
     public void LoginBackgroundChange(MotionEvent event,final RelativeLayout layout_current,final RelativeLayout layout_overlay)
     {
 
             switch (event.getAction())
             {
                 case MotionEvent.ACTION_DOWN:
-                    //pressed
-
 
                     //get pressed location(coordinates)
                     int x = (int)event.getX();
@@ -133,6 +130,7 @@ public class Login extends Activity
                         public void onAnimationRepeat(Animator animation)
                         {
                             //animation has repeated
+                            //Not working expected
                         }
                     });
 

@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Adapters;
 
 import android.app.Activity;
 import android.content.ClipData;
@@ -25,18 +25,20 @@ import java.util.List;
 import mobile_development.damon.projectb.Models.CircularNetworkImageView;
 import mobile_development.damon.projectb.Models.Project;
 import mobile_development.damon.projectb.Models.Student;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
 
 /**
  * Created by damon on 11/20/2015.
  */
-public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
+public class AssignProjectAdapter extends ArrayAdapter<Student> {
     private LayoutInflater inflater;
     private Context _context;
     private List<Student> _studentlist;
     private int _layourresourceid;
     private Activity activity;
 
-    public ListAdapter_Assign_Project(Context context,int layoutResourceId,List<Student> list)
+    public AssignProjectAdapter(Context context, int layoutResourceId, List<Student> list)
     {
         //Call super constructor for extending class initialisation (has no default)
         super(context,layoutResourceId);
@@ -87,7 +89,7 @@ public class ListAdapter_Assign_Project extends ArrayAdapter<Student> {
                 student_avatar.setDefaultImageResId(R.drawable.avatar_placeholder_white);
                 student_avatar.setErrorImageResId(R.drawable.avatar_placeholder_white);
                 //  student_avatar.setAdjustViewBounds(true);
-                student_avatar.setImageUrl(s.getAvatar_url(),NetworkHandler.getInstance(_context).getImageLoader());
+                student_avatar.setImageUrl(s.getAvatar_url(), NetworkHandler.getInstance(_context).getImageLoader());
             }
             catch (Exception e)
             {

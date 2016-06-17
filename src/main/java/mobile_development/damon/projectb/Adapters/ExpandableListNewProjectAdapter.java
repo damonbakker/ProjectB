@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Adapters;
 
 /**
  * Created by Damon on 10/1/2015.
@@ -15,14 +15,15 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
 
 import mobile_development.damon.projectb.Models.Project;
+import mobile_development.damon.projectb.R;
 
-public class ListAdapter_ExpandableList_NewProject extends BaseExpandableListAdapter
+public class ExpandableListNewProjectAdapter extends BaseExpandableListAdapter
 {
     private Context _context;
     private List<String> _listDataHeader;
     private HashMap<String, List<Project>> _listDataChild;
 
-    public ListAdapter_ExpandableList_NewProject(Context context, List<String> listDataHeader, HashMap<String, List<Project>> listChildData)
+    public ExpandableListNewProjectAdapter(Context context, List<String> listDataHeader, HashMap<String, List<Project>> listChildData)
     {
         this._context = context;
         this._listDataHeader = listDataHeader;

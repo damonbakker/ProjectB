@@ -1,30 +1,22 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Fragments.Main;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.TransitionInflater;
 import android.util.Log;
-import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ExpandableListAdapter;
-import android.widget.ExpandableListView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -40,19 +32,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mobile_development.damon.projectb.Models.Project;
+import mobile_development.damon.projectb.Activities.StudentDetails;
+import mobile_development.damon.projectb.AppConfig;
+import mobile_development.damon.projectb.Adapters.StudentsAdapter;
 import mobile_development.damon.projectb.Models.Student;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
+import mobile_development.damon.projectb.SharedPreference;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Fragment_Students.OnFragmentInteractionListener} interface
+ * {@link Students.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Fragment_Students#newInstance} factory method to
+ * Use the {@link Students#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Fragment_Students extends Fragment {
+public class Students extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -85,8 +82,8 @@ public class Fragment_Students extends Fragment {
      * @return A new instance of fragment Fragment_Students.
      */
     // TODO: Rename and change types and number of parameters
-    public static Fragment_Students newInstance(String param1, String param2) {
-        Fragment_Students fragment = new Fragment_Students();
+    public static Students newInstance(String param1, String param2) {
+        Students fragment = new Students();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -94,7 +91,7 @@ public class Fragment_Students extends Fragment {
         return fragment;
     }
 
-    public Fragment_Students() {
+    public Students() {
         // Required empty public constructor
     }
 
@@ -130,7 +127,7 @@ public class Fragment_Students extends Fragment {
         mainlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
-                Intent intent = new Intent(getActivity(), Activity_Student_Details.class);
+                Intent intent = new Intent(getActivity(), StudentDetails.class);
                 intent.putExtra("user_student_id",student_data.get(i).getUser_student_id());
                 intent.putExtra("student_name",student_data.get(i).getName());
                 getActivity().startActivity(intent);
@@ -192,7 +189,7 @@ public class Fragment_Students extends Fragment {
                         }
                     }
 
-                    ListAdapter_Students adapter = new ListAdapter_Students(getActivity(),R.layout.list_item_student,student_data);
+                    StudentsAdapter adapter = new StudentsAdapter(getActivity(),R.layout.list_item_student,student_data);
                     mainlistview.setAdapter(adapter);
 
 

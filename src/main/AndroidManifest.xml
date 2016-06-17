@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activity_Login"
+            android:name=".Activities.Login"
             android:label="@string/app_name"
             android:noHistory="true"
             android:screenOrientation="portrait"
@@ -27,37 +27,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity_Register"
-            android:label="@string/title_activity_register"
             android:noHistory="true"
+            android:name=".Activities.Register"
+            android:label="@string/title_activity_register"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"
             android:windowSoftInputMode="adjustResize"></activity>
         <activity
-            android:name=".Activity_Dashboard"
+            android:name=".Activities.Dashboard"
             android:label="@string/title_activity_activity__dashboard"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Activity_New_Project"
+            android:name=".Activities.NewProject"
             android:label="@string/title_activity_activity_new_project"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Activity_Assign_Project"
+            android:name=".Activities.AssignProject"
             android:label="@string/title_activity_activity_assign_project"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".Activity_Student_Details"
+            android:name=".Activities.StudentDetails"
             android:label="@string/title_activity_activity__student__details"
             android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".Models.Test_dragandrop"
-            android:label="@string/title_activity_test_dragandrop"></activity>
-        <activity
-            android:name=".Activity_dropandrop"
-            android:label="@string/title_activity_activity_dropandrop"></activity>
-        <activity
-            android:name=".Activity_CropAvatar"
-            android:label="@string/title_activity_activity__crop_avatar"></activity>
     </application>
 
 </manifest>

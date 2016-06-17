@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:fab="http://schemas.android.com/apk/res-auto"
 
-    tools:context="mobile_development.damon.projectb.Activity_Student_Details">
+    tools:context=".Activities.StudentDetails">
 
 
     <android.support.v7.widget.Toolbar
