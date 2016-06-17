@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,7 +26,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import mobile_development.damon.projectb.AppConfig;
 import mobile_development.damon.projectb.Models.Login;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
 
 
 public class Activity_Register extends AppCompatActivity

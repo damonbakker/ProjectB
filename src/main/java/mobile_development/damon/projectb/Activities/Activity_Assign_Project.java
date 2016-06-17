@@ -1,7 +1,6 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Activities;
 
 import android.content.ClipData;
-import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,8 +41,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import mobile_development.damon.projectb.AppConfig;
+import mobile_development.damon.projectb.ListAdapter_Assign_Project;
 import mobile_development.damon.projectb.Models.CircularNetworkImageView;
 import mobile_development.damon.projectb.Models.Student;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
+import mobile_development.damon.projectb.SharedPreference;
 
 public class Activity_Assign_Project extends AppCompatActivity {
 
@@ -672,21 +675,14 @@ public class Activity_Assign_Project extends AppCompatActivity {
     {
         float mult = 100; // must be total coding
 
-
-
-
-
         project_aspects_names.add("Coding");
         project_aspects_names.add("Planning");
         project_aspects_names.add("Design");
 
 
         PieDataSet dataSet = new PieDataSet(project_aspects_values, "Aspects");
-       /* dataSet.setSliceSpace(2f);
-        dataSet.setSelectionShift(5f);*/
 
         // add a lot of colors
-
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
         colors.add(ContextCompat.getColor(Activity_Assign_Project.this, R.color.coding));

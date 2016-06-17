@@ -1,10 +1,8 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Activities;
 
-import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,7 +12,6 @@ import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +29,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import mobile_development.damon.projectb.AppConfig;
+import mobile_development.damon.projectb.ListAdapter_ExpandableList_NewProject;
 import mobile_development.damon.projectb.Models.Project;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
+import mobile_development.damon.projectb.SharedPreference;
 
 public class Activity_New_Project extends AppCompatActivity
 {

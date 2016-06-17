@@ -1,4 +1,4 @@
-package mobile_development.damon.projectb;
+package mobile_development.damon.projectb.Activities;
 
 
 import android.content.Intent;
@@ -30,7 +30,13 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import mobile_development.damon.projectb.Activity_Dashboard;
+import mobile_development.damon.projectb.Activity_Register;
+import mobile_development.damon.projectb.AppConfig;
 import mobile_development.damon.projectb.Models.Login;
+import mobile_development.damon.projectb.NetworkHandler;
+import mobile_development.damon.projectb.R;
+import mobile_development.damon.projectb.SharedPreference;
 
 
 public class Activity_Login extends AppCompatActivity
