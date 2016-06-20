@@ -159,7 +159,7 @@ public class AssignProject extends AppCompatActivity {
         project_chart.setDescription("");
         project_chart.setExtraOffsets(5, 10, 5, 5);
 
-        project_chart.setCenterText(generateCenterSpannableText());
+        project_chart.setCenterText(generateCenterSpannableText(20));
 
         project_chart.setDrawHoleEnabled(true);
         project_chart.setHoleColorTransparent(true);
@@ -197,10 +197,10 @@ public class AssignProject extends AppCompatActivity {
         super.onBackPressed();
 
     }
-    private SpannableString generateCenterSpannableText() {
+    private SpannableString generateCenterSpannableText(int chance) {
 
-        SpannableString s = new SpannableString("Project aspects");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, 15, 0);
+        SpannableString s = new SpannableString("1%");
+        s.setSpan(new RelativeSizeSpan(1.7f), 0, 2, 0   );
         s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 15);
         s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 15);
         return s;
@@ -580,7 +580,7 @@ public class AssignProject extends AppCompatActivity {
         data.setValueTextColor(Color.WHITE);
 
         project_chart.setData(data);
-
+        project_chart.setNoDataText(" ");
         // undo all highlights
         project_chart.highlightValues(null);
 
