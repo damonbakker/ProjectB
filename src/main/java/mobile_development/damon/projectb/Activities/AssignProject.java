@@ -45,6 +45,7 @@ import mobile_development.damon.projectb.AppConfig;
 import mobile_development.damon.projectb.Adapters.AssignProjectAdapter;
 import mobile_development.damon.projectb.Models.CircularNetworkImageView;
 import mobile_development.damon.projectb.Models.Student;
+import mobile_development.damon.projectb.Models.StudentSlot;
 import mobile_development.damon.projectb.NetworkHandler;
 import mobile_development.damon.projectb.R;
 import mobile_development.damon.projectb.SharedPreference;
@@ -59,7 +60,7 @@ public class AssignProject extends AppCompatActivity {
     public TextView coding_indicator2,coding_value2,planning_indicator2,planning_value2,design_indicator2,design_value2;
     public TextView coding_indicator3,coding_value3,planning_indicator3,planning_value3,design_indicator3,design_value3;
     public TextView display_info_left,display_info_middle,display_info_right;
-    public CircularNetworkImageView avatarleft,avatarmiddle,avatarright;
+    public CircularNetworkImageView avatarleft,avatarmiddle, avatar_right;
     public PieChart project_chart;
 
     public TwoWayView mainlist;
@@ -70,25 +71,22 @@ public class AssignProject extends AppCompatActivity {
     public ArrayList<Entry> project_aspects_values = new ArrayList<Entry>();
     public ArrayList<String> project_aspects_names = new ArrayList<String>();
 
+
     public int coding_weight;
+
     public int planning_weight;
     public int design_weight;
     public int difficulty;
     public DateTime duration;
 
-
-
+    public ArrayList<StudentSlot> student_slots = new ArrayList<StudentSlot>();
     public List<Student> student_data = new ArrayList<>();
 
-    //hashmap with key:field position and value is position in active_student_data FOR checking if student is already placed
-    Map<Integer, Integer> active_student_position_map = new ConcurrentHashMap<>();
-    //for assigning dynamic integers for position of student spots
-    Map<String, Integer> student_field_position_map = new HashMap<>();
+    //Hashmap with key:field position || value is position in active_student_data(index), for checking if student is already placed
+    Map<Integer, Integer> active_student_map = new ConcurrentHashMap<>();
 
     public List<Student> active_student_data = Arrays.asList(new Student[5]);
 
-
-    
 
 
     @Override
@@ -106,9 +104,6 @@ public class AssignProject extends AppCompatActivity {
         getSupportActionBar().setTitle(getResources().getString(R.string.title_toolbar_assign_project));
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
 
-        student_field_position_map.put("left", 3);
-        student_field_position_map.put("center", 2);
-        student_field_position_map.put("right", 1);
 
         project_name = (TextView) findViewById(R.id.project_name);
         mainlist = (TwoWayView) findViewById(R.id.lvItems);
@@ -124,40 +119,40 @@ public class AssignProject extends AppCompatActivity {
         total_planning_value = (TextView) findViewById(R.id.total_planning_value);
 
         assigned_student_right = (RelativeLayout) findViewById(R.id.student_item_1);
-        assigned_student_middle = (RelativeLayout) findViewById(R.id.student_item_2);
-        assigned_student_left = (RelativeLayout) findViewById(R.id.student_item_3);
-
-        avatarright = (CircularNetworkImageView) findViewById(R.id.avatar);
-        avatarmiddle = (CircularNetworkImageView) findViewById(R.id.avatar2);
-        avatarleft = (CircularNetworkImageView) findViewById(R.id.avatar3);
-
+        avatar_right = (CircularNetworkImageView) findViewById(R.id.avatar);
         coding_indicator = (TextView) findViewById(R.id.coding_indicator);
-        coding_indicator2 = (TextView) findViewById(R.id.coding_indicator2);
-        coding_indicator3 = (TextView) findViewById(R.id.coding_indicator3);
-
         planning_indicator = (TextView) findViewById(R.id.planning_indicator);
-        planning_indicator2 = (TextView) findViewById(R.id.planning_indicator2);
-        planning_indicator3 = (TextView) findViewById(R.id.planning_indicator3);
-
         design_indicator = (TextView) findViewById(R.id.design_indicator);
-        design_indicator2 = (TextView) findViewById(R.id.design_indicator2);
-        design_indicator3 = (TextView) findViewById(R.id.design_indicator3);
-
         coding_value = (TextView) findViewById(R.id.coding_value);
-        coding_value2 = (TextView) findViewById(R.id.coding_value2);
-        coding_value3 = (TextView) findViewById(R.id.coding_value3);
-
         planning_value = (TextView) findViewById(R.id.planning_value);
-        planning_value2 = (TextView) findViewById(R.id.planning_value2);
-        planning_value3 = (TextView) findViewById(R.id.planning_value3);
-
         design_value = (TextView) findViewById(R.id.design_value);
-        design_value2 = (TextView) findViewById(R.id.design_value2);
-        design_value3 = (TextView) findViewById(R.id.design_value3);
-
-        display_info_left = (TextView) findViewById(R.id.display_placeholder_text_left);
         display_info_right = (TextView) findViewById(R.id.display_placeholder_text_right);
+
+        student_slots.add(new StudentSlot(assigned_student_right, avatar_right,coding_indicator,planning_indicator,design_indicator,coding_value,planning_value,design_value,display_info_right));
+
+        assigned_student_middle = (RelativeLayout) findViewById(R.id.student_item_2);
+        coding_indicator2 = (TextView) findViewById(R.id.coding_indicator2);
+        planning_indicator2 = (TextView) findViewById(R.id.planning_indicator2);
+        design_indicator2 = (TextView) findViewById(R.id.design_indicator2);
+        planning_value2 = (TextView) findViewById(R.id.planning_value2);
+        coding_value2 = (TextView) findViewById(R.id.coding_value2);
+        design_value2 = (TextView) findViewById(R.id.design_value2);
         display_info_middle = (TextView) findViewById(R.id.display_placeholder_text_middle);
+        avatarmiddle = (CircularNetworkImageView) findViewById(R.id.avatar2);
+
+        student_slots.add(new StudentSlot(assigned_student_middle,avatarmiddle,coding_indicator2,planning_indicator2,design_indicator2,coding_value2,planning_value2,design_value2,display_info_middle));
+
+        assigned_student_left = (RelativeLayout) findViewById(R.id.student_item_3);
+        avatarleft = (CircularNetworkImageView) findViewById(R.id.avatar3);
+        coding_indicator3 = (TextView) findViewById(R.id.coding_indicator3);
+        planning_indicator3 = (TextView) findViewById(R.id.planning_indicator3);
+        design_indicator3 = (TextView) findViewById(R.id.design_indicator3);
+        coding_value3 = (TextView) findViewById(R.id.coding_value3);
+        planning_value3 = (TextView) findViewById(R.id.planning_value3);
+        design_value3 = (TextView) findViewById(R.id.design_value3);
+        display_info_left = (TextView) findViewById(R.id.display_placeholder_text_left);
+
+        student_slots.add(new StudentSlot(assigned_student_left,avatarleft,coding_indicator3,planning_indicator3,design_indicator3,coding_value3,planning_value3,design_value3,display_info_left));
 
         project_chart = (PieChart) findViewById(R.id.chart1);
         project_chart.setDragDecelerationFrictionCoef(0.95f);
@@ -168,25 +163,20 @@ public class AssignProject extends AppCompatActivity {
 
         project_chart.setDrawHoleEnabled(true);
         project_chart.setHoleColorTransparent(true);
-
         project_chart.setTransparentCircleColor(Color.WHITE);
         project_chart.setTransparentCircleAlpha(110);
-
         project_chart.setHoleRadius(58f);
         project_chart.setTransparentCircleRadius(61f);
-
         project_chart.setDrawCenterText(true);
-
         project_chart.setRotationAngle(0);
-
         project_chart.setRotationEnabled(true);
         project_chart.setHighlightPerTapEnabled(true);
-
         project_chart.getLegend().setEnabled(false);
 
         assigned_student_right.setOnDragListener(AssignStudentDragListener);
         assigned_student_middle.setOnDragListener(AssignStudentDragListener);
         assigned_student_left.setOnDragListener(AssignStudentDragListener);
+
 
         setProjectData();
         setListData();
@@ -203,8 +193,8 @@ public class AssignProject extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
-        super.onBackPressed();
         project_chart.setVisibility(View.INVISIBLE);
+        super.onBackPressed();
 
     }
     private SpannableString generateCenterSpannableText() {
@@ -222,54 +212,140 @@ public class AssignProject extends AppCompatActivity {
         public boolean onDrag(View v, DragEvent event)
         {
             int action = event.getAction();
-            switch (event.getAction()) {
+            switch (event.getAction())
+            {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    //do nothing
-
+                    for (Student student : student_data)
+                    {
+                        Log.i("ALLIDS",Integer.toString(student.getId()));
+                        Log.i("ALLIDS",student.getName());
+                    }
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    Log.i("DRAG", "BINNEN DRAG");
+
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
 
                     break;
                 case DragEvent.ACTION_DROP:
-                    //Dragged object for the drop
+
                     View view = (View) event.getLocalState();
 
                     //get student position in list from ClipData
                     ClipData.Item item = event.getClipData().getItemAt(0);
-                    int student_position = Integer.parseInt(item.getText().toString());
+                    int StudentPosition = Integer.parseInt(item.getText().toString());
+                    //Retrieve student from location in list
+                    Log.i("POS",item.getText().toString());
+                    Student s = student_data.get(StudentPosition);
 
-                    //retrieve student from location in list
-                    Student s = student_data.get(student_position);
-
-                    switch (v.getId())
+                    for (Student student : student_data)
                     {
-                        case R.id.student_item_1:
-                            break;
+                        Log.i("ALLIDS",String.valueOf(student.getId()));
+                        Log.i("ALLIDS",s.getName());
                     }
 
-                    Log.i("VIEWID",String.valueOf(v.getId()));
-                    Log.i("VIEWID RIGHT",String.valueOf(R.id.student_item_1));
+                    Log.i("STUDENTID",String.valueOf(s.getId()));
 
+                    for (Map.Entry<Integer, Integer> entry : active_student_map.entrySet())
+                    {
+                        Integer key = entry.getKey();
+                        Integer value = entry.getValue();
+
+                        Log.i("HASHMAP KEY",key.toString());
+                        Log.i("HASHMAP Value",value.toString());
+                    }
+
+                    if (!active_student_map.containsValue(s.getId()))
+                    {
+                        switch (v.getId())
+                        {
+                            case R.id.student_item_1:
+                                //Right
+                                Log.i("Student item","Item 1");
+                                //write the student to the map that contains all active students
+                                active_student_data.set(0, s);
+                                //write the ID of the student to the map that keeps track of who is where
+                                active_student_map.put(1, s.getId());
+                                //Fill the view data
+
+                                StudentSlot slot1 = student_slots.get(0);
+                                slot1.assignStudentToSlot(AssignProject.this,s);
+                                break;
+                            case R.id.student_item_2:
+                                //Center
+                                Log.i("Student item","Item 2");
+                                //write the student to the map that contains all active students
+                                active_student_data.set(1, s);
+                                //write the position of the student to the map that keeps track of who is where
+                                active_student_map.put(2, s.getId());
+
+                                StudentSlot slot2 = student_slots.get(1);
+                                slot2.assignStudentToSlot(AssignProject.this,s);
+                                break;
+                            case R.id.student_item_3:
+                                //Left
+                                Log.i("Student item","Item 3");
+                                //write the student to the map that contains all active students
+                                active_student_data.set(2, s);
+                                //write the position of the student to the map that keeps track of who is where
+                                active_student_map.put(3, s.getId());
+
+                                StudentSlot slot3 = student_slots.get(2);
+                                slot3.assignStudentToSlot(AssignProject.this,s);
+                                break;
+                        }
+
+                    }
+                    else
+                    {
+                        Toast toast = Toast.makeText(getApplicationContext(), "Student already placed", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
+                    }
+
+/*
                     //check if the student is already assigned somewhere
                     if (CheckStudentSpot(student_field_position_map.get("center"), student_position))
                     {
                         int student_field_position_id = student_field_position_map.get("center");
 
+                        Log.i("Field_Position",String.valueOf(student_field_position_id));
                         //write the student to the map that contains all active students
                         active_student_data.set(student_field_position_id - 1, s);
                         //write the position of the student to the map that keeps track of who is where
-                        active_student_position_map.put(student_field_position_id, student_position);
+                        active_student_map.put(student_field_position_id, student_position);
                         //change visible dataset
                         setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s, planning_indicator2, coding_indicator2, design_indicator2, display_info_middle);
 
                     }
+                    else if(CheckStudentSpot(student_field_position_map.get("left"), student_position))
+                    {
+                        int student_field_position_id = student_field_position_map.get("center");
+
+                        Log.i("Field_Position",String.valueOf(student_field_position_id));
+                        //write the student to the map that contains all active students
+                        active_student_data.set(student_field_position_id - 1, s);
+                        //write the position of the student to the map that keeps track of who is where
+                        active_student_map.put(student_field_position_id, student_position);
+                        //change visible dataset
+                        setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s, planning_indicator2, coding_indicator2, design_indicator2, display_info_middle);
+                    }
+                    else if(CheckStudentSpot(student_field_position_map.get("right"), student_position))
+                    {
+                        int student_field_position_id = student_field_position_map.get("center");
+
+                        Log.i("Field_Position",String.valueOf(student_field_position_id));
+                        //write the student to the map that contains all active students
+                        active_student_data.set(student_field_position_id - 1, s);
+                        //write the position of the student to the map that keeps track of who is where
+                        active_student_map.put(student_field_position_id, student_position);
+                        //change visible dataset
+                        setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s, planning_indicator2, coding_indicator2, design_indicator2, display_info_middle);
+                    }
 
                     Toast toast = Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
+                    toast.show();*/
 
                     break;
                 default:
@@ -280,167 +356,6 @@ public class AssignProject extends AppCompatActivity {
         }
 
     };
-
-    public class MiddleStudentDragListener implements View.OnDragListener {
-
-        @Override
-        public boolean onDrag(View v, DragEvent event)
-        {
-            int action = event.getAction();
-            switch (event.getAction()) {
-                case DragEvent.ACTION_DRAG_STARTED:
-                    // do nothing
-
-                    break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-                    Log.i("DRAG","BINNEN DRAG");
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-
-                    break;
-                case DragEvent.ACTION_DROP:
-                    View view = (View) event.getLocalState();
-                    //get student position in list from clipdata
-                    ClipData.Item item = event.getClipData().getItemAt(0);
-                    int student_position = Integer.parseInt(item.getText().toString());
-
-                    //retrieve student from location in list
-                    Student s = student_data.get(student_position);
-
-                    //check if the student is already assigned somewhere
-                    if (CheckStudentSpot(student_field_position_map.get("center"),student_position))
-                    {
-
-                        int student_field_position_id = student_field_position_map.get("center");
-
-                        //write the student to the map that contains all active students
-                        active_student_data.set(student_field_position_id - 1, s);
-                        //write the position of the student to the map that keeps track of who is where
-                        active_student_position_map.put(student_field_position_id, student_position);
-                        //change visible dataset
-                        setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s,planning_indicator2,coding_indicator2,design_indicator2,display_info_middle);
-
-                    }
-
-                    Toast toast =  Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-
-                    break;
-                default:
-                    break;
-            }
-            return true;
-        }
-    }
-
-    public class RightStudentDragListener implements View.OnDragListener {
-
-
-        @Override
-        public boolean onDrag(View v, DragEvent event) {
-            int action = event.getAction();
-            switch (event.getAction()) {
-                case DragEvent.ACTION_DRAG_STARTED:
-                    // do nothing
-
-                    break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-
-                    break;
-                case DragEvent.ACTION_DROP:
-
-                    View view = (View) event.getLocalState();
-                    //get student position in list from clipdata
-                    ClipData.Item item = event.getClipData().getItemAt(0);
-                    int student_position = Integer.parseInt(item.getText().toString());
-
-                    //retrieve student from location in list
-                    Student s = student_data.get(student_position);
-
-                    //check if the student is already assigned somewhere
-                    if (CheckStudentSpot(student_field_position_map.get("right"),student_position))
-                    {
-
-                        int student_field_position_id = student_field_position_map.get("right");
-
-                        //write the student to the map that contains all active students
-                        active_student_data.set(student_field_position_id - 1, s);
-                        //write the position of the student to the map that keeps track of who is where
-                        active_student_position_map.put(student_field_position_id, student_position);
-                        //change visible dataset
-                        setStudentData(avatarright, coding_value, planning_value, design_value, s,design_indicator,planning_indicator,coding_indicator,display_info_right);
-
-                    }
-
-                    Toast toast =  Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-
-                    break;
-
-                default:
-
-                    break;
-            }
-            return true;
-        }
-    }
-
-    public class LeftStudentDragListener implements View.OnDragListener {
-
-        @Override
-        public boolean onDrag(View v, DragEvent event) {
-            int action = event.getAction();
-            switch (event.getAction()) {
-                case DragEvent.ACTION_DRAG_STARTED:
-
-                    break;
-                case DragEvent.ACTION_DRAG_ENTERED:
-
-                    break;
-                case DragEvent.ACTION_DRAG_EXITED:
-
-                    break;
-                case DragEvent.ACTION_DROP:
-
-                    View view = (View) event.getLocalState();
-                    //get student position in list from clipdata
-                    ClipData.Item item = event.getClipData().getItemAt(0);
-                    int student_position = Integer.parseInt(item.getText().toString());
-
-                    //retrieve student from location in list
-                    Student s = student_data.get(student_position);
-
-                    //check if the student is already assigned somewhere
-                    if (CheckStudentSpot(student_field_position_map.get("left"),student_position))
-                    {
-
-                        int student_field_position_id = student_field_position_map.get("left");
-
-                        //write the student to the map that contains all active students
-                        active_student_data.set(student_field_position_id - 1, s);
-                        //write the position of the student to the map that keeps track of who is where
-                        active_student_position_map.put(student_field_position_id, student_position);
-                        //change visible dataset
-                        setStudentData(avatarleft, coding_value3, planning_value3, design_value3, s,planning_indicator3,design_indicator3,coding_indicator3,display_info_left);
-
-                    }
-
-                    Toast toast =  Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();
-
-                    break;
-                default:
-                    break;
-            }
-            return true;
-        }
-    }
 
     private void setListData()
     {
@@ -465,7 +380,7 @@ public class AssignProject extends AppCompatActivity {
                         try
                         {
                             JSONObject obj_student = data.getJSONObject(i);
-                            student_data.add(new Student(obj_student.getInt("id"),obj_student.getString("name"),obj_student.getInt("level"),obj_student.getInt("planning"),obj_student.getInt("design"),obj_student.getInt("coding"),obj_student.getString("avatar")));
+                            student_data.add(new Student(obj_student.getInt("id"),obj_student.getString("name"),obj_student.getInt("level"),obj_student.getInt("planning"),obj_student.getInt("design"),obj_student.getInt("coding"),obj_student.getInt("motivation"),obj_student.getInt("leading"),obj_student.getString("avatar")));
                         }
                         catch (JSONException e)
                         {
@@ -528,8 +443,6 @@ public class AssignProject extends AppCompatActivity {
                 try
                 {
                     JSONObject response_obj = new JSONObject(response);
-                    Log.i("RESPONSE",response_obj.toString());
-                    Log.i("RESPONSE", response_obj.getString("name"));
 
                     project_duration.setText(response_obj.getString("duration"));
 
@@ -582,35 +495,7 @@ public class AssignProject extends AppCompatActivity {
 
     public void setStudentData(CircularNetworkImageView avatar,TextView coding_value,TextView planning_value,TextView design_value,Student active_student,TextView planning_indicator,TextView coding_indicator,TextView design_indicator,TextView info_display)
     {
-        try{
 
-            Log.i("SetSTudentdataright",active_student_position_map.get(1).toString());
-        }
-        catch (Exception e)
-        {
-            Log.i("SetSTudentdataright","null");
-
-        }
-        try{
-            Log.i("SetSTudentdatamiddle",active_student_position_map.get(2).toString());
-
-        }
-        catch (Exception e)
-        {
-            Log.i("SetSTudentdatamiddle","null");
-
-        }
-        try{
-            Log.i("SetSTudentdataleft",active_student_position_map.get(3).toString());
-
-        }
-        catch (Exception e)
-        {
-            Log.i("SetSTudentdataleft","null");
-
-        }
-
-        Log.i("new","ACTIVE STUDENTSnow");
 
         int coding = 0;
         int planning = 0;
@@ -620,7 +505,6 @@ public class AssignProject extends AppCompatActivity {
             if (active_student_data.get(i) != null)
             {
                 Log.i("NOWSTUDENTDATA",active_student_data.get(i).getName());
-                Log.i("total coding",String.valueOf(active_student_data.get(i).getCoding()));
 
                 coding = coding + active_student_data.get(i).getCoding();
                 planning = planning + active_student_data.get(i).getPlanning();
@@ -631,10 +515,6 @@ public class AssignProject extends AppCompatActivity {
         totalcoding = coding;
         totalplanning = planning;
         totaldesign = design;
-
-        Log.i("totaldesign",String.valueOf(totaldesign));
-        Log.i("totalplannng",String.valueOf(totalplanning));
-        Log.i("totalcoding",String.valueOf(totalcoding));
 
         total_design_value.setText(String.valueOf(totaldesign));
         total_planning_value.setText(String.valueOf(totalplanning));
@@ -708,17 +588,7 @@ public class AssignProject extends AppCompatActivity {
         project_chart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
     }
 
-    public boolean CheckStudentSpot(int position_field,int id)
-    {
-        if (active_student_position_map.containsValue(id))
-        {
-            Log.i("Checkstudent","STUDENT ID ALREADY PLACED");
-            Log.i("Checkstudent", "You can't use a student twice");
-            return false;
-        }
 
-        return true;
-    }
 
 
 }

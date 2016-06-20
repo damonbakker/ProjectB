@@ -75,8 +75,6 @@ public class AssignProjectAdapter extends ArrayAdapter<Student> {
 
         Student s = _studentlist.get(position);
 
-
-
             coding_value.setText(String.valueOf(s.getCoding()));
             planning_value.setText(String.valueOf(s.getPlanning()));
             design_value.setText(String.valueOf(s.getDesign()));
@@ -88,12 +86,12 @@ public class AssignProjectAdapter extends ArrayAdapter<Student> {
             {
                 student_avatar.setDefaultImageResId(R.drawable.avatar_placeholder_white);
                 student_avatar.setErrorImageResId(R.drawable.avatar_placeholder_white);
-                //  student_avatar.setAdjustViewBounds(true);
+                //Student_avatar.setAdjustViewBounds(true);
                 student_avatar.setImageUrl(s.getAvatar_url(), NetworkHandler.getInstance(_context).getImageLoader());
             }
             catch (Exception e)
             {
-                Log.i("FAIL", e.toString());
+                Log.i("FailedImgPlacement", e.toString());
             }
         }
 
@@ -101,11 +99,11 @@ public class AssignProjectAdapter extends ArrayAdapter<Student> {
         convertView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ClipData data = ClipData.newPlainText("test", String.valueOf(position));
+                ClipData data = ClipData.newPlainText("CurrentStudentPosition", String.valueOf(position));
                 Log.i("Dragstart",_studentlist.get(position).getName());
                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
                 v.startDrag(data, shadowBuilder, v, 0);
-              //  v.setVisibility(View.INVISIBLE);
+
                 return true;
             }
         });

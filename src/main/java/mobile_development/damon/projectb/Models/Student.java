@@ -38,6 +38,20 @@ public class Student
         this.latest_apply = latest_apply;
     }
 
+    public Student(int id, String name, int level, int planning, int design, int coding, int motivation, int leading,String avatar)
+    {
+        this.id = id;
+        this.name = name;
+        this.level = level;
+        this.planning = planning;
+        this.design = design;
+        this.coding = coding;
+        this.motivation = motivation;
+        this.leading = leading;
+        this.avatar_url = avatar;
+
+    }
+
     public Student(int user_student_id, String name, int level, int planning, int design, int coding,String avatar)
     {
         this.user_student_id = user_student_id;
