@@ -68,14 +68,14 @@ public class AssignProject extends AppCompatActivity {
     public int totalcoding;
     public int totalplanning;
     public int totaldesign;
+
     public ArrayList<Entry> project_aspects_values = new ArrayList<Entry>();
     public ArrayList<String> project_aspects_names = new ArrayList<String>();
 
 
-    public int coding_weight;
-
-    public int planning_weight;
-    public int design_weight;
+    public float coding_weight;
+    public float planning_weight;
+    public float design_weight;
     public int difficulty;
     public DateTime duration;
 
@@ -114,9 +114,6 @@ public class AssignProject extends AppCompatActivity {
         project_name.setText(getIntent().getStringExtra("project_name"));
         Log.i("extras", String.valueOf(project_id));
 
-        total_coding_value = (TextView) findViewById(R.id.total_coding_value);
-        total_design_value = (TextView) findViewById(R.id.total_design_value);
-        total_planning_value = (TextView) findViewById(R.id.total_planning_value);
 
         assigned_student_right = (RelativeLayout) findViewById(R.id.student_item_1);
         avatar_right = (CircularNetworkImageView) findViewById(R.id.avatar);
@@ -154,18 +151,18 @@ public class AssignProject extends AppCompatActivity {
 
         student_slots.add(new StudentSlot(assigned_student_left,avatarleft,coding_indicator3,planning_indicator3,design_indicator3,coding_value3,planning_value3,design_value3,display_info_left));
 
-        project_chart = (PieChart) findViewById(R.id.chart1);
+        project_chart = (PieChart) findViewById(R.id.project_chart);
         project_chart.setDragDecelerationFrictionCoef(0.95f);
         project_chart.setDescription("");
         project_chart.setExtraOffsets(5, 10, 5, 5);
 
-        project_chart.setCenterText(generateCenterSpannableText(20));
+       // project_chart.setCenterText(generateCenterSpannableText());
 
         project_chart.setDrawHoleEnabled(true);
         project_chart.setHoleColorTransparent(true);
         project_chart.setTransparentCircleColor(Color.WHITE);
-        project_chart.setTransparentCircleAlpha(110);
-        project_chart.setHoleRadius(58f);
+        project_chart.setTransparentCircleAlpha(35);
+        project_chart.setHoleRadius(45f);
         project_chart.setTransparentCircleRadius(61f);
         project_chart.setDrawCenterText(true);
         project_chart.setRotationAngle(0);
@@ -177,9 +174,11 @@ public class AssignProject extends AppCompatActivity {
         assigned_student_middle.setOnDragListener(AssignStudentDragListener);
         assigned_student_left.setOnDragListener(AssignStudentDragListener);
 
+        project_chart.setNoDataText(" ");
 
         setProjectData();
         setListData();
+
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -197,12 +196,33 @@ public class AssignProject extends AppCompatActivity {
         super.onBackPressed();
 
     }
-    private SpannableString generateCenterSpannableText(int chance) {
+    private SpannableString generateCenterSpannableText(int chance,int total_coding,int total_planning,int total_design) {
 
-        SpannableString s = new SpannableString("1%");
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, 2, 0   );
+        int mTotalChance = 50;
+
+        String mSuccessChance = "50" + "%";
+        int mSpanRelativeSize = mSuccessChance.length();
+        String mCodingTotal = "0";
+        String mDesignTotal = "0";
+        String mPlanningTotal = "0";
+
+        SpannableString s = new SpannableString(mSuccessChance + "\n" + "C:" + mCodingTotal + "\n" + "P:" + mPlanningTotal +"\n" + "D:" + mDesignTotal);
+        s.setSpan(new RelativeSizeSpan(1.7f), 0, mSpanRelativeSize, 0   );
         s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 15);
-        s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 15);
+
+        if (mTotalChance < 40)
+        {
+            s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), mSpanRelativeSize);
+        }
+        else if (mTotalChance < 80)
+        {
+            s.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, s.length(), mSpanRelativeSize);
+        }
+        else
+        {
+            s.setSpan(new ForegroundColorSpan(Color.GREEN), 0, s.length(), mSpanRelativeSize);
+        }
+        s.setSpan(new ForegroundColorSpan(Color.WHITE), mSpanRelativeSize + 1, s.length(), 15);
         return s;
     }
 
@@ -237,23 +257,6 @@ public class AssignProject extends AppCompatActivity {
                     //Retrieve student from location in list
                     Log.i("POS",item.getText().toString());
                     Student s = student_data.get(StudentPosition);
-
-                    for (Student student : student_data)
-                    {
-                        Log.i("ALLIDS",String.valueOf(student.getId()));
-                        Log.i("ALLIDS",s.getName());
-                    }
-
-                    Log.i("STUDENTID",String.valueOf(s.getId()));
-
-                    for (Map.Entry<Integer, Integer> entry : active_student_map.entrySet())
-                    {
-                        Integer key = entry.getKey();
-                        Integer value = entry.getValue();
-
-                        Log.i("HASHMAP KEY",key.toString());
-                        Log.i("HASHMAP Value",value.toString());
-                    }
 
                     if (!active_student_map.containsValue(s.getId()))
                     {
@@ -303,49 +306,6 @@ public class AssignProject extends AppCompatActivity {
                         toast.show();
                     }
 
-/*
-                    //check if the student is already assigned somewhere
-                    if (CheckStudentSpot(student_field_position_map.get("center"), student_position))
-                    {
-                        int student_field_position_id = student_field_position_map.get("center");
-
-                        Log.i("Field_Position",String.valueOf(student_field_position_id));
-                        //write the student to the map that contains all active students
-                        active_student_data.set(student_field_position_id - 1, s);
-                        //write the position of the student to the map that keeps track of who is where
-                        active_student_map.put(student_field_position_id, student_position);
-                        //change visible dataset
-                        setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s, planning_indicator2, coding_indicator2, design_indicator2, display_info_middle);
-
-                    }
-                    else if(CheckStudentSpot(student_field_position_map.get("left"), student_position))
-                    {
-                        int student_field_position_id = student_field_position_map.get("center");
-
-                        Log.i("Field_Position",String.valueOf(student_field_position_id));
-                        //write the student to the map that contains all active students
-                        active_student_data.set(student_field_position_id - 1, s);
-                        //write the position of the student to the map that keeps track of who is where
-                        active_student_map.put(student_field_position_id, student_position);
-                        //change visible dataset
-                        setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s, planning_indicator2, coding_indicator2, design_indicator2, display_info_middle);
-                    }
-                    else if(CheckStudentSpot(student_field_position_map.get("right"), student_position))
-                    {
-                        int student_field_position_id = student_field_position_map.get("center");
-
-                        Log.i("Field_Position",String.valueOf(student_field_position_id));
-                        //write the student to the map that contains all active students
-                        active_student_data.set(student_field_position_id - 1, s);
-                        //write the position of the student to the map that keeps track of who is where
-                        active_student_map.put(student_field_position_id, student_position);
-                        //change visible dataset
-                        setStudentData(avatarmiddle, coding_value2, planning_value2, design_value2, s, planning_indicator2, coding_indicator2, design_indicator2, display_info_middle);
-                    }
-
-                    Toast toast = Toast.makeText(getApplicationContext(), v.getTag().toString(), Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.CENTER, 0, 0);
-                    toast.show();*/
 
                     break;
                 default:
@@ -446,13 +406,13 @@ public class AssignProject extends AppCompatActivity {
 
                     project_duration.setText(response_obj.getString("duration"));
 
-                    float test1 = Float.parseFloat(response_obj.getString("coding_weight"));
-                    float test2 = Float.parseFloat(response_obj.getString("planning_weight"));
-                    float test3 = Float.parseFloat(response_obj.getString("design_weight"));
+                    coding_weight = Float.parseFloat(response_obj.getString("coding_weight"));
+                    planning_weight = Float.parseFloat(response_obj.getString("planning_weight"));
+                    design_weight = Float.parseFloat(response_obj.getString("design_weight"));
 
-                    project_aspects_values.add(new Entry(test1, 0));
-                    project_aspects_values.add(new Entry(test2, 1));
-                    project_aspects_values.add(new Entry(test3, 2));
+                    project_aspects_values.add(new Entry(coding_weight, 0));
+                    project_aspects_values.add(new Entry(planning_weight, 1));
+                    project_aspects_values.add(new Entry(design_weight, 2));
 
                     setPieProjectData();
 
@@ -493,7 +453,7 @@ public class AssignProject extends AppCompatActivity {
 
     }
 
-    public void setStudentData(CircularNetworkImageView avatar,TextView coding_value,TextView planning_value,TextView design_value,Student active_student,TextView planning_indicator,TextView coding_indicator,TextView design_indicator,TextView info_display)
+    public void updateStudentData(CircularNetworkImageView avatar, TextView coding_value, TextView planning_value, TextView design_value, Student active_student, TextView planning_indicator, TextView coding_indicator, TextView design_indicator, TextView info_display)
     {
 
 
@@ -504,8 +464,6 @@ public class AssignProject extends AppCompatActivity {
         {
             if (active_student_data.get(i) != null)
             {
-                Log.i("NOWSTUDENTDATA",active_student_data.get(i).getName());
-
                 coding = coding + active_student_data.get(i).getCoding();
                 planning = planning + active_student_data.get(i).getPlanning();
                 design = design + active_student_data.get(i).getDesign();
@@ -516,23 +474,11 @@ public class AssignProject extends AppCompatActivity {
         totalplanning = planning;
         totaldesign = design;
 
+/*
         total_design_value.setText(String.valueOf(totaldesign));
         total_planning_value.setText(String.valueOf(totalplanning));
         total_coding_value.setText(String.valueOf(totalcoding));
-
-        if (avatar.getVisibility() == View.INVISIBLE)
-        {
-            avatar.setVisibility(View.VISIBLE);
-            coding_value.setVisibility(View.VISIBLE);
-            design_value.setVisibility(View.VISIBLE);
-            planning_value.setVisibility(View.VISIBLE);
-            coding_indicator.setVisibility(View.VISIBLE);
-            design_indicator.setVisibility(View.VISIBLE);
-            planning_indicator.setVisibility(View.VISIBLE);
-
-            info_display.setVisibility(View.INVISIBLE);
-
-        }
+*/
 
         if (active_student.getAvatar_url() != "null")
         {
@@ -551,6 +497,16 @@ public class AssignProject extends AppCompatActivity {
 
     }
 
+    public void setPieAspectValueDisplay()
+    {
+        //Coding
+        project_aspects_names.set(0,"lol");
+        //Planning
+        project_aspects_names.set(1,"lol");
+        //Design
+        project_aspects_names.set(2,"lol");
+    }
+
     public void setPieProjectData()
     {
         float mult = 100; // must be total coding
@@ -561,8 +517,8 @@ public class AssignProject extends AppCompatActivity {
 
 
         PieDataSet dataSet = new PieDataSet(project_aspects_values, "Aspects");
+        dataSet.setDrawValues(true);
 
-        // add a lot of colors
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
         colors.add(ContextCompat.getColor(AssignProject.this, R.color.coding));
@@ -572,20 +528,19 @@ public class AssignProject extends AppCompatActivity {
 
         dataSet.setColors(colors);
 
-        //dataSet.setSelectionShift(0f);
-
         PieData data = new PieData(project_aspects_names, dataSet);
-        //data.setValueFormatter(new PercentFormatter());
+
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);
-
         project_chart.setData(data);
-        project_chart.setNoDataText(" ");
-        // undo all highlights
+        project_chart.setNoDataText("");
         project_chart.highlightValues(null);
+
 
         project_chart.invalidate();
         project_chart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
+
+
     }
 
 

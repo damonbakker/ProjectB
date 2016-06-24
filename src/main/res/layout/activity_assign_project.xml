@@ -43,12 +43,12 @@
             android:layout_below="@+id/project_name" />
 
         <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart1"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_below="@+id/project_name"
-            android:layout_marginTop="20dp"
-            android:layout_alignParentStart="true" />
+            android:id="@+id/project_chart"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
+            android:layout_below="@+id/project_duration"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-5dp" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -352,60 +352,7 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="C :"
-            android:id="@+id/total_coding_indicator"
-            android:layout_marginTop="33dp"
-            android:textColor="@color/coding"
-            android:layout_below="@+id/project_duration"
-            android:layout_toEndOf="@+id/chart1" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="P : "
-            android:textColor="@color/planning"
-            android:id="@+id/total_planning_indicator"
-            android:layout_below="@+id/total_coding_indicator"
-            android:layout_toEndOf="@+id/chart1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="D :"
-            android:textColor="@color/design"
-            android:id="@+id/total_design_indicator"
-            android:layout_below="@+id/total_planning_indicator"
-            android:layout_toEndOf="@+id/chart1" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/md_white_1000"
-            android:id="@+id/total_planning_value"
-            android:layout_below="@+id/total_coding_indicator"
-            android:layout_toEndOf="@+id/total_coding_indicator" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/total_coding_value"
-            android:textColor="@color/md_white_1000"
-            android:layout_above="@+id/total_planning_value"
-            android:layout_toEndOf="@+id/total_coding_indicator" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:id="@+id/total_design_value"
-            android:textColor="@color/md_white_1000"
-            android:layout_alignTop="@+id/total_design_indicator"
-            android:layout_alignStart="@+id/total_planning_value" />
 
     </RelativeLayout>
 
