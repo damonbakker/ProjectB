@@ -29,6 +29,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 
 import org.joda.time.DateTime;
+import org.joda.time.convert.Converter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -65,14 +66,15 @@ public class AssignProject extends AppCompatActivity {
 
     public TwoWayView mainlist;
 
-    public int totalcoding;
-    public int totalplanning;
-    public int totaldesign;
+    public int total_chance;
+    public int total_coding;
+    public int total_planning;
+    public int total_design;
 
     public ArrayList<Entry> project_aspects_values = new ArrayList<Entry>();
     public ArrayList<String> project_aspects_names = new ArrayList<String>();
 
-
+    public PieDataSet pieAspectValueStudentData;
     public float coding_weight;
     public float planning_weight;
     public float design_weight;
@@ -156,7 +158,6 @@ public class AssignProject extends AppCompatActivity {
         project_chart.setDescription("");
         project_chart.setExtraOffsets(5, 10, 5, 5);
 
-       // project_chart.setCenterText(generateCenterSpannableText());
 
         project_chart.setDrawHoleEnabled(true);
         project_chart.setHoleColorTransparent(true);
@@ -179,7 +180,6 @@ public class AssignProject extends AppCompatActivity {
         setProjectData();
         setListData();
 
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,33 +196,40 @@ public class AssignProject extends AppCompatActivity {
         super.onBackPressed();
 
     }
-    private SpannableString generateCenterSpannableText(int chance,int total_coding,int total_planning,int total_design) {
+    private SpannableString generateCenterSpannableText(int mTotalChance,int mTotalCoding,int mTotalPlanning,int mTotalDesign) {
 
-        int mTotalChance = 50;
 
         String mSuccessChance = "50" + "%";
-        int mSpanRelativeSize = mSuccessChance.length();
-        String mCodingTotal = "0";
-        String mDesignTotal = "0";
-        String mPlanningTotal = "0";
+        String mCoding = "" + mTotalCoding;
+        String mPlanning ="" + mTotalPlanning;
+        String mDesign = "" + mTotalDesign;
+        int mChanceLength = mSuccessChance.length();
+        int mCodingLength = mCoding.length();
+        int mPlanningLength = mPlanning.length();
+        int mDesignLength = mDesign.length();
 
-        SpannableString s = new SpannableString(mSuccessChance + "\n" + "C:" + mCodingTotal + "\n" + "P:" + mPlanningTotal +"\n" + "D:" + mDesignTotal);
-        s.setSpan(new RelativeSizeSpan(1.7f), 0, mSpanRelativeSize, 0   );
+
+        SpannableString s = new SpannableString(mSuccessChance + "\n" + mCoding + "\n" + mPlanning +"\n" + mDesign);
+        s.setSpan(new RelativeSizeSpan(1.9f), 0, mChanceLength, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 15);
 
         if (mTotalChance < 40)
         {
-            s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), mSpanRelativeSize);
+            s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), mChanceLength);
         }
         else if (mTotalChance < 80)
         {
-            s.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, s.length(), mSpanRelativeSize);
+            s.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, s.length(), mChanceLength);
         }
         else
         {
-            s.setSpan(new ForegroundColorSpan(Color.GREEN), 0, s.length(), mSpanRelativeSize);
+            s.setSpan(new ForegroundColorSpan(Color.GREEN), 0, s.length(), mChanceLength);
         }
-        s.setSpan(new ForegroundColorSpan(Color.WHITE), mSpanRelativeSize + 1, s.length(), 15);
+        s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(AssignProject.this, R.color.coding)), mChanceLength + 1, s.length(), mChanceLength + 1 + mCodingLength);
+        s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(AssignProject.this, R.color.planning)), mChanceLength + 1 + mCodingLength + 1, s.length(), mChanceLength + 1 + mCodingLength + 1 + mPlanningLength);
+        s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(AssignProject.this, R.color.design)), mChanceLength + 1 + mCodingLength + 1 + mPlanningLength + 1, s.length(), mChanceLength + 1 + mCodingLength + 1 + mPlanningLength + 1 + mDesignLength);
+
+
         return s;
     }
 
@@ -235,11 +242,7 @@ public class AssignProject extends AppCompatActivity {
             switch (event.getAction())
             {
                 case DragEvent.ACTION_DRAG_STARTED:
-                    for (Student student : student_data)
-                    {
-                        Log.i("ALLIDS",Integer.toString(student.getId()));
-                        Log.i("ALLIDS",student.getName());
-                    }
+
                     break;
                 case DragEvent.ACTION_DRAG_ENTERED:
 
@@ -254,8 +257,8 @@ public class AssignProject extends AppCompatActivity {
                     //get student position in list from ClipData
                     ClipData.Item item = event.getClipData().getItemAt(0);
                     int StudentPosition = Integer.parseInt(item.getText().toString());
+                    
                     //Retrieve student from location in list
-                    Log.i("POS",item.getText().toString());
                     Student s = student_data.get(StudentPosition);
 
                     if (!active_student_map.containsValue(s.getId()))
@@ -264,19 +267,20 @@ public class AssignProject extends AppCompatActivity {
                         {
                             case R.id.student_item_1:
                                 //Right
-                                Log.i("Student item","Item 1");
+                      
                                 //write the student to the map that contains all active students
                                 active_student_data.set(0, s);
                                 //write the ID of the student to the map that keeps track of who is where
                                 active_student_map.put(1, s.getId());
                                 //Fill the view data
 
+
                                 StudentSlot slot1 = student_slots.get(0);
                                 slot1.assignStudentToSlot(AssignProject.this,s);
                                 break;
                             case R.id.student_item_2:
                                 //Center
-                                Log.i("Student item","Item 2");
+                          
                                 //write the student to the map that contains all active students
                                 active_student_data.set(1, s);
                                 //write the position of the student to the map that keeps track of who is where
@@ -287,7 +291,7 @@ public class AssignProject extends AppCompatActivity {
                                 break;
                             case R.id.student_item_3:
                                 //Left
-                                Log.i("Student item","Item 3");
+                                
                                 //write the student to the map that contains all active students
                                 active_student_data.set(2, s);
                                 //write the position of the student to the map that keeps track of who is where
@@ -297,6 +301,11 @@ public class AssignProject extends AppCompatActivity {
                                 slot3.assignStudentToSlot(AssignProject.this,s);
                                 break;
                         }
+
+                        updateStudentData();
+                        calculateChance();
+                        project_chart.setCenterText(generateCenterSpannableText(0,total_coding,total_planning,total_design));
+                        project_chart.invalidate();
 
                     }
                     else
@@ -325,15 +334,10 @@ public class AssignProject extends AppCompatActivity {
             @Override
             public void onResponse(String response)
             {
-                //waiting_response.setVisibility(View.INVISIBLE);
-                Log.i("RESPONSE", "RESPONSE RECIEVED");
-
                 try
                 {
                     JSONObject response_obj = new JSONObject(response);
                     JSONArray data = response_obj.getJSONArray("data");
-
-                    Log.i("RESPONSE",data.toString());
 
                     for (int i =0; i < data.length();i++)
                     {
@@ -453,7 +457,7 @@ public class AssignProject extends AppCompatActivity {
 
     }
 
-    public void updateStudentData(CircularNetworkImageView avatar, TextView coding_value, TextView planning_value, TextView design_value, Student active_student, TextView planning_indicator, TextView coding_indicator, TextView design_indicator, TextView info_display)
+    public void updateStudentData()
     {
 
 
@@ -470,41 +474,52 @@ public class AssignProject extends AppCompatActivity {
             }
         }
 
-        totalcoding = coding;
-        totalplanning = planning;
-        totaldesign = design;
-
-/*
-        total_design_value.setText(String.valueOf(totaldesign));
-        total_planning_value.setText(String.valueOf(totalplanning));
-        total_coding_value.setText(String.valueOf(totalcoding));
-*/
-
-        if (active_student.getAvatar_url() != "null")
-        {
-            avatar.setImageUrl(active_student.getAvatar_url(), NetworkHandler.getInstance(AssignProject.this).getImageLoader());
-        }
-        else
-        {
-            avatar.setImageResource(R.drawable.avatar_placeholder_white);
-        }
-
-        coding_value.setText(String.valueOf(active_student.getCoding()));
-        planning_value.setText(String.valueOf(active_student.getPlanning()));
-        design_value.setText(String.valueOf(active_student.getDesign()));
-
+        total_coding = coding;
+        total_planning = planning;
+        total_design = design;
 
 
     }
 
-    public void setPieAspectValueDisplay()
+    public int calculateChance()
     {
-        //Coding
-        project_aspects_names.set(0,"lol");
-        //Planning
-        project_aspects_names.set(1,"lol");
-        //Design
-        project_aspects_names.set(2,"lol");
+        double mCoding = total_coding;
+        double mDesign = total_design;
+        double mPlanning = total_planning;
+
+        double mCodingWeight = Math.round(coding_weight);
+        double mDesignWeight = Math.round(design_weight);
+        double mPlanningWeight = Math.round(planning_weight);
+
+
+        int mCodingChance = getAttributeContribution(mCodingWeight,mCoding);
+        int mDesignChance = getAttributeContribution(mDesignWeight,mDesign);
+        int mPlanningChance = getAttributeContribution(mPlanningWeight,mPlanning);
+
+        Log.i("MATHCODING",String.valueOf(mCodingChance));
+        Log.i("MATHDESIGN",String.valueOf(mDesignChance));
+        Log.i("MATHPLANNING",String.valueOf(mPlanningChance));
+
+        return 100;
+    }
+
+    private static int getAttributeContribution(double AttributeWeight , double AttributeValue)
+    {
+        double c = 100 /  AttributeWeight;
+        double x = c * AttributeValue;
+
+
+        double mRawChance = x * 0.33;
+
+        if (mRawChance > 33)
+        {
+            mRawChance = 33;
+        }
+
+        mRawChance = Math.round(mRawChance);
+        int mChance = (int) mRawChance;
+
+        return mChance;
     }
 
     public void setPieProjectData()
@@ -516,8 +531,8 @@ public class AssignProject extends AppCompatActivity {
         project_aspects_names.add("Design");
 
 
-        PieDataSet dataSet = new PieDataSet(project_aspects_values, "Aspects");
-        dataSet.setDrawValues(true);
+        pieAspectValueStudentData = new PieDataSet(project_aspects_values, "Aspects");
+        pieAspectValueStudentData.setDrawValues(true);
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
 
@@ -526,9 +541,9 @@ public class AssignProject extends AppCompatActivity {
         colors.add(ContextCompat.getColor(AssignProject.this, R.color.design));
 
 
-        dataSet.setColors(colors);
+        pieAspectValueStudentData.setColors(colors);
 
-        PieData data = new PieData(project_aspects_names, dataSet);
+        PieData data = new PieData(project_aspects_names, pieAspectValueStudentData);
 
         data.setValueTextSize(11f);
         data.setValueTextColor(Color.WHITE);

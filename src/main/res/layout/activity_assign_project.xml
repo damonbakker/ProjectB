@@ -31,7 +31,7 @@
             android:transitionName="project_name"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="25dp" />
+            android:layout_marginTop="18dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,8 +44,8 @@
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/project_chart"
-            android:layout_width="230dp"
-            android:layout_height="230dp"
+            android:layout_width="240dp"
+            android:layout_height="240dp"
             android:layout_below="@+id/project_duration"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="-5dp" />
@@ -79,6 +79,7 @@
             android:tag="left"
             android:layout_alignTop="@+id/student_item_2"
             android:layout_toStartOf="@+id/student_item_2"
+
             >
 
             <mobile_development.damon.projectb.Models.CircularNetworkImageView
@@ -87,7 +88,8 @@
                 android:id="@+id/avatar3"
                 android:src="@drawable/avatar_placeholder_white"
                 android:scaleType="fitXY"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                android:layout_marginTop="8dp" />
 
 
             <TextView
@@ -173,7 +175,7 @@
             android:tag="middle"
             android:layout_above="@+id/relativeLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="18dp">
+            android:layout_marginBottom="10dp">
 
             <mobile_development.damon.projectb.Models.CircularNetworkImageView
                 android:layout_width="60dp"
@@ -181,7 +183,8 @@
                 android:id="@+id/avatar2"
                 android:src="@drawable/avatar_placeholder_white"
                 android:scaleType="fitXY"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                android:layout_marginTop="8dp" />
 
 
             <TextView
@@ -275,7 +278,8 @@
                 android:id="@+id/avatar"
                 android:src="@drawable/avatar_placeholder_white"
                 android:scaleType="fitXY"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                android:layout_marginTop="8dp" />
 
 
             <TextView
@@ -352,6 +356,13 @@
 
         </RelativeLayout>
 
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:id="@+id/button"
+            android:layout_below="@+id/project_chart"
+            android:layout_centerHorizontal="true" />
 
 
     </RelativeLayout>
