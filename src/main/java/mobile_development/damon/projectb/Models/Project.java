@@ -1,5 +1,7 @@
 package mobile_development.damon.projectb.Models;
 
+import android.util.Log;
+
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
@@ -18,7 +20,6 @@ public class Project
     private int planning_weight;
     private DateTime duration;
     private DateTime start_date;
-
 
     private DateTime end_date;
     private ArrayList<Student> participants;
@@ -107,5 +108,40 @@ public class Project
 
     public int getCoding_weight() {
         return coding_weight;
+    }
+
+    public static int calculateChance(double mCoding, double mDesign, double mPlanning, double mCodingWeight, double mDesignWeight, double mPlanningWeight)
+    {
+        mCodingWeight = Math.round(mCodingWeight);
+        mDesignWeight = Math.round(mDesignWeight);
+        mPlanningWeight = Math.round(mPlanningWeight);
+
+        double mTotalWeight = mCodingWeight + mDesignWeight + mPlanningWeight;
+
+        int mCodingChance = getAttributeContribution(mCodingWeight,mCoding,mTotalWeight);
+        int mDesignChance = getAttributeContribution(mDesignWeight,mDesign,mTotalWeight);
+        int mPlanningChance = getAttributeContribution(mPlanningWeight,mPlanning,mTotalWeight);
+
+        return mCodingChance+mDesignChance+mPlanningChance + 1;
+    }
+
+    private static int getAttributeContribution(double AttributeWeight , double AttributeValue, double TotalWeight)
+    {
+        double c = 100 /  AttributeWeight;
+        double x = c * AttributeValue;
+
+        double AspectWeight = 100 / TotalWeight * AttributeWeight;
+        double AspectPercentageWeight = AspectWeight * 0.01;
+        double mRawChance = x * AspectPercentageWeight;
+
+        if (mRawChance > AspectWeight)
+        {
+            mRawChance = AspectWeight;
+        }
+
+        mRawChance = Math.round(mRawChance);
+        int mChance = (int) mRawChance;
+
+        return mChance;
     }
 }

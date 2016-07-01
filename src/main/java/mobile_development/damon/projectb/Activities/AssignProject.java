@@ -45,6 +45,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import mobile_development.damon.projectb.AppConfig;
 import mobile_development.damon.projectb.Adapters.AssignProjectAdapter;
 import mobile_development.damon.projectb.Models.CircularNetworkImageView;
+import mobile_development.damon.projectb.Models.Project;
 import mobile_development.damon.projectb.Models.Student;
 import mobile_development.damon.projectb.Models.StudentSlot;
 import mobile_development.damon.projectb.NetworkHandler;
@@ -199,7 +200,7 @@ public class AssignProject extends AppCompatActivity {
     private SpannableString generateCenterSpannableText(int mTotalChance,int mTotalCoding,int mTotalPlanning,int mTotalDesign) {
 
 
-        String mSuccessChance = "50" + "%";
+        String mSuccessChance = mTotalChance + "%";
         String mCoding = "" + mTotalCoding;
         String mPlanning ="" + mTotalPlanning;
         String mDesign = "" + mTotalDesign;
@@ -301,10 +302,14 @@ public class AssignProject extends AppCompatActivity {
                                 slot3.assignStudentToSlot(AssignProject.this,s);
                                 break;
                         }
-
+                        //Update student value data
                         updateStudentData();
-                        calculateChance();
-                        project_chart.setCenterText(generateCenterSpannableText(0,total_coding,total_planning,total_design));
+                        //Calculate success chance of the project
+                        int mSuccessChance = Project.calculateChance(total_coding,total_design,total_planning,coding_weight,design_weight,planning_weight);
+                        Log.i("CHANCE",String.valueOf(mSuccessChance+1));
+                        //Update the center text on the piechart
+                        project_chart.setCenterText(generateCenterSpannableText(mSuccessChance,total_coding,total_planning,total_design));
+                        //Refresh the piechart
                         project_chart.invalidate();
 
                     }
@@ -460,7 +465,6 @@ public class AssignProject extends AppCompatActivity {
     public void updateStudentData()
     {
 
-
         int coding = 0;
         int planning = 0;
         int design = 0;
@@ -481,46 +485,6 @@ public class AssignProject extends AppCompatActivity {
 
     }
 
-    public int calculateChance()
-    {
-        double mCoding = total_coding;
-        double mDesign = total_design;
-        double mPlanning = total_planning;
-
-        double mCodingWeight = Math.round(coding_weight);
-        double mDesignWeight = Math.round(design_weight);
-        double mPlanningWeight = Math.round(planning_weight);
-
-
-        int mCodingChance = getAttributeContribution(mCodingWeight,mCoding);
-        int mDesignChance = getAttributeContribution(mDesignWeight,mDesign);
-        int mPlanningChance = getAttributeContribution(mPlanningWeight,mPlanning);
-
-        Log.i("MATHCODING",String.valueOf(mCodingChance));
-        Log.i("MATHDESIGN",String.valueOf(mDesignChance));
-        Log.i("MATHPLANNING",String.valueOf(mPlanningChance));
-
-        return 100;
-    }
-
-    private static int getAttributeContribution(double AttributeWeight , double AttributeValue)
-    {
-        double c = 100 /  AttributeWeight;
-        double x = c * AttributeValue;
-
-
-        double mRawChance = x * 0.33;
-
-        if (mRawChance > 33)
-        {
-            mRawChance = 33;
-        }
-
-        mRawChance = Math.round(mRawChance);
-        int mChance = (int) mRawChance;
-
-        return mChance;
-    }
 
     public void setPieProjectData()
     {
